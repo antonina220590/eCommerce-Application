@@ -1,20 +1,44 @@
 # eCommerce-Application
-RSS Final Task
 
-Welcome to our eCommerce application! This platform replicates real-world shopping experiences in a digital environment 🏪. It's a comprehensive online shopping portal that provides an interactive and seamless experience to users. From product discovery to checkout, the application ensures a smooth journey for the user, enhancing their engagement and boosting their purchasing confidence 🚀.
+### Project description
 
-Key pages in the application include:
+This eCommerce-Application project aims to develop a general purpose e-commerce store. It will allow users to purchase certain types of products. 
+Key pages of the application include:
 
-Login and Registration pages 🖥️
+- Login and Registration pages 🖥️
+- Main page 🏠
+- Catalog Product page 📋
+- Detailed Product page 🔎
+- User Profile page 👤
+- Basket page 🛒
+- About Us page 🙋‍♂️🙋‍♀️
 
-Main page 🏠
+The application is powered by CommerceTools 🌐, a leading provider of commerce solutions for B2C and B2B enterprises. CommerceTools offers a cloud-native, microservices-based commerce platform that enables brands to create unique and engaging digital commerce experiences.
 
-Catalog Product page 📋
+The project is being developed as the final task of the RS school's JS / Front-end course. Its main goals are:
+ - consolidation of the knowledges gained during this course and,
+ - improvment of teamwork skills. 
 
-Detailed Product page 🔎
+Our team: 
 
-User Profile page 👤
+- [antonina220590](https://github.com/antonina220590)
+- [gbogdanova](https://github.com/gbogdanova)
+- [yauhenbayeu](https://github.com/yauhenbayeu)
 
-Basket page 🛒
+Our mentor:
 
-About Us page 🙋‍♂️🙋‍♀️
+- [xocink](https://app.rs.school/profile?githubId=xocink)
+
+### Technology stack
+
+##### Front-end:
+
+- HTML
+- CSS / SCSS
+- TypeScript
+- JavaScript
+- Webpack
+
+### Scripts 
+
+### Settings instructions
