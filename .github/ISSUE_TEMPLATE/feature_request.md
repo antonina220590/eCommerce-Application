@@ -2,19 +2,18 @@
 name: Feature request
 about: Suggest an idea for this project
 title: ''
-labels: ''
-assignees: ''
+labels: 'enhancement'
+assignees: [antonina220590, gbogdanova, yauhenbayeu]
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+1. Task: [link]([https://github.com/](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/eCommerce-Application/Sprints/Sprint2/RSS-ECOMM-2_01.md))
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+2. Deadline 20.05.2024
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+3. Description:
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+
+4. Acceptance Criteria
+- [x] Email field validation checks for a properly formatted email address according to the specified rules.
+- [ ] Password field validation checks for meeting the length and complexity requirements.
