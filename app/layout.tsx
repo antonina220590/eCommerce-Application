@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Header from "./ui/components/header/Header";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import Footer from "./ui/components/footer/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+import "./ui/styles/main.scss";
 
 export const metadata: Metadata = {
   title: "eCommerce-Application",
@@ -17,9 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

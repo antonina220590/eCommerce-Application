@@ -20,6 +20,8 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
+    "node-sass-glob-importer": "^5.3.3",
+    "sass": "^1.76.0",
     "typescript": "^5"
   }
 }

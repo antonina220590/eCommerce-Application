@@ -1,8 +1,6 @@
-import styles from "../page.module.css";
-
 const Contacts = () => {
   return (
-    <main className={styles.main}>
+    <main>
       <h1>Contacts</h1>
     </main>
   );
