@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --fix app/",
     "format": "prettier --write \"app/**/*.{js,jsx,ts,tsx,css,md}\"",
-    "prepare": "cd .. && husky ./.husky"
+    "prepare": "husky"
   },
   "dependencies": {
     "clsx": "^2.1.1",
