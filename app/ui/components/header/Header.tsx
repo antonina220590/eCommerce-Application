@@ -1,11 +1,10 @@
-import NavLinks from "./nav-links";
-const Header = () => {
+import NavLinks from './nav-links';
+
+export default function Header() {
   return (
     <header>
       <p>Header</p>
       <NavLinks />
     </header>
   );
-};
-
-export default Header;
+}

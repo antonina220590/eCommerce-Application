@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
-import globImporter from "node-sass-glob-importer";
+import globImporter from 'node-sass-glob-importer';
 
 const nextConfig = {
   sassOptions: {
-    includePaths: ["./ui/styles", "./ui/components"],
+    includePaths: ['./ui/styles', './ui/components'],
     importer: globImporter(),
   },
 };
