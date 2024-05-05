@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --fix app/",
-    "format": "prettier --write \"app/**/*.{js,jsx,ts,tsx,css,md}\""
+    "format": "prettier --write \"app/**/*.{js,jsx,ts,tsx,css,md}\"",
+    "prepare": "cd .. && husky ./.husky"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -29,6 +30,7 @@
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.2",
+    "husky": "^9.0.11",
     "prettier": "^3.2.5",
     "sass": "^1.76.0",
     "typescript": "^5"
