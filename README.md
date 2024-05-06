@@ -38,6 +38,8 @@ Our mentor:
 - TypeScript
 - JavaScript
 - Webpack
+- React
+- Next JS
 
 ### Scripts 
 
