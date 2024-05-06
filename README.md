@@ -88,6 +88,14 @@ npm run format
 
 Runs Prettier to format your code, targeting files in the app/ directory including JavaScript, TypeScript, CSS, and Markdown.
 
+### Run Tests
+
+```bash
+npm run test
+```
+
+Executes the test suites of the application using Jest.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
