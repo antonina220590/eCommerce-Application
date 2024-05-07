@@ -1,0 +1,17 @@
+@import '../settings/variables.module.scss';
+
+.header {
+  background-color: $color-brand;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+
+  &Wrapper {
+    align-items: center;
+    background-color: red;
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    padding: 0 20px;
+  }
+}
