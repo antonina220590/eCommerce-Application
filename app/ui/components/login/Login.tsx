@@ -6,6 +6,7 @@ import { isValidEmail, isValidPassword } from '@/app/utils/validation';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
@@ -25,6 +26,10 @@ export default function Login() {
     const { value } = event.target;
     setPassword(value);
     setPasswordError(isValidPassword(value));
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -47,11 +52,14 @@ export default function Login() {
           Password
           <input
             id="password"
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             value={password}
             onChange={handlePasswordChange}
           />
         </label>
+        <button type="button" onClick={togglePasswordVisibility}>
+          {showPassword ? 'Hide' : 'Show'}
+        </button>
         {passwordError && <span>{passwordError}</span>}
       </div>
       <button
