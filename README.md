@@ -1,8 +1,8 @@
 # eCommerce-Application
 
-### Project description
+## Project description
 
-This eCommerce-Application project aims to develop a general purpose e-commerce store. It will allow users to purchase certain types of products. 
+This eCommerce-Application project aims to develop a general purpose e-commerce store. It will allow users to purchase certain types of products.
 Key pages of the application include:
 
 - Login and Registration pages 🖥️
@@ -16,10 +16,11 @@ Key pages of the application include:
 The application is powered by CommerceTools 🌐, a leading provider of commerce solutions for B2C and B2B enterprises. CommerceTools offers a cloud-native, microservices-based commerce platform that enables brands to create unique and engaging digital commerce experiences.
 
 The project is being developed as the final task of the RS school's JS / Front-end course. Its main goals are:
- - consolidation of the knowledges gained during this course and,
- - improvment of teamwork skills. 
 
-Our team: 
+- consolidation of the knowledges gained during this course and,
+- improvement of teamwork skills.
+
+Our team:
 
 - [antonina220590](https://github.com/antonina220590)
 - [gbogdanova](https://github.com/gbogdanova)
@@ -31,7 +32,7 @@ Our mentor:
 
 ### Technology stack
 
-##### Front-end:
+#### Front-end:
 
 - HTML
 - CSS / SCSS
@@ -101,3 +102,5 @@ To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
