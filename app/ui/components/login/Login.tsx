@@ -25,34 +25,31 @@ export default function Login() {
     }
   };
 
+  const isValidPassword = (pass: string) => {
+    let message = '';
+    if (!pass) {
+      message = 'Password is required';
+    } else if (pass.length < 8) {
+      message = 'Password must be at least 8 characters long';
+    } else if (!/[A-Z]/.test(pass)) {
+      message = 'Password must contain at least one uppercase letter (A-Z)';
+    } else if (!/[a-z]/.test(pass)) {
+      message = 'Password must contain at least one lowercase letter (a-z)';
+    } else if (!/\d/.test(pass)) {
+      message = 'Password must contain at least one digit (0-9)';
+    } else if (!/[@#$%^&*]/.test(pass)) {
+      message = 'Password must contain at least one special character';
+    } else if (pass !== pass.trim()) {
+      message = 'Password must not contain leading or trailing whitespace';
+    }
+    return message;
+  };
+
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setPassword(value);
-    if (!value) {
-      setPasswordError('Password is required');
-    } else if (value.length < 8) {
-      setPasswordError('Password must be at least 8 characters long.');
-    } else if (!/[a-z]/.test(value)) {
-      setPasswordError(
-        'Password must contain at least one lowercase letter (a-z)'
-      );
-    } else if (!/[A-Z]/.test(value)) {
-      setPasswordError(
-        'Password must contain at least one uppercase letter (A-Z)'
-      );
-    } else if (!/\d/.test(value)) {
-      setPasswordError('Password must contain at least one digit (0-9)');
-    } else if (!/[@#$%^&*!]/.test(value)) {
-      setPasswordError(
-        'Password must contain at least one special character (e.g., !@#$%^&*)'
-      );
-    } else if (value !== value.trim()) {
-      setPasswordError(
-        'Password must not contain leading or trailing whitespace'
-      );
-    } else {
-      setPasswordError('');
-    }
+    const errorMessage = isValidPassword(value);
+    setPasswordError(errorMessage);
   };
 
   return (
@@ -82,7 +79,10 @@ export default function Login() {
         </label>
         {passwordError && <span>{passwordError}</span>}
       </div>
-      <button type="submit" disabled={!isValidEmail(email) || !password}>
+      <button
+        type="submit"
+        disabled={!isValidEmail(email) || !isValidPassword(password)}
+      >
         Log In
       </button>
     </form>
