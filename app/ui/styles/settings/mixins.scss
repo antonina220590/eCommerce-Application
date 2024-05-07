@@ -1,0 +1,7 @@
+@mixin button {
+  background-color: $primary;
+
+  &.active {
+    background-color: $active;
+  }
+}
