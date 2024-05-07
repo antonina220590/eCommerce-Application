@@ -25,11 +25,31 @@ export default function Login() {
     }
   };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
     setPassword(value);
     if (!value) {
       setPasswordError('Password is required');
+    } else if (value.length < 8) {
+      setPasswordError('Password must be at least 8 characters long.');
+    } else if (!/[a-z]/.test(value)) {
+      setPasswordError(
+        'Password must contain at least one lowercase letter (a-z)'
+      );
+    } else if (!/[A-Z]/.test(value)) {
+      setPasswordError(
+        'Password must contain at least one uppercase letter (A-Z)'
+      );
+    } else if (!/\d/.test(value)) {
+      setPasswordError('Password must contain at least one digit (0-9)');
+    } else if (!/[@#$%^&*!]/.test(value)) {
+      setPasswordError(
+        'Password must contain at least one special character (e.g., !@#$%^&*)'
+      );
+    } else if (value !== value.trim()) {
+      setPasswordError(
+        'Password must not contain leading or trailing whitespace'
+      );
     } else {
       setPasswordError('');
     }
@@ -45,6 +65,7 @@ export default function Login() {
             type="email"
             value={email}
             onChange={handleEmailChange}
+            placeholder="user@example.com"
           />
         </label>
         {emailError && <span>{emailError}</span>}
