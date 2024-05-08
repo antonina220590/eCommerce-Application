@@ -1,6 +1,20 @@
-export function isValidEmail(mail: string) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(mail);
+export function isValidEmail(email: string): string {
+  if (!email) {
+    return 'Email address is required';
+  }
+  const atIndex = email.indexOf('@');
+  if (atIndex === -1 || atIndex === 0 || atIndex === email.length - 1) {
+    return 'Email address must contain an "@" symbol separating local part and domain name';
+  }
+  const domain = email.substring(atIndex + 1);
+  if (!domain || domain.trim() === '' || domain.indexOf('.') === -1) {
+    return 'Email address must contain a domain name (e.g., example.com)';
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return 'Email address must be properly formatted (e.g., user@example.com)';
+  }
+
+  return '';
 }
 
 export function isValidPassword(pass: string): string {
