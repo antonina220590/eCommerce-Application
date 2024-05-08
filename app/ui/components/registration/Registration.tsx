@@ -55,6 +55,7 @@ export default function Registration() {
           First name
           <input
             id="first"
+            name="first"
             type="text"
             value={first}
             onChange={handleFirstChange}
@@ -67,6 +68,7 @@ export default function Registration() {
           Last name
           <input
             id="last"
+            name="last"
             type="text"
             value={last}
             onChange={handleLastChange}
@@ -79,6 +81,7 @@ export default function Registration() {
           Email
           <input
             id="email"
+            name="email"
             type="email"
             value={email}
             onChange={handleEmailChange}
@@ -92,6 +95,7 @@ export default function Registration() {
           Password
           <input
             id="password"
+            name="password"
             type={showPassword ? 'text' : 'password'}
             value={password}
             onChange={handlePasswordChange}
