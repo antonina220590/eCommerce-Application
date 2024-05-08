@@ -1,7 +1,9 @@
 @mixin button {
   background-color: $color-dark;
+  border-bottom: 1px solid transparent;
 
   &.active {
     color: $color-brand;
+    border-bottom: 1px solid $color-brand;
   }
 }

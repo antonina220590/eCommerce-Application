@@ -19,25 +19,54 @@
     display: flex;
   }
 
-  &Busket {
-    border-bottom: $color-brand;
-    &:hover {
-      border-bottom: $color-brand;
-    }
+  &Icons {
+    display: flex;
+    gap: 10px;
   }
 }
 
-.basketWrapper {
-  position: relative;
-}
 
 .svgBasket * {
   position: absolute;
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
+  fill: $color-dark;
+
+  &:hover {
+    fill: $color-brand;
+  }
+
+  &.active {
+    fill: $color-brand;
+  }
+}
+
+.svgSignUp * {
+  position: absolute;
+  width: 30px;
+  height: 30px;
   fill: white;
 
   &:hover {
+    fill: $color-brand;
+  }
+
+  &.active {
+    fill: $color-brand;
+  }
+}
+
+.svgLogin * {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  fill: white;
+
+  &:hover {
+    fill: $color-brand;
+  }
+
+  &.active {
     fill: $color-brand;
   }
 }

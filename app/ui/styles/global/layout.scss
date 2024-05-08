@@ -11,6 +11,9 @@ body {
   line-height: 1.5;
 }
 button,
-a {
+a
+{
   @include button;
+  display: flex;
+  align-items: center;
 }
