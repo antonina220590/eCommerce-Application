@@ -9,12 +9,12 @@ import {
 
 export default function Registration() {
   const [first, setFirst] = useState('');
-  // const [second, setSecond] = useState('');
+  const [last, setLast] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const [firstError, setFirstError] = useState('');
-  // const [secondError, setSecondError] = useState('');
+  const [lastError, setLastError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
@@ -24,6 +24,12 @@ export default function Registration() {
     const value = event.target.value.trim();
     setFirst(value);
     setFirstError(isValidName(value));
+  };
+
+  const handleLastChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value.trim();
+    setLast(value);
+    setLastError(isValidName(value));
   };
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,6 +61,18 @@ export default function Registration() {
           />
         </label>
         {firstError && <span>{firstError}</span>}
+      </div>
+      <div>
+        <label htmlFor="last">
+          Last name
+          <input
+            id="last"
+            type="text"
+            value={last}
+            onChange={handleLastChange}
+          />
+        </label>
+        {lastError && <span>{lastError}</span>}
       </div>
       <div>
         <label htmlFor="email">
@@ -89,7 +107,8 @@ export default function Registration() {
         disabled={
           isValidEmail(email) !== '' ||
           isValidPassword(password) !== '' ||
-          isValidName(first) !== ''
+          isValidName(first) !== '' ||
+          isValidName(last) !== ''
         }
       >
         Log In
