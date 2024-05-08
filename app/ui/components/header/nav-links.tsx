@@ -10,6 +10,10 @@ const links = [
     name: 'Contacts ',
     href: '/contacts',
   },
+  {
+    name: 'Login ',
+    href: '/login',
+  },
 ];
 
 export default function NavLinks() {
