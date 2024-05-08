@@ -1,8 +1,9 @@
-export const isValidEmail = (mail: string) => {
+export function isValidEmail(mail: string) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(mail);
-};
-export const isValidPassword = (pass: string): string => {
+}
+
+export function isValidPassword(pass: string): string {
   if (!pass) {
     return 'Password is required';
   }
@@ -25,4 +26,4 @@ export const isValidPassword = (pass: string): string => {
     return 'Password must not contain leading or trailing whitespace';
   }
   return '';
-};
+}
