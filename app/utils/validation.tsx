@@ -13,7 +13,6 @@ export function isValidEmail(email: string): string {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return 'Email address must be properly formatted (e.g., user@example.com)';
   }
-
   return '';
 }
 
@@ -38,6 +37,16 @@ export function isValidPassword(pass: string): string {
   }
   if (pass !== pass.trim()) {
     return 'Password must not contain leading or trailing whitespace';
+  }
+  return '';
+}
+
+export function isValidName(name: string): string {
+  if (!name) {
+    return 'This field is required';
+  }
+  if (!/^[a-zA-Z]+$/.test(name)) {
+    return 'This field must contain only alphabetic characters';
   }
   return '';
 }

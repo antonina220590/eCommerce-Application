@@ -14,6 +14,10 @@ const links = [
     name: 'Login ',
     href: '/login',
   },
+  {
+    name: 'Registration ',
+    href: '/registration',
+  },
 ];
 
 export default function NavLinks() {
