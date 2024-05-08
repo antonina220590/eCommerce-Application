@@ -13,4 +13,5 @@ body {
 button,
 a {
   @include button;
+  text-decoration: none;
 }
