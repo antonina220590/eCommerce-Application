@@ -18,4 +18,26 @@
   &LinksContainer {
     display: flex;
   }
+
+  &Busket {
+    border-bottom: $color-brand;
+    &:hover {
+      border-bottom: $color-brand;
+    }
+  }
+}
+
+.basketWrapper {
+  position: relative;
+}
+
+.svgBasket * {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  fill: white;
+
+  &:hover {
+    fill: $color-brand;
+  }
 }

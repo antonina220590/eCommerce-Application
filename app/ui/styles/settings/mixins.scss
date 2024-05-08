@@ -1,7 +1,7 @@
 @mixin button {
-  background-color: $color-brand;
+  background-color: $color-dark;
 
   &.active {
-    background-color: $color-disabled;
+    color: $color-brand;
   }
 }

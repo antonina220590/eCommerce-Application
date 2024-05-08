@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import styles from '../../styles/components/links.module.scss';
 
 const links = [
   { name: 'Main', href: '/' },
@@ -18,7 +19,6 @@ const links = [
 
 export default function NavLinks() {
   const pathname = usePathname();
-
   return (
     <>
       {links.map((link) => {
@@ -26,7 +26,7 @@ export default function NavLinks() {
           <Link
             key={link.name}
             href={link.href}
-            className={clsx({
+            className={clsx(styles.links, {
               active: pathname === link.href,
             })}
           >
