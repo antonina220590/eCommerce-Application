@@ -41,11 +41,11 @@ export function isValidPassword(pass: string): string {
   return '';
 }
 
-export function isValidName(name: string): string {
-  if (!name) {
+export function isValidText(text: string): string {
+  if (!text) {
     return 'This field is required';
   }
-  if (!/^[a-zA-Z]+$/.test(name)) {
+  if (!/^[a-zA-Z]+$/.test(text)) {
     return 'This field must contain only alphabetic characters';
   }
   return '';
@@ -67,5 +67,12 @@ export function isValidBirth(birth: string): string {
     return 'You must be at least 13 years old';
   }
 
+  return '';
+}
+
+export function isValidStreet(street: string): string {
+  if (!street) {
+    return 'This field is required';
+  }
   return '';
 }
