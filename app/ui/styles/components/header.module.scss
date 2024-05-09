@@ -1,4 +1,5 @@
 @import '../settings/variables.module.scss';
+@import '../settings/mixins.scss';
 
 .header {
   background-color: $color-dark;
@@ -12,19 +13,57 @@
     display: flex;
     width: 100%;
     padding: 0 20px;
-    justify-content: space-around;
-  }
-
-  &LinksContainer {
-    display: flex;
+    justify-content: space-between;
   }
 
   &Icons {
     display: flex;
     gap: 10px;
   }
-}
 
+  &Container {
+    display: flex;
+    width: 55%;
+    justify-content: space-between;
+  }
+
+  &LinksContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    @include media-tablet {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 20%;
+      height: 10%;
+      position: fixed;
+      top: 0;
+      background-color: $color-dark;
+      overflow: hidden;
+      right: -100%;
+      transition: all 1s ease-in-out;
+
+      &_open {
+        right: 0;
+        display: flex;
+        background-color: $color-dark;
+        border-radius: 10px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        left: 80%;
+        width: 20%;
+        height: 10%;
+        position: absolute;
+        top: 6%;
+        transition: all 0.8s ease-in-out;
+      }
+    }
+  }
+}
 
 .svgBasket * {
   position: absolute;
@@ -43,8 +82,8 @@
 
 .svgSignUp * {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   fill: white;
 
   &:hover {
@@ -58,8 +97,8 @@
 
 .svgLogin * {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   fill: white;
 
   &:hover {
