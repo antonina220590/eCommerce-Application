@@ -5,6 +5,7 @@ import {
   isValidName,
   isValidEmail,
   isValidPassword,
+  isValidBirth,
 } from '@/app/utils/validation';
 
 export default function Registration() {
@@ -12,11 +13,13 @@ export default function Registration() {
   const [last, setLast] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [birth, setBirth] = useState('');
 
   const [firstError, setFirstError] = useState('');
   const [lastError, setLastError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [birthError, setBirthError] = useState('');
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -46,6 +49,12 @@ export default function Registration() {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleBirthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setBirth(value);
+    setBirthError(isValidBirth(value));
   };
 
   return (
@@ -106,13 +115,28 @@ export default function Registration() {
         </button>
         {passwordError && <span>{passwordError}</span>}
       </div>
+      <div>
+        <label htmlFor="birth">
+          Date of birth
+          <input
+            id="birth"
+            name="birth"
+            type="date"
+            value={birth}
+            onChange={handleBirthChange}
+            max={new Date().toISOString().split('T')[0]}
+          />
+        </label>
+        {birthError && <span>{birthError}</span>}
+      </div>
       <button
         type="submit"
         disabled={
           isValidEmail(email) !== '' ||
           isValidPassword(password) !== '' ||
           isValidName(first) !== '' ||
-          isValidName(last) !== ''
+          isValidName(last) !== '' ||
+          isValidBirth(birth) !== ''
         }
       >
         Log In

@@ -50,3 +50,22 @@ export function isValidName(name: string): string {
   }
   return '';
 }
+
+export function isValidBirth(birth: string): string {
+  if (!birth) {
+    return 'This field is required';
+  }
+  const birthDate = new Date(birth);
+  const today = new Date();
+
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const month = today.getMonth() - birthDate.getMonth();
+  if (month < 0 || (month === 0 && today.getDay() < birthDate.getDay())) {
+    age -= 1;
+  }
+  if (age < 13) {
+    return 'You must be at least 13 years old';
+  }
+
+  return '';
+}
