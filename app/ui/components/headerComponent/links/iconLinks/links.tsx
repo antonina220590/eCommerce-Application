@@ -15,13 +15,13 @@ const linkIcons: Links[] = [
   {
     name: 'Sign Up',
     href: '/registration',
-    image: <LoginIcon className={clsx(style.svgSignUp)} />,
+    image: <SignUpIcon className={clsx(style.svgLogin)} />,
   },
 
   {
     name: 'Login',
     href: '/login',
-    image: <SignUpIcon className={clsx(style.svgLogin)} />,
+    image: <LoginIcon className={clsx(style.svgSignUp)} />,
   },
 ];
 
