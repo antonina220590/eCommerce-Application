@@ -183,7 +183,9 @@ export default function Registration() {
           isValidPassword(password) !== '' ||
           isValidText(first) !== '' ||
           isValidText(last) !== '' ||
-          isValidBirth(birth) !== ''
+          isValidBirth(birth) !== '' ||
+          isValidStreet(birth) !== '' ||
+          isValidText(city) !== ''
         }
       >
         Log In
