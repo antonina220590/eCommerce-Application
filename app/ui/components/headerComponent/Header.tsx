@@ -1,6 +1,6 @@
 'use client';
 
-import cl from 'classnames';
+import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
 import { NavLinks, NavIcons } from './links/nav-links';
 import Logo from './logo/Logo';
@@ -24,12 +24,12 @@ export default function Header() {
 
   return (
     <header
-      className={cl(styles.header)}
+      className={clsx(styles.header)}
       onClick={handleNavClose}
       role="presentation"
     >
-      <div className={cl(styles.headerWrapper)}>
-        <div className={cl(styles.headerContainer)}>
+      <div className={clsx(styles.headerWrapper)}>
+        <div className={clsx(styles.headerContainer)}>
           <Logo />
           <div
             className={
@@ -41,11 +41,11 @@ export default function Header() {
             <NavLinks />
           </div>
         </div>
-        <div className={styles.headerIcons}>
+        <div className={clsx(styles.headerIcons)}>
           <NavIcons />
         </div>
         <div
-          className={cl(styles.hamburger)}
+          className={clsx(styles.hamburger)}
           onClick={handleNavCollapse}
           role="presentation"
         >

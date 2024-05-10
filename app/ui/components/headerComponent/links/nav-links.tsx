@@ -3,14 +3,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-import cl from 'classnames';
 import styles from './links.module.scss';
 import style from '../header.module.scss';
 import BasketIcon from '../../../../../public/basket.svg';
 import LoginIcon from '../../../../../public/login.svg';
 import SignUpIcon from '../../../../../public/signup.svg';
 
-const links = [
+export const links = [
   { name: 'Main', href: '/' },
   {
     name: 'Catalog',
@@ -47,19 +46,19 @@ const linkIcons = [
   {
     name: 'Basket',
     href: '/basket',
-    image: <BasketIcon className={cl(style.svgBasket)} />,
+    image: <BasketIcon className={clsx(style.svgBasket)} />,
   },
 
   {
     name: 'Sign Up',
     href: '/registration',
-    image: <LoginIcon className={cl(style.svgSignUp)} />,
+    image: <LoginIcon className={clsx(style.svgSignUp)} />,
   },
 
   {
     name: 'Login',
     href: '/login',
-    image: <SignUpIcon className={cl(style.svgLogin)} />,
+    image: <SignUpIcon className={clsx(style.svgLogin)} />,
   },
 ];
 export function NavIcons() {
