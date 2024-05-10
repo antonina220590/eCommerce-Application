@@ -1,4 +1,5 @@
 @import '../../../styles/settings/variables.module.scss';
+@import '../../../styles/settings/mixins.scss';
 
 .links {
   text-decoration: none;
@@ -9,6 +10,11 @@
 
   &:hover {
     color: $color-disabled;
+  }
+
+  @include media-mobile {
+    font-size: 1.2rem;
+    margin-right: 0;
   }
 }
 

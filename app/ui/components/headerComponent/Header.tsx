@@ -9,9 +9,9 @@ import styles from './header.module.scss';
 export default function Header() {
   const [isNavCollapsed, setIsNavCollapsed] = useState(false);
   const handleNavClose = () => {
-    const TABLET_VIEW = 1024;
-    const isTabletView = window.innerWidth < TABLET_VIEW;
-    if (isNavCollapsed && isTabletView) {
+    const MOBILE_VIEW = 767.5;
+    const isMobileView = window.innerWidth < MOBILE_VIEW;
+    if (isNavCollapsed && isMobileView) {
       setIsNavCollapsed(false);
     }
   };
