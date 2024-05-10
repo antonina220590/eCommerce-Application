@@ -2,10 +2,9 @@
 
 import cl from 'classnames';
 import React, { useState } from 'react';
-import { NavLinks, NavIcons } from './nav-links';
-import Logo from './Logo';
-import styles from '../../styles/components/header.module.scss';
-import style from '../../styles/components/hamburger.module.scss';
+import { NavLinks, NavIcons } from './links/nav-links';
+import Logo from './logo/Logo';
+import styles from './header.module.scss';
 
 export default function Header() {
   const [isNavCollapsed, setIsNavCollapsed] = useState(false);
@@ -41,7 +40,7 @@ export default function Header() {
           <NavIcons />
         </div>
         <div
-          className={cl(style.hamburger)}
+          className={cl(styles.hamburger)}
           onClick={handleNavCollapse}
           role="presentation"
         >

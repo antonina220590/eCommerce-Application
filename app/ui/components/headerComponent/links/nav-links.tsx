@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import cl from 'classnames';
-import styles from '../../styles/components/links.module.scss';
-import style from '../../styles/components/header.module.scss';
-import BasketIcon from '../../../../public/basket.svg';
-import LoginIcon from '../../../../public/login.svg';
-import SignUpIcon from '../../../../public/signup.svg';
+import styles from './links.module.scss';
+import style from '../header.module.scss';
+import BasketIcon from '../../../../../public/basket.svg';
+import LoginIcon from '../../../../../public/login.svg';
+import SignUpIcon from '../../../../../public/signup.svg';
 
 const links = [
   { name: 'Main', href: '/' },

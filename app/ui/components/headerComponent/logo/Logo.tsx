@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import cl from 'classnames';
-import styles from '../../styles/components/logo.module.scss';
+import styles from './logo.module.scss';
 
 export default function Logo() {
   return (

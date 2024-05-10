@@ -1,4 +1,4 @@
-@import '../settings/variables.module.scss';
+@import '../../../styles/settings/variables.module.scss';
 
 .logo {
   a {
@@ -6,7 +6,7 @@
     color: white;
     display: inline-block;
     text-indent: -1234em;
-    background: url('../../../../public/logo.svg') center no-repeat;
+    background: url('../../../../../public/logo.svg') center no-repeat;
     background-size: contain;
     width: 11.9rem;
     height: 3.5rem;

@@ -1,5 +1,5 @@
-@import '../settings/variables.module.scss';
-@import '../settings/mixins.scss';
+@import '../../styles/settings/variables.module.scss';
+@import '../../styles/settings/mixins.scss';
 
 .header {
   background-color: $color-dark;
@@ -107,5 +107,72 @@
 
   &.active {
     fill: $color-brand;
+  }
+}
+
+
+.hamburger {
+  display: none;
+}
+@media (max-width: 1024px) {
+  .hamburger {
+    padding-top: 5px;
+    display: block;
+    width: 45px;
+    height: 18px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .hamburger span,
+  .hamburger::before,
+  .hamburger::after {
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 10%;
+    transition: all 0.4s ease-in-out;
+    background-color: $color-light;
+}
+
+  .hamburger::before,
+  .hamburger::after {
+    content: "";
+  }
+
+  .hamburger::before {
+    top: 0;
+  }
+
+  .hamburger::after {
+    bottom: 0;
+  }
+
+  .hamburger span {
+    top: 50%;
+    transform: scale(1) translate(0px, -50%);
+  }
+
+  .hamburger_active span{
+    transform: scale(0) translate(0px, -50%);
+  }
+
+  .hamburger_active::before {
+    top: 50%;
+    transform: rotate(-45deg) translate(0px, -50%);
+  }
+
+  .hamburger_active::after {
+    top: 50%;
+    transform: rotate(45deg) translate(0px, 50%);
+  }
+
+  .header__menu_active {
+    @include media-tablet {
+      right: 0;
+      position: absolute;
+      top: 12%;
+      transition: all 0.8s ease-in-out;
+    }
   }
 }
