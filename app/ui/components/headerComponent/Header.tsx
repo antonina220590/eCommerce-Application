@@ -1,7 +1,7 @@
 'use client';
 
 import cl from 'classnames';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLinks, NavIcons } from './links/nav-links';
 import Logo from './logo/Logo';
 import styles from './header.module.scss';
@@ -9,13 +9,18 @@ import styles from './header.module.scss';
 export default function Header() {
   const [isNavCollapsed, setIsNavCollapsed] = useState(false);
   const handleNavClose = () => {
-    if (isNavCollapsed && window.innerWidth < 1024) {
+    const TABLET_VIEW = 1024;
+    const isTabletView = window.innerWidth < TABLET_VIEW;
+    if (isNavCollapsed && isTabletView) {
       setIsNavCollapsed(false);
     }
   };
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
 
-  window.addEventListener('resize', handleNavClose);
+  useEffect(() => {
+    window.addEventListener('resize', handleNavClose);
+    return () => window.removeEventListener('resize', handleNavClose);
+  });
 
   return (
     <header
