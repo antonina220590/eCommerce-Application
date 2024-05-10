@@ -3,25 +3,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import linkIcons from './links';
 
-const links = [
-  { name: 'Home ', href: '/' },
-  {
-    name: 'Contacts ',
-    href: '/contacts',
-  },
-  {
-    name: 'Login ',
-    href: '/login',
-  },
-];
-
-export default function NavLinks() {
+export default function NavIcons() {
   const pathname = usePathname();
-
   return (
     <>
-      {links.map((link) => {
+      {linkIcons.map((link) => {
         return (
           <Link
             key={link.name}
@@ -30,7 +18,7 @@ export default function NavLinks() {
               active: pathname === link.href,
             })}
           >
-            {link.name}
+            {link.image}
           </Link>
         );
       })}
