@@ -33,11 +33,9 @@ export default function Header() {
         <div className={clsx(styles.headerContainer)}>
           <Logo />
           <div
-            className={
-              isNavCollapsed
-                ? styles.headerLinksContainer_open
-                : styles.headerLinksContainer
-            }
+            className={clsx(styles.headerLinksContainer, {
+              [styles.headerLinksContainer_active]: isNavCollapsed,
+            })}
           >
             <NavLinks />
           </div>

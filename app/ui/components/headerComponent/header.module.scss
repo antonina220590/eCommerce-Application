@@ -46,7 +46,7 @@
       right: -100%;
       transition: all 1s ease-in-out;
 
-      &_open {
+      &_active {
         right: 0;
         display: flex;
         background-color: $color-dark;
