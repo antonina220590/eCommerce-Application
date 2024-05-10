@@ -60,7 +60,7 @@ export function isValidBirth(birth: string): string {
 
   let age = today.getFullYear() - birthDate.getFullYear();
   const month = today.getMonth() - birthDate.getMonth();
-  if (month < 0 || (month === 0 && today.getDay() < birthDate.getDay())) {
+  if (month < 0 || (month === 0 && today.getDay() > birthDate.getDay())) {
     age -= 1;
   }
   if (age < 13) {
@@ -73,6 +73,19 @@ export function isValidBirth(birth: string): string {
 export function isValidStreet(street: string): string {
   if (!street) {
     return 'This field is required';
+  }
+  return '';
+}
+
+export function isValidCode(code: string): string {
+  if (!code) {
+    return 'This field is required';
+  }
+  if (!/^\d{5}/.test(code)) {
+    return 'Postal code must contain exactly 5 digits';
+  }
+  if (code.length > 5) {
+    return 'Postal code must not contain more than 5 digits';
   }
   return '';
 }

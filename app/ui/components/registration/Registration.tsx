@@ -7,6 +7,7 @@ import {
   isValidPassword,
   isValidBirth,
   isValidStreet,
+  isValidCode,
 } from '@/app/utils/validation';
 
 export default function Registration() {
@@ -17,6 +18,7 @@ export default function Registration() {
   const [birth, setBirth] = useState('');
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
+  const [code, setCode] = useState('');
 
   const [firstError, setFirstError] = useState('');
   const [lastError, setLastError] = useState('');
@@ -25,6 +27,7 @@ export default function Registration() {
   const [birthError, setBirthError] = useState('');
   const [streetError, setStreetError] = useState('');
   const [cityError, setCityError] = useState('');
+  const [codeError, setCodeError] = useState('');
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -72,6 +75,12 @@ export default function Registration() {
     const value = event.target.value.trim();
     setCity(value);
     setCityError(isValidText(value));
+  };
+
+  const handleCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value.trim();
+    setCode(value);
+    setCodeError(isValidCode(value));
   };
 
   return (
@@ -147,7 +156,6 @@ export default function Registration() {
         {birthError && <span>{birthError}</span>}
       </div>
       <h3>Address</h3>
-      {/* This part of form will repeat for billing address task RSS-ECOMM-2_14, should be reused  */}
       <div>
         <div>
           <label htmlFor="street">
@@ -174,6 +182,30 @@ export default function Registration() {
             />
           </label>
           {cityError && <span>{cityError}</span>}
+        </div>
+        <div>
+          <label htmlFor="code">
+            Postal code
+            <input
+              id="code"
+              name="code"
+              type="text"
+              value={code}
+              onChange={handleCodeChange}
+            />
+          </label>
+          {codeError && <span>{codeError}</span>}
+        </div>
+        <div>
+          <label htmlFor="country">
+            Country
+            <select id="country" name="country">
+              <option value="USA">United States</option>
+              <option value="Canada">Canada</option>
+              <option value="Germany">Germany</option>
+              <option value="UK">United Kingdom</option>
+            </select>
+          </label>
         </div>
       </div>
       <button
