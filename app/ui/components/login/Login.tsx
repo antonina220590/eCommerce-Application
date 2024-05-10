@@ -34,7 +34,7 @@ export default function Login() {
           <input
             id="email"
             name="email"
-            type="email"
+            type="text"
             value={email}
             onChange={handleEmailChange}
             placeholder="user@example.com"

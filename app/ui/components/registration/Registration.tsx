@@ -117,7 +117,7 @@ export default function Registration() {
           <input
             id="email"
             name="email"
-            type="email"
+            type="text"
             value={email}
             onChange={handleEmailChange}
             placeholder="user@example.com"
