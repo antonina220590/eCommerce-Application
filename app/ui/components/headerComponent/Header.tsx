@@ -2,7 +2,8 @@
 
 import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
-import { NavLinks, NavIcons } from './links/nav-links';
+import NavLinks from './links/simpleLinks/nav-links';
+import NavIcons from './links/iconLinks/icon-links';
 import Logo from './logo/Logo';
 import styles from './header.module.scss';
 

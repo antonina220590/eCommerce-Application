@@ -65,50 +65,6 @@
   }
 }
 
-.svgBasket * {
-  position: absolute;
-  width: 35px;
-  height: 35px;
-  fill: $color-dark;
-
-  &:hover {
-    fill: $color-brand;
-  }
-
-  &.active {
-    fill: $color-brand;
-  }
-}
-
-.svgSignUp * {
-  position: absolute;
-  width: 35px;
-  height: 35px;
-  fill: white;
-
-  &:hover {
-    fill: $color-brand;
-  }
-
-  &.active {
-    fill: $color-brand;
-  }
-}
-
-.svgLogin * {
-  position: absolute;
-  width: 35px;
-  height: 35px;
-  fill: white;
-
-  &:hover {
-    fill: $color-brand;
-  }
-
-  &.active {
-    fill: $color-brand;
-  }
-}
 
 .hamburger {
   display: none;
