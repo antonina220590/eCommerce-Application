@@ -1,11 +1,21 @@
+html {
+  font-size: 10px;
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: $bg-color;
+  background-color: $color-light;
   font-family: system-ui, sans-serif;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 1.5;
 }
+
 button,
-a {
+a
+{
   @include button;
+  display: flex;
+  align-items: center;
 }
+

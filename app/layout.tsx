@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import Header from './ui/components/header/Header';
+import Header from './ui/components/headerComponent/Header';
 import Footer from './ui/components/footer/Footer';
 
 import './ui/styles/main.scss';

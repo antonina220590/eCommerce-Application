@@ -1,2 +1,5 @@
+@import"../../node_modules/normalize-scss/sass/normalize";
+@include normalize();
+
 @import "./settings/**/*";
 @import "./global/**/*";
