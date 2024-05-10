@@ -107,27 +107,4 @@
     top: 50%;
     transform: scale(1) translate(0px, -50%);
   }
-
-  .hamburger_active span {
-    transform: scale(0) translate(0px, -50%);
-  }
-
-  .hamburger_active::before {
-    top: 50%;
-    transform: rotate(-45deg) translate(0px, -50%);
-  }
-
-  .hamburger_active::after {
-    top: 50%;
-    transform: rotate(45deg) translate(0px, 50%);
-  }
-
-  .header__menu_active {
-    @include media-tablet {
-      right: 0;
-      position: absolute;
-      top: 12%;
-      transition: all 0.8s ease-in-out;
-    }
-  }
 }
