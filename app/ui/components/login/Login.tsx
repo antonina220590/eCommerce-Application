@@ -33,7 +33,8 @@ export default function Login() {
           Email
           <input
             id="email"
-            type="email"
+            name="email"
+            type="text"
             value={email}
             onChange={handleEmailChange}
             placeholder="user@example.com"
@@ -46,6 +47,7 @@ export default function Login() {
           Password
           <input
             id="password"
+            name="password"
             type={showPassword ? 'text' : 'password'}
             value={password}
             onChange={handlePasswordChange}
