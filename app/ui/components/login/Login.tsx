@@ -1,7 +1,9 @@
 'use client';
 
+import clsx from 'clsx';
 import React, { useState } from 'react';
 import { isValidEmail, isValidPassword } from '@/app/utils/validation';
+import styles from './login.module.scss';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -27,9 +29,10 @@ export default function Login() {
   };
 
   return (
-    <form>
-      <div>
-        <label htmlFor="email">
+    <section className={clsx(styles.form)}>
+      <h2 className={clsx(styles.formTitle)}>Login Form</h2>
+      <form className={clsx(styles.formForm)}>
+        <label htmlFor="email" className={clsx(styles.formElement)}>
           Email
           <input
             id="email"
@@ -38,12 +41,13 @@ export default function Login() {
             value={email}
             onChange={handleEmailChange}
             placeholder="user@example.com"
+            className={clsx({ [styles.Error]: emailError })}
           />
         </label>
-        {emailError && <span>{emailError}</span>}
-      </div>
-      <div>
-        <label htmlFor="password">
+        <div className={clsx(styles.formError)}>
+          {emailError && <span>{emailError}</span>}
+        </div>
+        <label htmlFor="password" className={clsx(styles.formElement)}>
           Password
           <input
             id="password"
@@ -51,21 +55,23 @@ export default function Login() {
             type={showPassword ? 'text' : 'password'}
             value={password}
             onChange={handlePasswordChange}
-          />
+          />{' '}
+          <button type="button" onClick={togglePasswordVisibility}>
+            {showPassword ? 'Hide' : 'Show'}
+          </button>
         </label>
-        <button type="button" onClick={togglePasswordVisibility}>
-          {showPassword ? 'Hide' : 'Show'}
+        <div className={clsx(styles.formError)}>
+          {passwordError && <span>{passwordError}</span>}
+        </div>
+        <button
+          type="submit"
+          disabled={
+            isValidEmail(email) !== '' || isValidPassword(password) !== ''
+          }
+        >
+          Log In
         </button>
-        {passwordError && <span>{passwordError}</span>}
-      </div>
-      <button
-        type="submit"
-        disabled={
-          isValidEmail(email) !== '' || isValidPassword(password) !== ''
-        }
-      >
-        Log In
-      </button>
-    </form>
+      </form>
+    </section>
   );
 }
