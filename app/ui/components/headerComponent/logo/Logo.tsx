@@ -6,7 +6,7 @@ import styles from './logo.module.scss';
 export default function Logo() {
   return (
     <h1 className={clsx(styles.logo)}>
-      <Link href="/">Pages</Link>
+      <Link href="/main">Pages</Link>
     </h1>
   );
 }

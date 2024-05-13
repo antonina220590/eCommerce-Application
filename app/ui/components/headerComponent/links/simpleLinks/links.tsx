@@ -1,7 +1,7 @@
 import Links from '../linkInterface';
 
 const links: Links[] = [
-  { name: 'Main', href: '/' },
+  { name: 'Main', href: '/main' },
   {
     name: 'Catalog',
     href: '/catalog',
