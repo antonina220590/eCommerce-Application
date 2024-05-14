@@ -32,7 +32,10 @@ export default function Login() {
 
   return (
     <section className={clsx(styles.form)}>
-      <h2 className={clsx(styles.formTitle)}>Login Form</h2>
+      <h2 className={clsx(styles.formTitle)}>Log In</h2>
+      <h4 className={clsx(styles.formSubtitle)}>
+        Have not account yet? <a href="/registration">Sign Up &rarr;</a>
+      </h4>
       <form className={clsx(styles.formForm)}>
         <label htmlFor="email" className={clsx(styles.formElement)}>
           Email
