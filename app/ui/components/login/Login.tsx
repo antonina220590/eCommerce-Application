@@ -51,22 +51,25 @@ export default function Login() {
         </div>
         <label htmlFor="password" className={clsx(styles.formElement)}>
           Password
-          <input
-            id="password"
-            name="password"
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={handlePasswordChange}
-          />{' '}
-          <button type="button" onClick={togglePasswordVisibility}>
-            {showPassword ? <Hide /> : <Show />}
-          </button>
+          <div style={{ position: 'relative' }}>
+            <input
+              id="password"
+              name="password"
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={handlePasswordChange}
+            />{' '}
+            <button type="button" onClick={togglePasswordVisibility}>
+              {showPassword ? <Show /> : <Hide />}
+            </button>
+          </div>
         </label>
         <div className={clsx(styles.formError)}>
           {passwordError && <span>{passwordError}</span>}
         </div>
         <button
           type="submit"
+          className={clsx(styles.formButton)}
           disabled={
             isValidEmail(email) !== '' || isValidPassword(password) !== ''
           }
