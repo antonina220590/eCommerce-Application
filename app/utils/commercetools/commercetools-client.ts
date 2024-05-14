@@ -73,4 +73,13 @@ const getToken = async (): Promise<string> => {
   return data.access_token;
 };
 
-export { apiRoot, getToken, projectKey, apiUrl };
+export {
+  apiRoot,
+  getToken,
+  projectKey,
+  apiUrl,
+  authUrl,
+  scopes,
+  clientSecret,
+  clientId,
+};
