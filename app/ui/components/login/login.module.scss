@@ -5,14 +5,10 @@
   @include centering;
   flex-grow: 1;
   flex-direction: column;
-  gap: 20px;
-  height: calc(100vh - 150px); 
+  gap: 5px;
+  min-height: calc(100vh - 167px); 
   color: $color-dark;
   background-color: $color-background;
-
-  @include media-mobile {
-    gap: 10px;
-  }
 
   &Title{
     position: relative;
@@ -27,7 +23,20 @@
       background-color: $color-brand;
     }
   }
-  
+  &Subtitle{
+    margin-bottom: 0;
+    a {
+      display: inline;
+      background-color: $color-background;
+      color: $color-brand;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
   &Form{
     display: flex;
     flex-direction: column;
