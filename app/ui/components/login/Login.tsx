@@ -4,6 +4,8 @@ import clsx from 'clsx';
 import React, { useState } from 'react';
 import { isValidEmail, isValidPassword } from '@/app/utils/validation';
 import styles from './login.module.scss';
+import Show from '../../../../public/show.svg';
+import Hide from '../../../../public/hide.svg';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -57,7 +59,7 @@ export default function Login() {
             onChange={handlePasswordChange}
           />{' '}
           <button type="button" onClick={togglePasswordVisibility}>
-            {showPassword ? 'Hide' : 'Show'}
+            {showPassword ? <Hide /> : <Show />}
           </button>
         </label>
         <div className={clsx(styles.formError)}>
