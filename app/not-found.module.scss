@@ -51,8 +51,8 @@
     background: none;
     text-decoration: none;
     font-size: 3rem;
-    color: #FFCA42;
-    border-bottom: 3px solid red;
+    color: $color-brand;
+    border-bottom: 3px solid $color-error;
     font-weight: bold;
     margin-top: 10px;
     transition: opacity 0.3s;

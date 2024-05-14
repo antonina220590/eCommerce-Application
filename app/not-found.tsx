@@ -20,7 +20,6 @@ export default function NotFound() {
               alt="page not found"
               fill
               role="presentation"
-              sizes="(max-width: 768px) 100vw, (max-width: 1090px) 50vw, 33vw"
             />
           </div>
         </div>
