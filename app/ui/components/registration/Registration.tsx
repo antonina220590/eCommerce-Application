@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import {
   isValidText,
   isValidEmail,
@@ -9,6 +9,7 @@ import {
   isValidStreet,
   isValidCode,
 } from '@/app/utils/validation';
+import handleRegistration from '@/app/utils/auth/handleRegistration';
 
 export default function Registration() {
   const [first, setFirst] = useState('');
@@ -83,8 +84,16 @@ export default function Registration() {
     setCodeError(isValidCode(value));
   };
 
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const result = await handleRegistration(e);
+    console.log(result);
+    console.log(e);
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="first">
           First name

@@ -12,8 +12,12 @@
     "test": "jest"
   },
   "dependencies": {
+    "@commercetools/platform-sdk": "^7.8.0",
+    "@commercetools/sdk-client-v2": "^2.5.0",
+    "axios": "^1.6.8",
     "clsx": "^2.1.1",
     "next": "14.2.3",
+    "node-fetch": "^3.3.2",
     "node-sass-glob-importer": "^5.3.3",
     "normalize-scss": "^8.0.0",
     "react": "^18",
