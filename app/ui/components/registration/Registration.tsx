@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import React, { useState } from 'react';
 import {
   isValidText,
@@ -9,6 +10,9 @@ import {
   isValidStreet,
   isValidCode,
 } from '@/app/utils/validation';
+import styles from '../login/login.module.scss';
+import Show from '../../../../public/show.svg';
+import Hide from '../../../../public/hide.svg';
 
 export default function Registration() {
   const [first, setFirst] = useState('');
@@ -84,85 +88,93 @@ export default function Registration() {
   };
 
   return (
-    <section>
-      <h4>
+    <section className={clsx(styles.form)}>
+      <h2 className={clsx(styles.formTitle)}>Registration Form</h2>
+      <h4 className={clsx(styles.formSubtitle)}>
         Already have an account? <a href="/login">Sign In &rarr;</a>
       </h4>
-      <form>
-        <div>
-          <label htmlFor="first">
-            First name
-            <input
-              id="first"
-              name="first"
-              type="text"
-              value={first}
-              onChange={handleFirstChange}
-            />
-          </label>
+      <form className={clsx(styles.formForm)}>
+        <label htmlFor="first" className={clsx(styles.formElement)}>
+          First name
+          <input
+            id="first"
+            name="first"
+            type="text"
+            value={first}
+            onChange={handleFirstChange}
+            className={clsx({ [styles.Error]: firstError })}
+          />
+        </label>
+        <div className={clsx(styles.formError)}>
           {firstError && <span>{firstError}</span>}
         </div>
-        <div>
-          <label htmlFor="last">
-            Last name
-            <input
-              id="last"
-              name="last"
-              type="text"
-              value={last}
-              onChange={handleLastChange}
-            />
-          </label>
+        <label htmlFor="last" className={clsx(styles.formElement)}>
+          Last name
+          <input
+            id="last"
+            name="last"
+            type="text"
+            value={last}
+            onChange={handleLastChange}
+            className={clsx({ [styles.Error]: lastError })}
+          />
+        </label>
+        <div className={clsx(styles.formError)}>
           {lastError && <span>{lastError}</span>}
         </div>
-        <div>
-          <label htmlFor="email">
-            Email
-            <input
-              id="email"
-              name="email"
-              type="text"
-              value={email}
-              onChange={handleEmailChange}
-              placeholder="user@example.com"
-            />
-          </label>
+        <label htmlFor="email" className={clsx(styles.formElement)}>
+          Email
+          <input
+            id="email"
+            name="email"
+            type="text"
+            value={email}
+            onChange={handleEmailChange}
+            placeholder="user@example.com"
+            className={clsx({ [styles.Error]: emailError })}
+          />
+        </label>
+        <div className={clsx(styles.formError)}>
           {emailError && <span>{emailError}</span>}
         </div>
-        <div>
-          <label htmlFor="password">
-            Password
+        <label htmlFor="password" className={clsx(styles.formElement)}>
+          Password
+          <div style={{ position: 'relative' }}>
             <input
               id="password"
               name="password"
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={handlePasswordChange}
-            />
-          </label>
-          <button type="button" onClick={togglePasswordVisibility}>
-            {showPassword ? 'Hide' : 'Show'}
-          </button>
+              className={clsx({ [styles.Error]: passwordError })}
+            />{' '}
+            <button type="button" onClick={togglePasswordVisibility}>
+              {showPassword ? <Show /> : <Hide />}
+            </button>
+          </div>
+        </label>
+        <div className={clsx(styles.formError)}>
           {passwordError && <span>{passwordError}</span>}
         </div>
-        <div>
-          <label htmlFor="birth">
-            Date of birth
-            <input
-              id="birth"
-              name="birth"
-              type="date"
-              value={birth}
-              onChange={handleBirthChange}
-              max={new Date().toISOString().split('T')[0]}
-            />
-          </label>
+        <label htmlFor="birth" className={clsx(styles.formElement)}>
+          Date of birth
+          <input
+            id="birth"
+            name="birth"
+            type="date"
+            value={birth}
+            onChange={handleBirthChange}
+            className={clsx({ [styles.Error]: birthError })}
+            max={new Date().toISOString().split('T')[0]}
+          />
+        </label>
+        <div className={clsx(styles.formError)}>
           {birthError && <span>{birthError}</span>}
         </div>
         <h3>Address</h3>
         <div>
           <div>
-            <label htmlFor="street">
+            <label htmlFor="street" className={clsx(styles.formElement)}>
               Street
               <input
                 id="street"
@@ -175,7 +187,7 @@ export default function Registration() {
             {streetError && <span>{streetError}</span>}
           </div>
           <div>
-            <label htmlFor="city">
+            <label htmlFor="city" className={clsx(styles.formElement)}>
               City
               <input
                 id="city"
@@ -188,7 +200,7 @@ export default function Registration() {
             {cityError && <span>{cityError}</span>}
           </div>
           <div>
-            <label htmlFor="code">
+            <label htmlFor="code" className={clsx(styles.formElement)}>
               Postal code
               <input
                 id="code"
@@ -201,7 +213,7 @@ export default function Registration() {
             {codeError && <span>{codeError}</span>}
           </div>
           <div>
-            <label htmlFor="country">
+            <label htmlFor="country" className={clsx(styles.formElement)}>
               Country
               <select id="country" name="country">
                 <option value="USA">United States</option>
