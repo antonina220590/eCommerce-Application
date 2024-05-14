@@ -6,6 +6,7 @@ const handleRegistration = async (e: FormEvent<HTMLFormElement>) => {
   const formData: { [key: string]: string } = {};
   const form = e.currentTarget;
 
+  // TODO: refactor - prefer getting data from form component
   Array.from(form.elements).forEach((element) => {
     if (element.tagName === 'INPUT' || element.tagName === 'SELECT') {
       const field = element as HTMLInputElement | HTMLSelectElement;

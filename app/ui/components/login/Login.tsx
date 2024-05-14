@@ -1,8 +1,9 @@
 'use client';
 
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { isValidEmail, isValidPassword } from '@/app/utils/validation';
+import handleLogin from '@/app/utils/auth/handleLogin';
 import styles from './login.module.scss';
 import Show from '../../../../public/show.svg';
 import Hide from '../../../../public/hide.svg';
@@ -30,13 +31,26 @@ export default function Login() {
     setShowPassword(!showPassword);
   };
 
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = {
+      email,
+      password,
+    };
+
+    await handleLogin(formData);
+    // const result = await handleLogin(formData);
+    // console.log(result);
+    // console.log(e);
+  };
+
   return (
     <section className={clsx(styles.form)}>
       <h2 className={clsx(styles.formTitle)}>Log In</h2>
       <h4 className={clsx(styles.formSubtitle)}>
         Have not account yet? <a href="/registration">Sign Up &rarr;</a>
       </h4>
-      <form className={clsx(styles.formForm)}>
+      <form onSubmit={handleSubmit} className={clsx(styles.formForm)}>
         <label htmlFor="email" className={clsx(styles.formElement)}>
           Email
           <input
