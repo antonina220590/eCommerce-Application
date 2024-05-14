@@ -8,8 +8,11 @@
   }
 }
 
-
-
+@mixin centering {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 @mixin media-laptop {
   @media(max-width: $content-width) {@content; }
