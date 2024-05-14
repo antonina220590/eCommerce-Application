@@ -86,7 +86,7 @@ export default function Registration() {
   return (
     <section>
       <h4>
-        Already have an account? <a href="/registration">Sign In &rarr;</a>
+        Already have an account? <a href="/login">Sign In &rarr;</a>
       </h4>
       <form>
         <div>
