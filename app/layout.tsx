@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Header from './ui/components/headerComponent/Header';
-import Footer from './ui/components/footer/Footer';
+import Footer from './ui/components/footerComponent/Footer';
 
 import './ui/styles/main.scss';
 
