@@ -10,6 +10,10 @@
   color: $color-dark;
   background-color: $color-background;
 
+  @include media-mobile {
+    gap: 10px;
+  }
+
   &Title{
     position: relative;
 
@@ -30,6 +34,12 @@
     gap: 15px;
     background-color: $color-light;
     padding: 20px;
+
+    @include media-mobile {
+      gap: 10px;
+      width: calc(100% - 40px); 
+      padding: 10px 20px;
+     }
   }
 
   &Element{
@@ -37,6 +47,10 @@
     flex-direction: column;
     gap: 10px;
     font-style: italic;
+
+    @include media-mobile {
+      gap: 5px;
+    }
 
     input{
       width: 656px;
@@ -50,6 +64,11 @@
       line-height: 30.6px;
       letter-spacing: 0.2px;
       padding-left: 15px;
+
+      @include media-mobile {
+        width: calc(100% - 20px); 
+        height: 50px;
+       }
     }
 
     input.Error {
@@ -73,8 +92,7 @@
   
   &Error{
       display: block;
-      min-height: 18px;
-      margin-top: 5px;
+      min-height: 15px;
       color: $color-error;
       font-size: 12px;
   }
@@ -83,7 +101,7 @@
     @include centering;
     align-self: center;
     width: 400px;
-    height: 75px;
+    height: 70px;
     background-color: $color-brand;
 
     &:disabled{
@@ -95,5 +113,10 @@
       background-color: $color-dark;
       color: $color-brand;
     }
+
+    @include media-mobile {
+      max-width: 280px;
+      height: 50px;
+     }
   }
 }
