@@ -173,59 +173,61 @@ export default function Registration() {
         </div>
         <h3>Address</h3>
         <div>
-          <div>
-            <label htmlFor="street" className={clsx(styles.formElement)}>
-              Street
-              <input
-                id="street"
-                name="street"
-                type="text"
-                value={street}
-                onChange={handleStreetChange}
-              />
-            </label>
+          <label htmlFor="street" className={clsx(styles.formElement)}>
+            Street
+            <input
+              id="street"
+              name="street"
+              type="text"
+              value={street}
+              onChange={handleStreetChange}
+              className={clsx({ [styles.Error]: streetError })}
+            />
+          </label>
+          <div className={clsx(styles.formError)}>
             {streetError && <span>{streetError}</span>}
           </div>
-          <div>
-            <label htmlFor="city" className={clsx(styles.formElement)}>
-              City
-              <input
-                id="city"
-                name="city"
-                type="text"
-                value={city}
-                onChange={handleCityChange}
-              />
-            </label>
+          <label htmlFor="city" className={clsx(styles.formElement)}>
+            City
+            <input
+              id="city"
+              name="city"
+              type="text"
+              value={city}
+              onChange={handleCityChange}
+              className={clsx({ [styles.Error]: cityError })}
+            />
+          </label>
+          <div className={clsx(styles.formError)}>
             {cityError && <span>{cityError}</span>}
           </div>
-          <div>
-            <label htmlFor="code" className={clsx(styles.formElement)}>
-              Postal code
-              <input
-                id="code"
-                name="code"
-                type="text"
-                value={code}
-                onChange={handleCodeChange}
-              />
-            </label>
+          <label htmlFor="code" className={clsx(styles.formElement)}>
+            Postal code
+            <input
+              id="code"
+              name="code"
+              type="text"
+              value={code}
+              onChange={handleCodeChange}
+              className={clsx({ [styles.Error]: codeError })}
+            />
+          </label>
+          <div className={clsx(styles.formError)}>
             {codeError && <span>{codeError}</span>}
           </div>
-          <div>
-            <label htmlFor="country" className={clsx(styles.formElement)}>
-              Country
-              <select id="country" name="country">
-                <option value="USA">United States</option>
-                <option value="Canada">Canada</option>
-                <option value="Germany">Germany</option>
-                <option value="UK">United Kingdom</option>
-              </select>
-            </label>
-          </div>
+          <label htmlFor="country" className={clsx(styles.formElement)}>
+            Country
+            <select id="country" name="country">
+              <option value="USA">United States</option>
+              <option value="Canada">Canada</option>
+              <option value="Germany">Germany</option>
+              <option value="UK">United Kingdom</option>
+            </select>
+          </label>
         </div>
         <button
           type="submit"
+          className={clsx(styles.formButton)}
           disabled={
             isValidEmail(email) !== '' ||
             isValidPassword(password) !== '' ||
@@ -236,7 +238,7 @@ export default function Registration() {
             isValidText(city) !== ''
           }
         >
-          Log In
+          Sign Up
         </button>
       </form>
     </section>
