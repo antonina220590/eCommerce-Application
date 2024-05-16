@@ -1,4 +1,5 @@
 @import '../../styles/settings/variables.module.scss';
+@import '../../styles/settings/mixins.scss';
 
 .addressBox {
   display: flex;
@@ -8,12 +9,31 @@
     display: flex;
     justify-content: center;
     gap: 50px;
+
+    @include media-mobile {
+      flex-direction: column;
+    }
+  }
+
+  &Addresstype {
+    display: flex;
+    flex-direction: column;
+
+    @include media-input {
+      width: 250px;
+    }
+
+    @include media-mobile {
+      width: 250px;
+    }
   }
 }
 
 .addressTitle {
   display: flex;
   justify-content: center;
+
+  
 }
 
 .disabled {

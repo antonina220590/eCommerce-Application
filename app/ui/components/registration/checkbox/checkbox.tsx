@@ -17,7 +17,9 @@ function CheckBox({ isChecked, label, checkHandler }: checkBox) {
         checked={isChecked}
         onChange={checkHandler}
       />
-      <label htmlFor="checkbox">{label}</label>
+      <label htmlFor="checkbox" className={clsx(styles.checkboxLabel)}>
+        {label}
+      </label>
     </div>
   );
 }

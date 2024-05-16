@@ -1,5 +1,16 @@
+@import '../../../styles/settings/mixins.scss';
+@import '../../../styles/settings/variables.module.scss';
+
 .checkbox {
   display: flex;
   justify-content: center;
   gap: 5px;
+
+  &Label {
+    font-size: 20px;
+
+    @include media-mobile {
+      font-size: 12px;
+    }
+  }
 }

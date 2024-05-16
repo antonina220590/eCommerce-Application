@@ -23,8 +23,11 @@ export default function Registration() {
   const [password, setPassword] = useState('');
   const [birth, setBirth] = useState('');
   const [street, setStreet] = useState('');
+  const [streetShipping, setStreetShipping] = useState('');
   const [city, setCity] = useState('');
+  const [cityShipping, setCityShipping] = useState('');
   const [code, setCode] = useState('');
+  const [codeShipping, setCodeShipping] = useState('');
 
   const [firstError, setFirstError] = useState('');
   const [lastError, setLastError] = useState('');
@@ -32,8 +35,11 @@ export default function Registration() {
   const [passwordError, setPasswordError] = useState('');
   const [birthError, setBirthError] = useState('');
   const [streetError, setStreetError] = useState('');
+  const [streetShippingError, setStreetShippingError] = useState('');
   const [cityError, setCityError] = useState('');
+  const [cityShippingError, setCityShippingError] = useState('');
   const [codeError, setCodeError] = useState('');
+  const [codeShippingError, setCodeShippingError] = useState('');
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -72,21 +78,48 @@ export default function Registration() {
   };
 
   const handleStreetChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value.trim();
-    setStreet(value);
-    setStreetError(isValidStreet(value));
+    let valueBilling: string = '';
+    let valueShipping: string = '';
+    if (event.target.id === 'streetBilling') {
+      valueBilling = event.target.value.trim();
+      setStreet(valueBilling);
+      setStreetError(isValidStreet(valueBilling));
+    }
+    if (event.target.id === 'streetShipping') {
+      valueShipping = event.target.value.trim();
+      setStreetShipping(valueShipping);
+      setStreetShippingError(isValidStreet(valueShipping));
+    }
   };
 
   const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value.trim();
-    setCity(value);
-    setCityError(isValidText(value));
+    let valueBilling: string = '';
+    let valueShipping: string = '';
+    if (event.target.id === 'cityBilling') {
+      valueBilling = event.target.value.trim();
+      setCity(valueBilling);
+      setCityError(isValidText(valueBilling));
+    }
+    if (event.target.id === 'cityShipping') {
+      valueShipping = event.target.value.trim();
+      setCityShipping(valueShipping);
+      setCityShippingError(isValidText(valueShipping));
+    }
   };
 
   const handleCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value.trim();
-    setCode(value);
-    setCodeError(isValidCode(value));
+    let valueBilling: string = '';
+    let valueShipping: string = '';
+    if (event.target.id === 'codeBilling') {
+      valueBilling = event.target.value.trim();
+      setCode(valueBilling);
+      setCodeError(isValidCode(valueBilling));
+    }
+    if (event.target.id === 'codeShipping') {
+      valueShipping = event.target.value.trim();
+      setCodeShipping(valueShipping);
+      setCodeShippingError(isValidCode(valueShipping));
+    }
   };
 
   const [isChecked, setIsChecked] = useState(false);
@@ -96,7 +129,7 @@ export default function Registration() {
 
   return (
     <section className={clsx(styles.form)}>
-      <h2 className={clsx(styles.formTitle)}>Registration Form</h2>
+      <h2 className={clsx(styles.formTitle)}>Registration</h2>
       <h4 className={clsx(styles.formSubtitle)}>
         Already have an account? <a href="/login">Sign In &rarr;</a>
       </h4>
@@ -185,7 +218,7 @@ export default function Registration() {
             checkHandler={onHandleChange}
           />
           <div className={clsx(style.addressBoxInside)}>
-            <div>
+            <div className={clsx(style.addressBoxAddresstype)}>
               <h3 className={clsx(style.addressTitle)}>Shipping Address</h3>
               <label
                 htmlFor="streetShipping"
@@ -196,13 +229,13 @@ export default function Registration() {
                   id="streetShipping"
                   name="streetShipping"
                   type="textShipping"
-                  value={street}
+                  value={streetShipping}
                   onChange={handleStreetChange}
-                  className={clsx({ [styles.Error]: streetError })}
+                  className={clsx({ [styles.Error]: streetShippingError })}
                 />
               </label>
               <div className={clsx(styles.formError)}>
-                {streetError && <span>{streetError}</span>}
+                {streetShippingError && <span>{streetShippingError}</span>}
               </div>
               <label
                 htmlFor="cityShipping"
@@ -213,13 +246,13 @@ export default function Registration() {
                   id="cityShipping"
                   name="cityShipping"
                   type="textShipping"
-                  value={city}
+                  value={cityShipping}
                   onChange={handleCityChange}
-                  className={clsx({ [styles.Error]: cityError })}
+                  className={clsx({ [styles.Error]: cityShippingError })}
                 />
               </label>
               <div className={clsx(styles.formError)}>
-                {cityError && <span>{cityError}</span>}
+                {cityShippingError && <span>{cityShippingError}</span>}
               </div>
               <label
                 htmlFor="codeShipping"
@@ -230,13 +263,13 @@ export default function Registration() {
                   id="codeShipping"
                   name="codeShipping"
                   type="textShipping"
-                  value={code}
+                  value={codeShipping}
                   onChange={handleCodeChange}
-                  className={clsx({ [styles.Error]: codeError })}
+                  className={clsx({ [styles.Error]: codeShippingError })}
                 />
               </label>
               <div className={clsx(styles.formError)}>
-                {codeError && <span>{codeError}</span>}
+                {codeShippingError && <span>{codeShippingError}</span>}
               </div>
               <label
                 htmlFor="countryShipping"
@@ -251,7 +284,7 @@ export default function Registration() {
                 </select>
               </label>
             </div>
-            <div>
+            <div className={clsx(style.addressBoxAddresstype)}>
               <h3 className={clsx(style.addressTitle)}>Billing Address</h3>
               <label
                 htmlFor="streetBilling"
@@ -262,6 +295,7 @@ export default function Registration() {
                   id="streetBilling"
                   name="streetBilling"
                   type="textBilling"
+                  disabled={isChecked}
                   value={street}
                   onChange={handleStreetChange}
                   className={clsx(
@@ -280,6 +314,7 @@ export default function Registration() {
                   name="cityBilling"
                   type="textBilling"
                   value={city}
+                  disabled={isChecked}
                   onChange={handleCityChange}
                   className={clsx(
                     { [styles.Error]: cityError },
@@ -296,6 +331,7 @@ export default function Registration() {
                   id="codeBilling"
                   name="codeBilling"
                   type="textBilling"
+                  disabled={isChecked}
                   value={code}
                   onChange={handleCodeChange}
                   className={clsx(
@@ -315,6 +351,7 @@ export default function Registration() {
                 <select
                   id="countryBilling"
                   name="countryBilling"
+                  disabled={isChecked}
                   className={clsx({ [style.disabled]: isChecked })}
                 >
                   <option value="USA">United States</option>
