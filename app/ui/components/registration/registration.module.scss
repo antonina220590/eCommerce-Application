@@ -1,0 +1,22 @@
+@import '../../styles/settings/variables.module.scss';
+
+.addressBox {
+  display: flex;
+  flex-direction: column;
+
+  &Inside {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+  }
+}
+
+.addressTitle {
+  display: flex;
+  justify-content: center;
+}
+
+.disabled {
+  background: $color-disabled;
+  pointer-events: none;
+}

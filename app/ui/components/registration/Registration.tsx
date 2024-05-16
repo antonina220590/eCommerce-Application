@@ -10,7 +10,9 @@ import {
   isValidStreet,
   isValidCode,
 } from '@/app/utils/validation';
+import CheckBox from './checkbox/checkbox';
 import styles from '../login/login.module.scss';
+import style from './registration.module.scss';
 import Show from '../../../../public/show.svg';
 import Hide from '../../../../public/hide.svg';
 
@@ -85,6 +87,11 @@ export default function Registration() {
     const value = event.target.value.trim();
     setCode(value);
     setCodeError(isValidCode(value));
+  };
+
+  const [isChecked, setIsChecked] = useState(false);
+  const onHandleChange = () => {
+    setIsChecked(!isChecked);
   };
 
   return (
@@ -171,59 +178,153 @@ export default function Registration() {
         <div className={clsx(styles.formError)}>
           {birthError && <span>{birthError}</span>}
         </div>
-        <h3>Address</h3>
-        <div>
-          <label htmlFor="street" className={clsx(styles.formElement)}>
-            Street
-            <input
-              id="street"
-              name="street"
-              type="text"
-              value={street}
-              onChange={handleStreetChange}
-              className={clsx({ [styles.Error]: streetError })}
-            />
-          </label>
-          <div className={clsx(styles.formError)}>
-            {streetError && <span>{streetError}</span>}
+        <div className={clsx(style.addressBox)}>
+          <CheckBox
+            isChecked={isChecked}
+            label="Use the same address for billing and shipping"
+            checkHandler={onHandleChange}
+          />
+          <div className={clsx(style.addressBoxInside)}>
+            <div>
+              <h3 className={clsx(style.addressTitle)}>Shipping Address</h3>
+              <label
+                htmlFor="streetShipping"
+                className={clsx(styles.formElement)}
+              >
+                Street
+                <input
+                  id="streetShipping"
+                  name="streetShipping"
+                  type="textShipping"
+                  value={street}
+                  onChange={handleStreetChange}
+                  className={clsx({ [styles.Error]: streetError })}
+                />
+              </label>
+              <div className={clsx(styles.formError)}>
+                {streetError && <span>{streetError}</span>}
+              </div>
+              <label
+                htmlFor="cityShipping"
+                className={clsx(styles.formElement)}
+              >
+                City
+                <input
+                  id="cityShipping"
+                  name="cityShipping"
+                  type="textShipping"
+                  value={city}
+                  onChange={handleCityChange}
+                  className={clsx({ [styles.Error]: cityError })}
+                />
+              </label>
+              <div className={clsx(styles.formError)}>
+                {cityError && <span>{cityError}</span>}
+              </div>
+              <label
+                htmlFor="codeShipping"
+                className={clsx(styles.formElement)}
+              >
+                Postal code
+                <input
+                  id="codeShipping"
+                  name="codeShipping"
+                  type="textShipping"
+                  value={code}
+                  onChange={handleCodeChange}
+                  className={clsx({ [styles.Error]: codeError })}
+                />
+              </label>
+              <div className={clsx(styles.formError)}>
+                {codeError && <span>{codeError}</span>}
+              </div>
+              <label
+                htmlFor="countryShipping"
+                className={clsx(styles.formElement)}
+              >
+                Country
+                <select id="countryShipping" name="countryShipping">
+                  <option value="USA">United States</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Germany">Germany</option>
+                  <option value="UK">United Kingdom</option>
+                </select>
+              </label>
+            </div>
+            <div>
+              <h3 className={clsx(style.addressTitle)}>Billing Address</h3>
+              <label
+                htmlFor="streetBilling"
+                className={clsx(styles.formElement)}
+              >
+                Street
+                <input
+                  id="streetBilling"
+                  name="streetBilling"
+                  type="textBilling"
+                  value={street}
+                  onChange={handleStreetChange}
+                  className={clsx(
+                    { [styles.Error]: streetError },
+                    { [style.disabled]: isChecked }
+                  )}
+                />
+              </label>
+              <div className={clsx(styles.formError)}>
+                {streetError && <span>{streetError}</span>}
+              </div>
+              <label htmlFor="cityBilling" className={clsx(styles.formElement)}>
+                City
+                <input
+                  id="cityBilling"
+                  name="cityBilling"
+                  type="textBilling"
+                  value={city}
+                  onChange={handleCityChange}
+                  className={clsx(
+                    { [styles.Error]: cityError },
+                    { [style.disabled]: isChecked }
+                  )}
+                />
+              </label>
+              <div className={clsx(styles.formError)}>
+                {cityError && <span>{cityError}</span>}
+              </div>
+              <label htmlFor="codeBilling" className={clsx(styles.formElement)}>
+                Postal code
+                <input
+                  id="codeBilling"
+                  name="codeBilling"
+                  type="textBilling"
+                  value={code}
+                  onChange={handleCodeChange}
+                  className={clsx(
+                    { [styles.Error]: codeError },
+                    { [style.disabled]: isChecked }
+                  )}
+                />
+              </label>
+              <div className={clsx(styles.formError)}>
+                {codeError && <span>{codeError}</span>}
+              </div>
+              <label
+                htmlFor="countryBilling"
+                className={clsx(styles.formElement)}
+              >
+                Country
+                <select
+                  id="countryBilling"
+                  name="countryBilling"
+                  className={clsx({ [style.disabled]: isChecked })}
+                >
+                  <option value="USA">United States</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Germany">Germany</option>
+                  <option value="UK">United Kingdom</option>
+                </select>
+              </label>
+            </div>
           </div>
-          <label htmlFor="city" className={clsx(styles.formElement)}>
-            City
-            <input
-              id="city"
-              name="city"
-              type="text"
-              value={city}
-              onChange={handleCityChange}
-              className={clsx({ [styles.Error]: cityError })}
-            />
-          </label>
-          <div className={clsx(styles.formError)}>
-            {cityError && <span>{cityError}</span>}
-          </div>
-          <label htmlFor="code" className={clsx(styles.formElement)}>
-            Postal code
-            <input
-              id="code"
-              name="code"
-              type="text"
-              value={code}
-              onChange={handleCodeChange}
-              className={clsx({ [styles.Error]: codeError })}
-            />
-          </label>
-          <div className={clsx(styles.formError)}>
-            {codeError && <span>{codeError}</span>}
-          </div>
-          <label htmlFor="country" className={clsx(styles.formElement)}>
-            Country
-            <select id="country" name="country">
-              <option value="USA">United States</option>
-              <option value="Canada">Canada</option>
-              <option value="Germany">Germany</option>
-              <option value="UK">United Kingdom</option>
-            </select>
-          </label>
         </div>
         <button
           type="submit"
