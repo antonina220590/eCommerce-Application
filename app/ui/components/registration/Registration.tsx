@@ -10,7 +10,9 @@ import {
   isValidStreet,
   isValidCode,
 } from '@/app/utils/validation';
+import CheckBox from './checkbox/checkbox';
 import styles from '../login/login.module.scss';
+import style from './registration.module.scss';
 import Show from '../../../../public/show.svg';
 import Hide from '../../../../public/hide.svg';
 
@@ -21,8 +23,11 @@ export default function Registration() {
   const [password, setPassword] = useState('');
   const [birth, setBirth] = useState('');
   const [street, setStreet] = useState('');
+  const [streetShipping, setStreetShipping] = useState('');
   const [city, setCity] = useState('');
+  const [cityShipping, setCityShipping] = useState('');
   const [code, setCode] = useState('');
+  const [codeShipping, setCodeShipping] = useState('');
 
   const [firstError, setFirstError] = useState('');
   const [lastError, setLastError] = useState('');
@@ -30,8 +35,11 @@ export default function Registration() {
   const [passwordError, setPasswordError] = useState('');
   const [birthError, setBirthError] = useState('');
   const [streetError, setStreetError] = useState('');
+  const [streetShippingError, setStreetShippingError] = useState('');
   const [cityError, setCityError] = useState('');
+  const [cityShippingError, setCityShippingError] = useState('');
   const [codeError, setCodeError] = useState('');
+  const [codeShippingError, setCodeShippingError] = useState('');
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -70,26 +78,58 @@ export default function Registration() {
   };
 
   const handleStreetChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value.trim();
-    setStreet(value);
-    setStreetError(isValidStreet(value));
+    let valueBilling: string = '';
+    let valueShipping: string = '';
+    if (event.target.id === 'streetBilling') {
+      valueBilling = event.target.value.trim();
+      setStreet(valueBilling);
+      setStreetError(isValidStreet(valueBilling));
+    }
+    if (event.target.id === 'streetShipping') {
+      valueShipping = event.target.value.trim();
+      setStreetShipping(valueShipping);
+      setStreetShippingError(isValidStreet(valueShipping));
+    }
   };
 
   const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value.trim();
-    setCity(value);
-    setCityError(isValidText(value));
+    let valueBilling: string = '';
+    let valueShipping: string = '';
+    if (event.target.id === 'cityBilling') {
+      valueBilling = event.target.value.trim();
+      setCity(valueBilling);
+      setCityError(isValidText(valueBilling));
+    }
+    if (event.target.id === 'cityShipping') {
+      valueShipping = event.target.value.trim();
+      setCityShipping(valueShipping);
+      setCityShippingError(isValidText(valueShipping));
+    }
   };
 
   const handleCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value.trim();
-    setCode(value);
-    setCodeError(isValidCode(value));
+    let valueBilling: string = '';
+    let valueShipping: string = '';
+    if (event.target.id === 'codeBilling') {
+      valueBilling = event.target.value.trim();
+      setCode(valueBilling);
+      setCodeError(isValidCode(valueBilling));
+    }
+    if (event.target.id === 'codeShipping') {
+      valueShipping = event.target.value.trim();
+      setCodeShipping(valueShipping);
+      setCodeShippingError(isValidCode(valueShipping));
+    }
+  };
+
+  const [isChecked, setIsChecked] = useState(false);
+  const onHandleChange = () => {
+    setIsChecked(!isChecked);
   };
 
   return (
     <section className={clsx(styles.form)}>
-      <h2 className={clsx(styles.formTitle)}>Registration Form</h2>
+      <h2 className={clsx(styles.formTitle)}>Registration</h2>
       <h4 className={clsx(styles.formSubtitle)}>
         Already have an account? <a href="/login">Sign In &rarr;</a>
       </h4>
@@ -171,59 +211,157 @@ export default function Registration() {
         <div className={clsx(styles.formError)}>
           {birthError && <span>{birthError}</span>}
         </div>
-        <h3>Address</h3>
-        <div>
-          <label htmlFor="street" className={clsx(styles.formElement)}>
-            Street
-            <input
-              id="street"
-              name="street"
-              type="text"
-              value={street}
-              onChange={handleStreetChange}
-              className={clsx({ [styles.Error]: streetError })}
-            />
-          </label>
-          <div className={clsx(styles.formError)}>
-            {streetError && <span>{streetError}</span>}
+        <div className={clsx(style.addressBox)}>
+          <CheckBox
+            isChecked={isChecked}
+            label="Use the same address for billing and shipping"
+            checkHandler={onHandleChange}
+          />
+          <div className={clsx(style.addressBoxInside)}>
+            <div className={clsx(style.addressBoxAddresstype)}>
+              <h3 className={clsx(style.addressTitle)}>Shipping Address</h3>
+              <label
+                htmlFor="streetShipping"
+                className={clsx(styles.formElement)}
+              >
+                Street
+                <input
+                  id="streetShipping"
+                  name="streetShipping"
+                  type="textShipping"
+                  value={streetShipping}
+                  onChange={handleStreetChange}
+                  className={clsx({ [styles.Error]: streetShippingError })}
+                />
+              </label>
+              <div className={clsx(styles.formError)}>
+                {streetShippingError && <span>{streetShippingError}</span>}
+              </div>
+              <label
+                htmlFor="cityShipping"
+                className={clsx(styles.formElement)}
+              >
+                City
+                <input
+                  id="cityShipping"
+                  name="cityShipping"
+                  type="textShipping"
+                  value={cityShipping}
+                  onChange={handleCityChange}
+                  className={clsx({ [styles.Error]: cityShippingError })}
+                />
+              </label>
+              <div className={clsx(styles.formError)}>
+                {cityShippingError && <span>{cityShippingError}</span>}
+              </div>
+              <label
+                htmlFor="codeShipping"
+                className={clsx(styles.formElement)}
+              >
+                Postal code
+                <input
+                  id="codeShipping"
+                  name="codeShipping"
+                  type="textShipping"
+                  value={codeShipping}
+                  onChange={handleCodeChange}
+                  className={clsx({ [styles.Error]: codeShippingError })}
+                />
+              </label>
+              <div className={clsx(styles.formError)}>
+                {codeShippingError && <span>{codeShippingError}</span>}
+              </div>
+              <label
+                htmlFor="countryShipping"
+                className={clsx(styles.formElement)}
+              >
+                Country
+                <select id="countryShipping" name="countryShipping">
+                  <option value="USA">United States</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Germany">Germany</option>
+                  <option value="UK">United Kingdom</option>
+                </select>
+              </label>
+            </div>
+            <div className={clsx(style.addressBoxAddresstype)}>
+              <h3 className={clsx(style.addressTitle)}>Billing Address</h3>
+              <label
+                htmlFor="streetBilling"
+                className={clsx(styles.formElement)}
+              >
+                Street
+                <input
+                  id="streetBilling"
+                  name="streetBilling"
+                  type="textBilling"
+                  disabled={isChecked}
+                  value={street}
+                  onChange={handleStreetChange}
+                  className={clsx(
+                    { [styles.Error]: streetError },
+                    { [style.disabled]: isChecked }
+                  )}
+                />
+              </label>
+              <div className={clsx(styles.formError)}>
+                {streetError && <span>{streetError}</span>}
+              </div>
+              <label htmlFor="cityBilling" className={clsx(styles.formElement)}>
+                City
+                <input
+                  id="cityBilling"
+                  name="cityBilling"
+                  type="textBilling"
+                  value={city}
+                  disabled={isChecked}
+                  onChange={handleCityChange}
+                  className={clsx(
+                    { [styles.Error]: cityError },
+                    { [style.disabled]: isChecked }
+                  )}
+                />
+              </label>
+              <div className={clsx(styles.formError)}>
+                {cityError && <span>{cityError}</span>}
+              </div>
+              <label htmlFor="codeBilling" className={clsx(styles.formElement)}>
+                Postal code
+                <input
+                  id="codeBilling"
+                  name="codeBilling"
+                  type="textBilling"
+                  disabled={isChecked}
+                  value={code}
+                  onChange={handleCodeChange}
+                  className={clsx(
+                    { [styles.Error]: codeError },
+                    { [style.disabled]: isChecked }
+                  )}
+                />
+              </label>
+              <div className={clsx(styles.formError)}>
+                {codeError && <span>{codeError}</span>}
+              </div>
+              <label
+                htmlFor="countryBilling"
+                className={clsx(styles.formElement)}
+              >
+                Country
+                <select
+                  id="countryBilling"
+                  name="countryBilling"
+                  disabled={isChecked}
+                  className={clsx({ [style.disabled]: isChecked })}
+                >
+                  <option value="USA">United States</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Germany">Germany</option>
+                  <option value="UK">United Kingdom</option>
+                </select>
+              </label>
+            </div>
           </div>
-          <label htmlFor="city" className={clsx(styles.formElement)}>
-            City
-            <input
-              id="city"
-              name="city"
-              type="text"
-              value={city}
-              onChange={handleCityChange}
-              className={clsx({ [styles.Error]: cityError })}
-            />
-          </label>
-          <div className={clsx(styles.formError)}>
-            {cityError && <span>{cityError}</span>}
-          </div>
-          <label htmlFor="code" className={clsx(styles.formElement)}>
-            Postal code
-            <input
-              id="code"
-              name="code"
-              type="text"
-              value={code}
-              onChange={handleCodeChange}
-              className={clsx({ [styles.Error]: codeError })}
-            />
-          </label>
-          <div className={clsx(styles.formError)}>
-            {codeError && <span>{codeError}</span>}
-          </div>
-          <label htmlFor="country" className={clsx(styles.formElement)}>
-            Country
-            <select id="country" name="country">
-              <option value="USA">United States</option>
-              <option value="Canada">Canada</option>
-              <option value="Germany">Germany</option>
-              <option value="UK">United Kingdom</option>
-            </select>
-          </label>
         </div>
         <button
           type="submit"
