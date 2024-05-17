@@ -80,7 +80,7 @@ export default function Login() {
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={handlePasswordChange}
-              className={clsx({ [styles.Error]: emailError })}
+              className={clsx({ [styles.Error]: passwordError })}
             />{' '}
             <button type="button" onClick={togglePasswordVisibility}>
               {showPassword ? <Show /> : <Hide />}

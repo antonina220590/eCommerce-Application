@@ -1,0 +1,43 @@
+@import '../../styles/settings/variables.module.scss';
+@import '../../styles/settings/mixins.scss';
+
+.addressBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &Inside {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+
+    @include media-mobile {
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+  &Addresstype {
+    flex: 1;
+    flex-direction: column;
+
+    input{
+      width: calc(100% - 20px);
+    }
+    select{width: 100%;}
+
+
+  }
+}
+
+.addressTitle {
+  display: flex;
+  justify-content: center;
+
+  
+}
+
+.disabled {
+  background: $color-disabled;
+  pointer-events: none;
+}

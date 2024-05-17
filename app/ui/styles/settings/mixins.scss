@@ -18,6 +18,10 @@
   @media(max-width: $content-width) {@content; }
 }
 
+@mixin media-input {
+  @media(max-width: $input-width) {@content; }
+}
+
 @mixin media-mid {
   @media(max-width: $mid-width) {@content; }
 }
