@@ -17,7 +17,7 @@ const handleLogin = async (
     });
 
     const result = await response.json();
-    console.log('handleLogin result (utils)', result);
+    // console.log('handleLogin result (utils)', result);
 
     if (response.ok) {
       return { success: true };

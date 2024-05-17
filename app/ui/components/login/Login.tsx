@@ -42,7 +42,7 @@ export default function Login() {
     };
 
     const result = await handleLogin(formData, setLoginError);
-    console.log(result);
+    // console.log(result);
     if (result?.success) {
       route.push('/');
     }

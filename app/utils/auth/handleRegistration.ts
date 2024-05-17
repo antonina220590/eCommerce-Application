@@ -16,7 +16,7 @@ const handleRegistration = async (e: FormEvent<HTMLFormElement>) => {
     }
   });
 
-  console.log('FormData -> ', formData);
+  // console.log('FormData -> ', formData);
 
   const response = await fetch('/api/auth/register', {
     method: 'POST',
@@ -26,7 +26,7 @@ const handleRegistration = async (e: FormEvent<HTMLFormElement>) => {
     body: JSON.stringify(formData),
   });
 
-  console.log(response);
+  // console.log(response);
 
   const result = await response.json();
   return result;

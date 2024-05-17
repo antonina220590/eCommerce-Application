@@ -10,12 +10,12 @@ export async function POST(req: NextRequest) {
   const regData = await req.json();
   const { email, password, firstName, lastName } = regData;
 
-  console.log('regData', regData);
+  // console.log('regData', regData);
 
   try {
     const token = await getToken();
 
-    console.log('token: ', token);
+    // console.log('token: ', token);
 
     // TODO - refactor according with our data from form (or at least change names)
     const customerDraft = {
