@@ -11,6 +11,7 @@ import {
   isValidCode,
 } from '@/app/utils/validation';
 
+import { useRouter } from 'next/navigation';
 import handleRegistration from '@/app/utils/auth/handleRegistration';
 import Checkbox from './checkbox/checkbox';
 import styles from '../login/login.module.scss';
@@ -42,6 +43,10 @@ export default function Registration() {
   const [cityShippingError, setCityShippingError] = useState('');
   const [codeError, setCodeError] = useState('');
   const [codeShippingError, setCodeShippingError] = useState('');
+  const [registrationError, setRegistrationError] = useState<string | null>(
+    null
+  );
+  const route = useRouter();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -132,10 +137,10 @@ export default function Registration() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await handleRegistration(e);
-    // const result = await handleRegistration(e);
-    // console.log(result);
-    // console.log(e);
+    const result = await handleRegistration(e, setRegistrationError);
+    if (result?.success) {
+      route.push('/');
+    }
   };
 
   const [isCheckedDefaultShipping, setIsCheckedDefaultShipping] =
@@ -156,11 +161,11 @@ export default function Registration() {
         Already have an account? <a href="/login">Sign In &rarr;</a>
       </h4>
       <form className={clsx(styles.formForm)} onSubmit={handleSubmit}>
-        <label htmlFor="first" className={clsx(styles.formElement)}>
+        <label htmlFor="firstName" className={clsx(styles.formElement)}>
           First name
           <input
             id="first"
-            name="first"
+            name="firstName"
             type="text"
             value={first}
             onChange={handleFirstChange}
@@ -170,11 +175,11 @@ export default function Registration() {
         <div className={clsx(styles.formError)}>
           {firstError && <span>{firstError}</span>}
         </div>
-        <label htmlFor="last" className={clsx(styles.formElement)}>
+        <label htmlFor="lastName" className={clsx(styles.formElement)}>
           Last name
           <input
             id="last"
-            name="last"
+            name="lastName"
             type="text"
             value={last}
             onChange={handleLastChange}
@@ -218,11 +223,11 @@ export default function Registration() {
         <div className={clsx(styles.formError)}>
           {passwordError && <span>{passwordError}</span>}
         </div>
-        <label htmlFor="birth" className={clsx(styles.formElement)}>
+        <label htmlFor="dateOfBirth" className={clsx(styles.formElement)}>
           Date of birth
           <input
             id="birth"
-            name="birth"
+            name="dateOfBirth"
             type="date"
             value={birth}
             onChange={handleBirthChange}
@@ -398,6 +403,11 @@ export default function Registration() {
             </div>
           </div>
         </div>
+        {registrationError && (
+          <div className={clsx(styles.formError)}>
+            <span>{registrationError}</span>
+          </div>
+        )}
         <button
           type="submit"
           className={clsx(styles.formButton)}

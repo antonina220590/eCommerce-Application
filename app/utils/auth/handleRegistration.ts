@@ -1,7 +1,11 @@
 import { FormEvent } from 'react';
 
-const handleRegistration = async (e: FormEvent<HTMLFormElement>) => {
+const handleRegistration = async (
+  e: FormEvent<HTMLFormElement>,
+  setRegistrationError: (_error: string | null) => void
+) => {
   e.preventDefault();
+  setRegistrationError(null);
 
   const formData: { [key: string]: string } = {};
   const form = e.currentTarget;
@@ -18,18 +22,32 @@ const handleRegistration = async (e: FormEvent<HTMLFormElement>) => {
 
   // console.log('FormData -> ', formData);
 
-  const response = await fetch('/api/auth/register', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(formData),
-  });
+  try {
+    const response = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
 
-  // console.log(response);
+    // console.log(response);
 
-  const result = await response.json();
-  return result;
+    const result = await response.json();
+
+    // console.log(result);
+    if (response.ok) {
+      // return result;
+      return { success: true };
+    }
+
+    setRegistrationError(result?.error);
+    return { success: false };
+  } catch (error) {
+    console.error('Registration failed:', error);
+    setRegistrationError('Registration failed due to some error');
+    return { success: false };
+  }
 };
 
 export default handleRegistration;
