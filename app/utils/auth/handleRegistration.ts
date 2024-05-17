@@ -26,6 +26,8 @@ const handleRegistration = async (e: FormEvent<HTMLFormElement>) => {
     body: JSON.stringify(formData),
   });
 
+  console.log(response);
+
   const result = await response.json();
   return result;
 };

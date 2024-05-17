@@ -1,10 +1,11 @@
 import React from 'react';
 import Login from '../ui/components/login/Login';
 
-export default function LoginForm() {
+function LoginForm() {
   return (
     <main>
       <Login />
     </main>
   );
 }
+export default LoginForm;

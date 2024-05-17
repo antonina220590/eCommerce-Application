@@ -7,14 +7,17 @@ import {
 import fetch from 'node-fetch';
 
 export async function POST(req: NextRequest) {
-  const { email, password, firstName, lastName } = await req.json();
+  const regData = await req.json();
+  const { email, password, firstName, lastName } = regData;
+
+  console.log('regData', regData);
 
   try {
     const token = await getToken();
 
     console.log('token: ', token);
 
-    // TODO - refactor according with our data from form
+    // TODO - refactor according with our data from form (or at least change names)
     const customerDraft = {
       email,
       password,

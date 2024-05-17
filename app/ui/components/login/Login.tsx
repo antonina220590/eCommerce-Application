@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import React, { useState, FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
 import { isValidEmail, isValidPassword } from '@/app/utils/validation';
 import handleLogin from '@/app/utils/auth/handleLogin';
 import styles from './login.module.scss';
@@ -14,6 +15,8 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [loginError, setLoginError] = useState<string | null>(null);
+  const route = useRouter();
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value.trim();
@@ -38,9 +41,11 @@ export default function Login() {
       password,
     };
 
-    await handleLogin(formData);
-    // const result = await handleLogin(formData);
-    // console.log(result);
+    const result = await handleLogin(formData, setLoginError);
+    console.log(result);
+    if (result?.success) {
+      route.push('/');
+    }
     // console.log(e);
   };
 
@@ -85,6 +90,11 @@ export default function Login() {
         <div className={clsx(styles.formError)}>
           {passwordError && <span>{passwordError}</span>}
         </div>
+        {loginError && (
+          <div className={clsx(styles.formError)}>
+            <span>{loginError}</span>
+          </div>
+        )}
         <button
           type="submit"
           className={clsx(styles.formButton)}

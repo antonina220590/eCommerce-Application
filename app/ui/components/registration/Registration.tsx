@@ -87,9 +87,10 @@ export default function Registration() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const result = await handleRegistration(e);
-    console.log(result);
-    console.log(e);
+    await handleRegistration(e);
+    // const result = await handleRegistration(e);
+    // console.log(result);
+    // console.log(e);
   };
 
   return (

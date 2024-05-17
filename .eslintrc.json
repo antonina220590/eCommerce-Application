@@ -8,6 +8,7 @@
   "extends": ["next/core-web-vitals", "airbnb", "plugin:prettier/recommended"],
   "plugins": ["prettier"],
   "rules": {
+    "no-unused-vars": ["error", { "args": "all", "argsIgnorePattern": "^_" }],
     "prettier/prettier": [
       "error",
       {
