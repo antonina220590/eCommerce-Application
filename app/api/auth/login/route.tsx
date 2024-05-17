@@ -40,13 +40,14 @@ export async function POST(req: NextRequest) {
     }
 
     const res = (await response.json()) as LoginTokenRequest;
-    console.log('res - >>', res);
-    const accessToken = res.access_token;
-    const expiresIn = res.expires_in;
+    // console.log('res - >>', res);
+    const tokenData = res;
+    const accessToken = tokenData.access_token;
+    const expiresIn = tokenData.expires_in;
 
     const userData = await fetchUserData(accessToken);
     const userName = userData.firstName;
-    console.log('userData - >>', userData);
+    // console.log('userData - >>', userData);
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -75,7 +76,7 @@ export async function POST(req: NextRequest) {
       {
         message: 'Login successful -> ',
         userData,
-        accessToken,
+        tokenData,
       },
       {
         status: 200,
