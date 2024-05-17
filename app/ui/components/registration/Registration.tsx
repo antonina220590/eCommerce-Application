@@ -12,7 +12,7 @@ import {
 } from '@/app/utils/validation';
 
 import handleRegistration from '@/app/utils/auth/handleRegistration';
-import CheckBox from './checkbox/checkbox';
+import Checkbox from './checkbox/checkbox';
 import styles from '../login/login.module.scss';
 import style from './registration.module.scss';
 import Show from '../../../../public/show.svg';
@@ -138,6 +138,17 @@ export default function Registration() {
     // console.log(e);
   };
 
+  const [isCheckedDefaultShipping, setIsCheckedDefaultShipping] =
+    useState(false);
+  const onHandleChangeDefaultShipping = () => {
+    setIsCheckedDefaultShipping(!isCheckedDefaultShipping);
+  };
+
+  const [isCheckedDefaultBilling, setIsCheckedDefaultBilling] = useState(false);
+  const onHandleChangeDefaultBilling = () => {
+    setIsCheckedDefaultBilling(!isCheckedDefaultBilling);
+  };
+
   return (
     <section className={clsx(styles.form)}>
       <h2 className={clsx(styles.formTitle)}>Registration</h2>
@@ -223,8 +234,9 @@ export default function Registration() {
           {birthError && <span>{birthError}</span>}
         </div>
         <div className={clsx(style.addressBox)}>
-          <CheckBox
+          <Checkbox
             isChecked={isChecked}
+            id="checkbox"
             label="Use the same address for billing and shipping"
             checkHandler={onHandleChange}
           />
@@ -294,6 +306,12 @@ export default function Registration() {
                   <option value="UK">United Kingdom</option>
                 </select>
               </label>
+              <Checkbox
+                id="checkboxDefaultShipping"
+                label="Set as default billing address"
+                isChecked={isCheckedDefaultShipping}
+                checkHandler={onHandleChangeDefaultShipping}
+              />
             </div>
             <div className={clsx(style.addressBoxAddresstype)}>
               <h3 className={clsx(style.addressTitle)}>Billing Address</h3>
@@ -371,6 +389,12 @@ export default function Registration() {
                   <option value="UK">United Kingdom</option>
                 </select>
               </label>
+              <Checkbox
+                id="checkboxDefaultBilling"
+                label="Set as default billing address"
+                isChecked={isCheckedDefaultBilling}
+                checkHandler={onHandleChangeDefaultBilling}
+              />
             </div>
           </div>
         </div>
