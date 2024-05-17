@@ -5,6 +5,8 @@
   display: flex;
   justify-content: center;
   gap: 5px;
+  width: 100%;
+  margin-top: 10px;
 
   &Label {
     font-size: 20px;
@@ -13,4 +15,10 @@
       font-size: 12px;
     }
   }
+
+  &Input {
+    max-width: 15px;
+  }
 }
+
+
