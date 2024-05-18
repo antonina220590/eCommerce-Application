@@ -129,6 +129,7 @@ export default function Registration() {
 
   const [isCheckedDefaultShipping, setIsCheckedDefaultShipping] =
     useState(false);
+
   const onHandleChangeDefaultShipping = () => {
     setIsCheckedDefaultShipping(!isCheckedDefaultShipping);
   };
@@ -146,7 +147,7 @@ export default function Registration() {
       </h4>
       <form className={clsx(styles.formForm)}>
         <label htmlFor="first" className={clsx(styles.formElement)}>
-          First name
+          First name*
           <input
             id="first"
             name="first"
@@ -160,7 +161,7 @@ export default function Registration() {
           {firstError && <span>{firstError}</span>}
         </div>
         <label htmlFor="last" className={clsx(styles.formElement)}>
-          Last name
+          Last name*
           <input
             id="last"
             name="last"
@@ -174,7 +175,7 @@ export default function Registration() {
           {lastError && <span>{lastError}</span>}
         </div>
         <label htmlFor="email" className={clsx(styles.formElement)}>
-          Email
+          Email*
           <input
             id="email"
             name="email"
@@ -189,7 +190,7 @@ export default function Registration() {
           {emailError && <span>{emailError}</span>}
         </div>
         <label htmlFor="password" className={clsx(styles.formElement)}>
-          Password
+          Password*
           <div style={{ position: 'relative' }}>
             <input
               id="password"
@@ -208,7 +209,7 @@ export default function Registration() {
           {passwordError && <span>{passwordError}</span>}
         </div>
         <label htmlFor="birth" className={clsx(styles.formElement)}>
-          Date of birth
+          Date of birth*
           <input
             id="birth"
             name="birth"
@@ -236,7 +237,7 @@ export default function Registration() {
                 htmlFor="streetShipping"
                 className={clsx(styles.formElement)}
               >
-                Street
+                Street*
                 <input
                   id="streetShipping"
                   name="streetShipping"
@@ -253,7 +254,7 @@ export default function Registration() {
                 htmlFor="cityShipping"
                 className={clsx(styles.formElement)}
               >
-                City
+                City*
                 <input
                   id="cityShipping"
                   name="cityShipping"
@@ -270,7 +271,7 @@ export default function Registration() {
                 htmlFor="codeShipping"
                 className={clsx(styles.formElement)}
               >
-                Postal code
+                Postal code*
                 <input
                   id="codeShipping"
                   name="codeShipping"
@@ -287,7 +288,7 @@ export default function Registration() {
                 htmlFor="countryShipping"
                 className={clsx(styles.formElement)}
               >
-                Country
+                Country*
                 <select id="countryShipping" name="countryShipping">
                   <option value="USA">United States</option>
                   <option value="Canada">Canada</option>
@@ -297,7 +298,7 @@ export default function Registration() {
               </label>
               <Checkbox
                 id="checkboxDefaultShipping"
-                label="Set as default billing address"
+                label="Set as default shipping address"
                 isChecked={isCheckedDefaultShipping}
                 checkHandler={onHandleChangeDefaultShipping}
               />
@@ -308,7 +309,7 @@ export default function Registration() {
                 htmlFor="streetBilling"
                 className={clsx(styles.formElement)}
               >
-                Street
+                Street*
                 <input
                   id="streetBilling"
                   name="streetBilling"
@@ -326,7 +327,7 @@ export default function Registration() {
                 {streetError && <span>{streetError}</span>}
               </div>
               <label htmlFor="cityBilling" className={clsx(styles.formElement)}>
-                City
+                City*
                 <input
                   id="cityBilling"
                   name="cityBilling"
@@ -344,7 +345,7 @@ export default function Registration() {
                 {cityError && <span>{cityError}</span>}
               </div>
               <label htmlFor="codeBilling" className={clsx(styles.formElement)}>
-                Postal code
+                Postal code*
                 <input
                   id="codeBilling"
                   name="codeBilling"
@@ -365,7 +366,7 @@ export default function Registration() {
                 htmlFor="countryBilling"
                 className={clsx(styles.formElement)}
               >
-                Country
+                Country*
                 <select
                   id="countryBilling"
                   name="countryBilling"
@@ -396,8 +397,9 @@ export default function Registration() {
             isValidText(first) !== '' ||
             isValidText(last) !== '' ||
             isValidBirth(birth) !== '' ||
-            isValidStreet(birth) !== '' ||
-            isValidText(city) !== ''
+            (isValidStreet(street && streetShipping) !== '' && !isChecked) ||
+            (isValidCode(code && codeShipping) !== '' && !isChecked) ||
+            (isValidText(city && cityShipping) !== '' && !isChecked)
           }
         >
           Sign Up
