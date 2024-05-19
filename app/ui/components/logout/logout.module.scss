@@ -1,0 +1,22 @@
+@import '../../styles/settings/variables.module.scss';
+
+.svgLogout * {
+  position: absolute;
+  min-width: 25px;
+  height: 25px;
+  fill: $color-dark;
+
+  &:hover {
+    fill: $color-brand;
+  }
+
+  &.active {
+    fill: $color-brand;
+  }
+}
+
+.box {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
