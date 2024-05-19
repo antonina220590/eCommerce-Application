@@ -139,7 +139,7 @@ export default function Registration() {
 
     const result = await handleRegistration(e, setRegistrationError);
     if (result?.success) {
-      route.push('/');
+      route.push('/?registered=true');
     }
   };
 

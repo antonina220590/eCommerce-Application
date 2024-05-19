@@ -1,9 +1,24 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
+import UserRegistered from '@/app/ui/components/registration/userRegistered/userRegistered';
 import styles from './mainPage.module.scss';
 
 export default function Home() {
+  const searchParams = useSearchParams();
+  const [isRegistered, setIsRegistered] = useState<boolean>(false);
+
+  useEffect(() => {
+    const registered = searchParams.get('registered');
+    if (registered === 'true') {
+      setIsRegistered(true);
+    }
+  }, [searchParams]);
+
   return (
     <main className={clsx(styles.main)}>
       <section className={clsx(styles.mainAbout)}>
@@ -34,6 +49,7 @@ export default function Home() {
             sizes="100vw"
           />
         </div>
+        {isRegistered && <UserRegistered setIsRegistered={setIsRegistered} />}
       </section>
     </main>
   );
