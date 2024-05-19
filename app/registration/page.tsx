@@ -1,10 +1,12 @@
 import React from 'react';
-import Registration from '../ui/components/registration/Registration';
+import Registration from '@/app/ui/components/registration/Registration';
 
-export default function LoginForm() {
+function RegistrationForm() {
   return (
     <main>
       <Registration />
     </main>
   );
 }
+
+export default RegistrationForm;
