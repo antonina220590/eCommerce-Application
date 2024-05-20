@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
     headers.append(
       'Set-Cookie',
       serialize('accessToken', accessToken, {
-        httpOnly: true,
+        httpOnly: false,
         secure: process.env.NODE_ENV === 'production',
         path: '/',
         sameSite: 'strict',

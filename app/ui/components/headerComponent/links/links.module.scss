@@ -19,6 +19,25 @@
   }
 }
 
+.linksMain {
+  text-decoration: none;
+  margin-right: 5%;
+  color: $color-dark;
+  font-weight: 800;
+  background-color: transparent;
+  font-size: 1.4rem;
+
+  &:hover {
+    color: $color-brand;
+  }
+
+  @include media-mobile {
+    font-size: 1rem;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
 .svgBasket * {
   position: absolute;
   width: 35px;
@@ -50,6 +69,21 @@
 }
 
 .svgLogin * {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  fill: white;
+
+  &:hover {
+    fill: $color-brand;
+  }
+
+  &.active {
+    fill: $color-brand;
+  }
+}
+
+.svgLogout * {
   position: absolute;
   width: 35px;
   height: 35px;

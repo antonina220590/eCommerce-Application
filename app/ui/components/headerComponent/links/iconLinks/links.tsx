@@ -3,6 +3,7 @@ import style from '../links.module.scss';
 import BasketIcon from '../../../../../../public/basket.svg';
 import LoginIcon from '../../../../../../public/login.svg';
 import SignUpIcon from '../../../../../../public/signup.svg';
+import LogoutIcon from '../../../../../../public/logout.svg';
 import Links from '../linkInterface';
 
 const linkIcons: Links[] = [
@@ -22,6 +23,12 @@ const linkIcons: Links[] = [
     name: 'Login',
     href: '/login',
     image: <LoginIcon className={clsx(style.svgSignUp)} />,
+  },
+
+  {
+    name: 'Logout',
+    href: '/logout',
+    image: <LogoutIcon className={clsx(style.svgSignUp)} />,
   },
 ];
 
