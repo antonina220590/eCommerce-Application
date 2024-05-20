@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
-import Image from 'next/image';
 import Link from 'next/link';
 import UserRegistered from '@/app/ui/components/registration/userRegistered/userRegistered';
 import styles from './mainPage.module.scss';
@@ -41,22 +40,6 @@ export default function Home() {
           <Link className={clsx(styles.mainAboutBtn)} href="/catalog">
             See For Yourself
           </Link>
-        </div>
-        <div className={clsx(styles.mainAboutImg)}>
-          <Image
-            className={clsx(styles.mainAboutImgPicture)}
-            src="/cover.webp"
-            alt="man and woman"
-            width="1200"
-            height="1250"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
-            role="presentation"
-            sizes="100vw"
-          />
         </div>
       </section>
     </main>
