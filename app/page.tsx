@@ -21,6 +21,9 @@ export default function Home() {
 
   return (
     <main className={clsx(styles.main)}>
+      <div className={clsx(styles.message)}>
+        {isRegistered && <UserRegistered setIsRegistered={setIsRegistered} />}
+      </div>
       <section className={clsx(styles.mainAbout)}>
         <div className={clsx(styles.mainAboutBox)}>
           <h2 className={clsx(styles.mainAboutTitle)}>
@@ -49,7 +52,6 @@ export default function Home() {
             sizes="100vw"
           />
         </div>
-        {isRegistered && <UserRegistered setIsRegistered={setIsRegistered} />}
       </section>
     </main>
   );

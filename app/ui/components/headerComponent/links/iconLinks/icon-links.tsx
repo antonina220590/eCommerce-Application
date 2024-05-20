@@ -44,20 +44,18 @@ export default function NavIcons() {
         break;
     }
   };
-
-  return (
-    !loading &&
-    filteredLinks.map((link) => (
-      <Link
-        key={link.name}
-        href={link.href}
-        className={clsx({
-          active: pathname === link.href,
-        })}
-        onClick={(e) => handleClick(e, link.name as string)}
-      >
-        {link.image}
-      </Link>
-    ))
-  );
+  return loading
+    ? null
+    : filteredLinks.map((link) => (
+        <Link
+          key={link.name}
+          href={link.href}
+          className={clsx({
+            active: pathname === link.href,
+          })}
+          onClick={(e) => handleClick(e, link.name as string)}
+        >
+          {link.image}
+        </Link>
+      ));
 }

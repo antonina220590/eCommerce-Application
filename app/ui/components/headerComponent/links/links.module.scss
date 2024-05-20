@@ -63,3 +63,18 @@
     fill: $color-brand;
   }
 }
+
+.svgLogout * {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  fill: white;
+
+  &:hover {
+    fill: $color-brand;
+  }
+
+  &.active {
+    fill: $color-brand;
+  }
+}
