@@ -5,6 +5,13 @@ import {
   apiUrl,
 } from '@/app/utils/commercetools/commercetools-client';
 import fetch from 'node-fetch';
+import { serialize } from 'cookie';
+
+interface ResponseData {
+  customer: {
+    [key: string]: unknown;
+  };
+}
 
 export async function POST(req: NextRequest) {
   const regData = await req.json();
@@ -43,11 +50,32 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const data = await response.json();
-    return NextResponse.json({
-      message: 'User created successfully -> ',
-      data,
-    });
+    const data = (await response.json()) as ResponseData;
+    console.log('data', data);
+    const userName = data.customer.firstName as string;
+
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append(
+      'Set-Cookie',
+      serialize('userName', userName, {
+        httpOnly: false,
+        secure: process.env.NODE_ENV === 'production',
+        path: '/',
+        sameSite: 'strict',
+      })
+    );
+
+    return NextResponse.json(
+      {
+        message: 'User created successfully -> ',
+        data,
+      },
+      {
+        status: 200,
+        headers,
+      }
+    );
   } catch (error) {
     console.error('error -> ', error);
     if (error instanceof Error) {
