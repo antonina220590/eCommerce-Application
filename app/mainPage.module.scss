@@ -91,3 +91,22 @@
   margin: 0 auto;
   justify-content: center;
 }
+
+.mainLinks {
+  background: $color-background;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 5px solid $color-brand;
+}
+
+.mainLinksWrapper {
+  display: flex;
+  padding: 10px 20px;
+  width: 100%;
+  justify-content: space-around;
+
+  @include media-mobile {
+    padding: 10px 10px;
+  }
+}

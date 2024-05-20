@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import UserRegistered from '@/app/ui/components/registration/userRegistered/userRegistered';
 import styles from './mainPage.module.scss';
+import MainLinks from './ui/components/headerComponent/links/mainLinks/main-links';
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -21,6 +22,11 @@ export default function Home() {
 
   return (
     <main className={clsx(styles.main)}>
+      <section className={styles.mainLinks}>
+        <div className={styles.mainLinksWrapper}>
+          <MainLinks />
+        </div>
+      </section>
       <div className={clsx(styles.message)}>
         {isRegistered && <UserRegistered setIsRegistered={setIsRegistered} />}
       </div>
