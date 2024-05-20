@@ -233,7 +233,6 @@ export default function Registration() {
             value={birth}
             onChange={handleBirthChange}
             className={clsx({ [styles.Error]: birthError })}
-            max={new Date().toISOString().split('T')[0]}
           />
         </label>
         <div className={clsx(styles.formError)}>

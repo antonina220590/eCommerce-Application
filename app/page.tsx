@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import Link from 'next/link';
 import UserRegistered from '@/app/ui/components/registration/userRegistered/userRegistered';
@@ -9,15 +8,15 @@ import styles from './mainPage.module.scss';
 import MainLinks from './ui/components/headerComponent/links/mainLinks/main-links';
 
 export default function Home() {
-  const searchParams = useSearchParams();
   const [isRegistered, setIsRegistered] = useState<boolean>(false);
 
   useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
     const registered = searchParams.get('registered');
     if (registered === 'true') {
       setIsRegistered(true);
     }
-  }, [searchParams]);
+  }, []);
 
   return (
     <main className={clsx(styles.main)}>
