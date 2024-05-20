@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
 import styles from '../registration.module.scss';
 
 type UserRegisteredProps = {
@@ -9,8 +10,11 @@ type UserRegisteredProps = {
 export default function UserRegistered({
   setIsRegistered,
 }: UserRegisteredProps) {
+  const route = useRouter();
+
   setTimeout(() => {
-    window.location.href = '/';
+    // window.location.href = '/';
+    route.replace('/');
     setIsRegistered(false);
   }, 4000);
 
