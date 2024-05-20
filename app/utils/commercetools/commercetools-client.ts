@@ -3,7 +3,11 @@ import { ClientBuilder } from '@commercetools/sdk-client-v2';
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 
 const projectKey = process.env.CTP_PROJECT_KEY!;
-const scopes = process.env.CTP_SCOPES!.split(' ');
+// const scopes = process.env.CTP_SCOPES!.split(' ');
+const scopes =
+  'view_categories:ecommerce-final-task manage_my_business_units:ecommerce-final-task manage_customers:ecommerce-final-task manage_my_quotes:ecommerce-final-task view_published_products:ecommerce-final-task manage_my_quote_requests:ecommerce-final-task create_anonymous_token:ecommerce-final-task manage_my_shopping_lists:ecommerce-final-task manage_my_payments:ecommerce-final-task manage_my_orders:ecommerce-final-task manage_my_profile:ecommerce-final-task'.split(
+    ' '
+  );
 const authUrl = process.env.CTP_AUTH_URL!;
 const apiUrl = process.env.CTP_API_URL!;
 const clientId = process.env.CTP_CLIENT_ID!;
