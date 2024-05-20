@@ -41,7 +41,6 @@ export default function Header() {
           </div>
         </div>
         <div className={clsx(styles.headerIcons)}>
-          {/* @ts-expect-error */}
           <NavIcons />
         </div>
         <div
