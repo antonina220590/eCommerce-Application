@@ -13,6 +13,7 @@
 
     @include media-mobile {
       flex-direction: column-reverse;
+      padding-top: 70px;
     }
 
     &Box {
@@ -108,5 +109,6 @@
 
   @include media-mobile {
     padding: 10px 10px;
+    width: 80%;
   }
 }
