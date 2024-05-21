@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Registration from '@/app/ui/components/registration/Registration';
 
