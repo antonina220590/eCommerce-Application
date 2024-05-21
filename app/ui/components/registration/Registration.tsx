@@ -417,9 +417,13 @@ export default function Registration() {
             isValidText(first) !== '' ||
             isValidText(last) !== '' ||
             isValidBirth(birth) !== '' ||
-            (isValidStreet(street && streetShipping) !== '' && !isChecked) ||
-            (isValidCode(code && codeShipping) !== '' && !isChecked) ||
-            (isValidText(city && cityShipping) !== '' && !isChecked)
+            isValidStreet(streetShipping) !== '' ||
+            isValidCode(codeShipping) !== '' ||
+            isValidText(cityShipping) !== '' ||
+            (!isChecked &&
+              (isValidStreet(street) !== '' ||
+                isValidCode(code) !== '' ||
+                isValidText(city) !== ''))
           }
         >
           Sign Up
