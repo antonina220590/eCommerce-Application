@@ -10,3 +10,21 @@ export interface LoginTokenRequest {
   scope: string;
   token_type: string;
 }
+export interface Address {
+  id?: string;
+  streetName: string;
+  city: string;
+  postalCode: string;
+  country: string;
+}
+export interface Customer {
+  id: string;
+  firstName: string;
+  version: number;
+  addresses: Address[];
+  [key: string]: unknown;
+}
+
+export interface ResponseCustomerData {
+  customer: Customer;
+}

@@ -6,30 +6,98 @@ import {
 } from '@/app/utils/commercetools/commercetools-client';
 import fetch from 'node-fetch';
 import { serialize } from 'cookie';
+import { Customer, ResponseCustomerData, Address } from '@/app/types';
 
-interface ResponseData {
-  customer: {
-    [key: string]: unknown;
+async function setDefaultAddresses(
+  customerId: string,
+  token: string,
+  version: number,
+  defaultShipping: boolean,
+  defaultBilling: boolean,
+  addresses: Address[]
+) {
+  const actions = [];
+  if (defaultShipping) {
+    actions.push({
+      action: 'setDefaultShippingAddress',
+      addressId: addresses[0].id,
+    });
+  }
+  if (defaultBilling) {
+    actions.push({
+      action: 'setDefaultBillingAddress',
+      addressId: addresses[addresses.length - 1].id,
+    });
+  }
+
+  const requestBody = {
+    version,
+    actions,
   };
+
+  // console.log('Updating data with -> ', JSON.stringify(requestBody));
+
+  const updateResponse = await fetch(
+    `${apiUrl}/${projectKey}/customers/${customerId}`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestBody),
+    }
+  );
+
+  return updateResponse;
 }
 
 export async function POST(req: NextRequest) {
   const regData = await req.json();
-  const { email, password, firstName, lastName } = regData;
-
-  // console.log('regData', regData);
+  const {
+    email,
+    password,
+    firstName,
+    lastName,
+    checkboxDefaultShipping,
+    streetShipping,
+    cityShipping,
+    codeShipping,
+    countryShipping,
+    checkboxDefaultBilling,
+    streetBilling,
+    cityBilling,
+    codeBilling,
+    countryBilling,
+  } = regData;
 
   try {
     const token = await getToken();
+    const addresses: Address[] = [];
 
-    // console.log('token: ', token);
+    if (streetShipping && cityShipping && codeShipping && countryShipping) {
+      addresses.push({
+        streetName: streetShipping,
+        city: cityShipping,
+        postalCode: codeShipping,
+        country: countryShipping,
+      });
+    }
+    if (streetBilling && cityBilling && codeBilling && countryBilling) {
+      addresses.push({
+        streetName: streetBilling,
+        city: cityBilling,
+        postalCode: codeBilling,
+        country: countryBilling,
+      });
+    }
 
-    // TODO - refactor according with our data from form (or at least change names)
     const customerDraft = {
       email,
       password,
       firstName,
       lastName,
+      addresses,
     };
 
     const response = await fetch(`${apiUrl}/${projectKey}/customers`, {
@@ -50,9 +118,40 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const data = (await response.json()) as ResponseData;
-    console.log('data', data);
-    const userName = data.customer.firstName as string;
+    const data = (await response.json()) as ResponseCustomerData;
+    // console.log('data -> ', data);
+
+    if (checkboxDefaultShipping || checkboxDefaultBilling) {
+      const updateResponse = await setDefaultAddresses(
+        data.customer.id,
+        token,
+        data.customer.version,
+        checkboxDefaultShipping,
+        checkboxDefaultBilling,
+        data.customer.addresses
+      );
+      if (!updateResponse.ok) {
+        const error = (await updateResponse.json()) as { message: string };
+        return NextResponse.json(
+          { message: 'Error setting default addresses', error: error.message },
+          { status: 500 }
+        );
+      }
+      const freshUserData = await fetch(
+        `${apiUrl}/${projectKey}/customers/${data.customer.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const freshData = (await freshUserData.json()) as Customer;
+      data.customer = freshData;
+      // console.log('data--> ', data);
+    }
+
+    const userName = data.customer.firstName;
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -67,14 +166,8 @@ export async function POST(req: NextRequest) {
     );
 
     return NextResponse.json(
-      {
-        message: 'User created successfully -> ',
-        data,
-      },
-      {
-        status: 200,
-        headers,
-      }
+      { message: 'User created successfully', data },
+      { status: 200, headers }
     );
   } catch (error) {
     console.error('error -> ', error);

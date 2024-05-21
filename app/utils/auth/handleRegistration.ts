@@ -7,7 +7,7 @@ const handleRegistration = async (
   e.preventDefault();
   setRegistrationError(null);
 
-  const formData: { [key: string]: string } = {};
+  const formData: { [key: string]: string | boolean } = {};
   const form = e.currentTarget;
 
   // TODO: refactor - prefer getting data from form component
@@ -15,7 +15,11 @@ const handleRegistration = async (
     if (element.tagName === 'INPUT' || element.tagName === 'SELECT') {
       const field = element as HTMLInputElement | HTMLSelectElement;
       if (field.name) {
-        formData[field.name] = field.value;
+        if (field.type === 'checkbox') {
+          formData[field.name] = (field as HTMLInputElement).checked;
+        } else {
+          formData[field.name] = field.value;
+        }
       }
     }
   });
