@@ -8,7 +8,7 @@
     background: $color-dark;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     border-top: 5px solid $color-brand;
 
     @include media-mobile {
