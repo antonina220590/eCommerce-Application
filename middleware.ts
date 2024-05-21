@@ -8,11 +8,11 @@ export const config = {
 
 export function middleware(request: NextRequest) {
   const cookies = request.headers.get('cookie') || '';
-  const { accessToken } = parseCookies({
+  const { userName } = parseCookies({
     req: { headers: { cookie: cookies } },
   });
 
-  if (accessToken) {
+  if (userName) {
     const url = request.nextUrl.clone();
     return NextResponse.redirect(url.origin);
   }

@@ -7,6 +7,7 @@ export interface checkBox {
   label: string;
   checkHandler: () => void;
   id: string;
+  name: string;
 }
 
 export default function Checkbox({
@@ -14,6 +15,7 @@ export default function Checkbox({
   label,
   checkHandler,
   id,
+  name,
 }: checkBox) {
   return (
     <div className={clsx(styles.checkbox)}>
@@ -21,6 +23,7 @@ export default function Checkbox({
         className={clsx(styles.checkboxInput)}
         type="checkbox"
         id={`${id}`}
+        name={`${name}`}
         checked={isChecked}
         onChange={checkHandler}
       />

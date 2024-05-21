@@ -242,6 +242,7 @@ export default function Registration() {
           <Checkbox
             isChecked={isChecked}
             id="checkbox"
+            name="checkbox"
             label="Use the same address for billing and shipping"
             checkHandler={onHandleChange}
           />
@@ -305,14 +306,15 @@ export default function Registration() {
               >
                 Country*
                 <select id="countryShipping" name="countryShipping">
-                  <option value="USA">United States</option>
-                  <option value="France">France</option>
-                  <option value="Germany">Germany</option>
-                  <option value="Spain">Spain</option>
+                  <option value="US">United States</option>
+                  <option value="FR">France</option>
+                  <option value="GE">Germany</option>
+                  <option value="ES">Spain</option>
                 </select>
               </label>
               <Checkbox
                 id="checkboxDefaultShipping"
+                name="checkboxDefaultShipping"
                 label="Set as default shipping address"
                 isChecked={isCheckedDefaultShipping}
                 checkHandler={onHandleChangeDefaultShipping}
@@ -388,14 +390,15 @@ export default function Registration() {
                   disabled={isChecked}
                   className={clsx({ [style.disabled]: isChecked })}
                 >
-                  <option value="USA">United States</option>
-                  <option value="France">France</option>
-                  <option value="Germany">Germany</option>
-                  <option value="Spain">Spain</option>
+                  <option value="US">United States</option>
+                  <option value="FR">France</option>
+                  <option value="GE">Germany</option>
+                  <option value="ES">Spain</option>
                 </select>
               </label>
               <Checkbox
                 id="checkboxDefaultBilling"
+                name="checkboxDefaultBilling"
                 label="Set as default billing address"
                 isChecked={isCheckedDefaultBilling}
                 checkHandler={onHandleChangeDefaultBilling}
