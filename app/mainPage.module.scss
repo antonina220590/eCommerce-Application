@@ -8,11 +8,12 @@
     background: $color-dark;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     border-top: 5px solid $color-brand;
 
     @include media-mobile {
       flex-direction: column-reverse;
+      padding-top: 70px;
     }
 
     &Box {
@@ -108,5 +109,6 @@
 
   @include media-mobile {
     padding: 10px 10px;
+    width: 75%;
   }
 }
