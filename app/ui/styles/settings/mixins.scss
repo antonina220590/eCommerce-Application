@@ -1,7 +1,35 @@
 @mixin button {
-  background-color: $primary;
+  background-color: $color-dark;
+  border-bottom: 1px solid transparent;
 
   &.active {
-    background-color: $active;
+    color: $color-brand;
+    border-bottom: 1px solid $color-brand;
   }
+}
+
+@mixin centering {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin media-laptop {
+  @media(max-width: $content-width) {@content; }
+}
+
+@mixin media-input {
+  @media(max-width: $input-width) {@content; }
+}
+
+@mixin media-mid {
+  @media(max-width: $mid-width) {@content; }
+}
+
+@mixin media-tablet {
+  @media(max-width: $tablet-width) {@content; }
+}
+
+@mixin media-mobile {
+  @media(max-width: $mobile-width) {@content; }
 }

@@ -1,0 +1,78 @@
+@import './ui/styles/settings/variables.module.scss';
+@import './ui/styles/settings/mixins.scss';
+
+.errorMain {
+  display: flex;
+}
+.error {
+  box-sizing: border-box;
+  background-color: $color-background;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &Wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    justify-content: space-evenly;
+    padding: 30px;
+
+    @include media-mid {
+      flex-direction: column-reverse;
+      gap: 30px;
+    }
+  }
+
+  &Text {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &Imagebox {
+    display: flex;
+    position: relative;
+    width: 778px;
+    height: 600px;
+
+    @include media-mid {
+      width: unset;
+      height: 400px;
+    }
+  }
+
+  &Link {
+    background: none;
+    background: none;
+    text-decoration: none;
+    font-size: 3rem;
+    color: $color-brand;
+    border-bottom: 3px solid $color-error;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 0.4;
+    }
+
+    @include media-mobile {
+      font-size: 2rem;
+    }
+  }
+
+  &Message {
+    font-size: 4rem;
+    margin: 0;
+    color: $color-dark;
+
+    @include media-mobile {
+      font-size: 2.5rem;
+    }
+  }
+}

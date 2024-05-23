@@ -1,0 +1,114 @@
+@import '../app/ui/styles/settings/variables.module.scss';
+@import '../app/ui/styles/settings/mixins.scss';
+
+.main {
+  display: block;
+
+  &About {
+    background: $color-dark;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 5px solid $color-brand;
+
+    @include media-mobile {
+      flex-direction: column-reverse;
+      padding-top: 70px;
+    }
+
+    &Box {
+      display: flex;
+      padding: 20px;
+      flex-direction: column;
+      gap: 20px;
+
+      @include media-mobile {
+        gap: 10px;
+      }
+    }
+
+    &Title {
+      margin: 0;
+      color: $color-light;
+      padding-left: 20px;
+      font-size: 4rem;
+      text-align: center;
+
+      @include media-mobile {
+        gap: 10px;
+        font-size: 3rem;
+      }
+    }
+
+    &Text {
+      color: $color-light;
+      text-align: center;
+    }
+
+    &Btn {
+      all: unset;
+      align-self: center;
+      width: 150px;
+      height: 40px;
+      background-color: $color-light;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $color-brand;
+      }
+
+      @include media-mobile {
+        margin-bottom: 30px;
+      }
+    }
+
+    &Img {
+      width: 49%;
+      flex-direction: column;
+      position: relative;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      overflow: hidden;
+      height: 100%;
+      margin: 5px;
+
+      @include media-mobile {
+        width: 100%;
+      }
+
+      &Picture {
+        position: static;
+        height: 50%;
+      }
+    }
+  }
+}
+
+.message {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.mainLinks {
+  background: $color-background;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 5px solid $color-brand;
+}
+
+.mainLinksWrapper {
+  display: flex;
+  padding: 10px 20px;
+  width: 100%;
+  justify-content: space-around;
+
+  @include media-mobile {
+    padding: 10px 10px;
+    width: 75%;
+  }
+}

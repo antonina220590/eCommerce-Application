@@ -1,0 +1,99 @@
+@import '../../../styles/settings/variables.module.scss';
+@import '../../../styles/settings/mixins.scss';
+
+.links {
+  text-decoration: none;
+  margin-right: 20%;
+  color: $color-light;
+  background-color: transparent;
+  font-size: 2.4rem;
+
+  &:hover {
+    color: $color-disabled;
+  }
+
+  @include media-mobile {
+    font-size: 1.2rem;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.linksMain {
+  text-decoration: none;
+  margin-right: 5%;
+  color: $color-dark;
+  font-weight: 800;
+  background-color: transparent;
+  font-size: 1.4rem;
+
+  &:hover {
+    color: $color-brand;
+  }
+
+  @include media-mobile {
+    font-size: 1rem;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+.svgBasket * {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  fill: $color-dark;
+
+  &:hover {
+    fill: $color-brand;
+  }
+
+  &.active {
+    fill: $color-brand;
+  }
+}
+
+.svgSignUp * {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  fill: white;
+
+  &:hover {
+    fill: $color-brand;
+  }
+
+  &.active {
+    fill: $color-brand;
+  }
+}
+
+.svgLogin * {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  fill: white;
+
+  &:hover {
+    fill: $color-brand;
+  }
+
+  &.active {
+    fill: $color-brand;
+  }
+}
+
+.svgLogout * {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  fill: white;
+
+  &:hover {
+    fill: $color-brand;
+  }
+
+  &.active {
+    fill: $color-brand;
+  }
+}

@@ -1,0 +1,24 @@
+@import '../../../styles/settings/mixins.scss';
+@import '../../../styles/settings/variables.module.scss';
+
+.checkbox {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  margin-top: 10px;
+
+  &Label {
+    font-size: 18px;
+
+    @include media-mobile {
+      font-size: 12px;
+    }
+  }
+
+  &Input {
+    max-width: 15px;
+  }
+}
+
+
