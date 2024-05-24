@@ -34,7 +34,7 @@ export default async function Cards() {
                   src={product.masterVariant.images[0].url}
                   alt={product.name['en-US']}
                   fill
-                  sizes="max-width: 400px"
+                  sizes="max-width: 800px"
                   style={{ objectFit: 'scale-down' }}
                 />
               ) : (
@@ -43,12 +43,14 @@ export default async function Cards() {
             </div>
             {product.masterVariant.prices &&
             product.masterVariant.prices.length > 0 ? (
-              <p>${product.masterVariant.prices[0].value.centAmount / 100}</p>
+              <div className={clsx(style.productPrice)}>
+                ${product.masterVariant.prices[0].value.centAmount / 100}
+              </div>
             ) : (
-              <p>Price not available</p>
+              <div>Price not available</div>
             )}
-            <h3>{product.name['en-US']}</h3>
-            <p>
+            <h3 className={clsx(style.productName)}>{product.name['en-US']}</h3>
+            <p className={clsx(style.productDescription)}>
               {product.metaDescription?.['en-US'] ?? 'No description available'}
             </p>
           </Link>
