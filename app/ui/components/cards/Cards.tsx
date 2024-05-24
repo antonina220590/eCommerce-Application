@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import fetchAllProducts from '@/app/utils/products/fetchAllProducts';
 import { Product } from '@/app/types/product';
 
@@ -31,9 +32,12 @@ export default async function Cards() {
             </ul>
             {product.masterVariant.images &&
             product.masterVariant.images.length > 0 ? (
-              <img
+              <Image
                 src={product.masterVariant.images[0].url}
                 alt={product.name['en-US']}
+                width={300}
+                height={300}
+                layout="responsive"
               />
             ) : (
               <p>No image available</p>
