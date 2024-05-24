@@ -1,0 +1,17 @@
+@import '../../styles/settings/variables.module.scss';
+@import '../../styles/settings/mixins.scss';
+
+.productsList {
+  display: grid;
+  max-width: 1400px;
+  margin: 20px auto;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.productCard {
+  box-sizing: border-box;
+  border: 1px solid $color-dark;
+  
+  a{all: unset;}
+}
