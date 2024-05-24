@@ -12,24 +12,14 @@ export default async function Cards() {
       published: !!product.published,
     }));
   } catch (error) {
-    console.error('Failed to load products', error);
     throw new Error('Failed to fetch products');
   }
 
   return (
     <div>
-      <h1>Catalog</h1>
       <div>
         {products.map((product) => (
-          <div id={`product-${product.id}`}>
-            <h2>{product.name['en-US']}</h2>
-            <ul>
-              {Object.entries(product).map(([key, value]) => (
-                <li key={key}>
-                  <strong>{key}:</strong> {JSON.stringify(value)}
-                </li>
-              ))}
-            </ul>
+          <div id={product.id}>
             {product.masterVariant.images &&
             product.masterVariant.images.length > 0 ? (
               <Image
@@ -42,6 +32,16 @@ export default async function Cards() {
             ) : (
               <p>No image available</p>
             )}
+            {product.masterVariant.prices &&
+            product.masterVariant.prices.length > 0 ? (
+              <p>${product.masterVariant.prices[0].value.centAmount / 100}</p>
+            ) : (
+              <p>Price not available</p>
+            )}
+            <h3>{product.name['en-US']}</h3>
+            <p>
+              {product.metaDescription?.['en-US'] ?? 'No description available'}
+            </p>
           </div>
         ))}
       </div>
