@@ -12,6 +12,16 @@
 .productCard {
   box-sizing: border-box;
   border: 1px solid $color-dark;
+}  
   
-  a{all: unset;}
-}
+.productLink{
+    all: unset;
+    
+ }
+ .imgBox {
+    position: relative;
+    width: 96%;
+    margin: 2% 2% 0 2%;
+    height: 400px; 
+    overflow: hidden;
+  }
