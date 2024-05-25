@@ -1,12 +1,25 @@
-import { apiRoot } from '@/app/utils/commercetools/commercetools-client';
-import { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
-
-async function fetchAllProducts(): Promise<ProductProjectionPagedQueryResponse> {
+async function fetchAllProducts() {
   try {
-    const response = await apiRoot.productProjections().get().execute();
-    return response.body;
+    const response = await fetch(`/api/catalog/products`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch user details: ${response.status} ${response.statusText}`
+      );
+    }
+
+    const products = await response.json();
+    console.log('products fetched -> ', products);
+
+    return products;
   } catch (error) {
-    throw new Error('Failed to fetch products');
+    console.error('Failed to fetch products', error);
+    throw error;
   }
 }
 
