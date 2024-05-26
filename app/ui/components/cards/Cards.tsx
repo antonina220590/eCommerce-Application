@@ -7,11 +7,13 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import fetchAllProducts from '@/app/utils/products/fetchAllProducts';
 import { ProductPagedQueryResponse } from '@commercetools/platform-sdk';
+import { useRouter } from 'next/navigation';
 
 export default function Cards() {
   const [products, setProducts] = useState<ProductPagedQueryResponse | null>(
     null
   );
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -30,6 +32,8 @@ export default function Cards() {
           {products.results.map((product) => (
             <div
               id={product.id}
+              onClick={() => router.push(`/product/${product.id}`)}
+              role="presentation"
               className={clsx(style.productCard)}
               key={product.id}
             >
