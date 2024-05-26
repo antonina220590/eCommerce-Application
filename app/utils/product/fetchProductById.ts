@@ -3,11 +3,12 @@ async function fetchProductByKey() {
     const currentPath = window.location.pathname;
     const id = currentPath.split('/')[2];
     console.log(id);
-    const response = await fetch(`/api/catalog/products/${id}`, {
+    const response = await fetch(`/api/catalog/product`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
+      // body: JSON.stringify('4850654f-005c-4787-88e0-99ad4624a770'),
     });
     if (!response.ok) {
       throw new Error(

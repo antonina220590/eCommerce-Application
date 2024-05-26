@@ -11,7 +11,7 @@ function ProductDetails() {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const fetched = await fetchProductById();
+      const fetched = await fetchProductById(); // передать id
       setProducts(fetched.products);
       console.log(fetched);
     };
