@@ -1,3 +1,5 @@
+'use client';
+
 import ProductDetails from '@/app/ui/components/productDetails/productDetails';
 
 export default function Product() {
