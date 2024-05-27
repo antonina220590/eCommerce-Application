@@ -1,0 +1,139 @@
+@import '../../styles/settings/variables.module.scss';
+@import '../../styles/settings/mixins.scss';
+
+.productPageWrapper {
+  box-sizing: border-box;
+  padding: 60px 10px;
+
+  @include media-mobile {
+    padding: 20px 10px;
+  }
+}
+
+.productInsideContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.productLeftSideContainer {
+  display: flex;
+  width: 30%;
+  padding-top: 20px;
+
+  @include media-mobile {
+    width: 40%;
+  }
+}
+
+.productRightSideContainer {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+
+}
+
+.imgBox {
+  position: relative;
+  width: 96%;
+  margin: 2% 2% 0 2%;
+  height: 400px;
+  overflow: hidden;
+  background-color: $color-lightgrey;
+
+  @include media-tablet {
+    height: 350px;
+  }
+
+  @include media-mobile {
+      height: 250px;
+    }
+}
+
+.productTitle {
+  margin: 20px;
+  color: $color-dark;
+
+  @include media-mobile {
+    font-size: 15px;
+  }
+}
+
+.productDescriptionText {
+  margin: 5px;
+
+  @include media-mobile {
+    font-size: 10px;
+  }
+}
+
+.productFullDescription {
+  display: flex;
+  text-align: justify;
+  margin: 0 20px;
+  max-height: 200px;
+  overflow: hidden;
+  position: relative;
+  border-top: 1px solid $color-brand;
+}
+
+.productFullDescription_open {
+  display: flex;
+  text-align: justify;
+  margin: 0 20px;
+  max-height: 200px;
+  overflow: hidden;
+  position: relative;
+  max-height: none;
+  border-top: 1px solid $color-brand;
+}
+
+.productFullDescriptionBottom {
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(240, 240, 240, 1) 100%);
+  width: 100%;
+  height: 50px;
+  opacity: 1;
+  transition: 1s;
+}
+
+.productFullDescriptionBottom_open {
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(240, 240, 240, 1) 100%);
+  width: 100%;
+  height: 50px;
+  opacity: 0;
+  transition: 1s;
+}
+
+.readMoreLabel {
+  cursor: pointer;
+  padding: 10px 20px;
+  font-style: italic;
+  color: $color-dark;
+}
+
+.readMoreLabel:hover {
+  color: $color-brand;
+}
+
+
+.productMain {
+  background: $color-lightgrey;
+}
+
+.productDescriptionButton {
+  width: 100%;
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin: 20px;
+  color: $color-dark;
+  font-style: italic;
+}
+
+.productDescriptionButton:hover {
+  color: $color-brand;
+}

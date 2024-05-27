@@ -30,11 +30,12 @@ export default function Cards() {
           {products.results.map((product) => (
             <div
               id={product.id}
+              role="presentation"
               className={clsx(style.productCard)}
               key={product.id}
             >
               <Link
-                href={`/${product.key}`}
+                href={`/product/${product.id}`}
                 className={clsx(style.productLink)}
               >
                 <div className={clsx(style.imgBox)}>
