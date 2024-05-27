@@ -13,7 +13,7 @@ async function fetchProductByKey(id: string) {
     }
 
     const product = await response.json();
-    console.log('product fetched -> ', product);
+    // console.log('product fetched -> ', product);
 
     return product;
   } catch (error) {

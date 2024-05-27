@@ -12,23 +12,19 @@ function ProductDetails() {
   const [open, setOpen] = useState(false);
 
   const toggleTextFullVisibility = () => {
-    console.log(!open);
     setOpen(!open);
   };
 
   useEffect(() => {
     const currentPath = window.location.pathname;
     const id = currentPath.split('/')[2];
-    console.log(id);
-
     const fetchProduct = async () => {
       const fetched = await fetchProductById(id);
       setProduct(fetched.products);
-      console.log(fetched);
     };
     fetchProduct().catch(console.error);
   }, []);
-  console.log(product?.masterData.current.name);
+  // console.log(product?.masterData.current.name);
 
   return (
     <div>
