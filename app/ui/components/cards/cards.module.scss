@@ -1,0 +1,63 @@
+@import '../../styles/settings/variables.module.scss';
+@import '../../styles/settings/mixins.scss';
+
+.productsList {
+  display: grid;
+  max-width: $content-width;
+  margin: 0px auto;
+  padding: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  @include media-tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-small {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.productCard {
+  box-sizing: border-box;
+  border: 1px solid $color-dark;
+}  
+  
+.productLink{
+    all: unset;
+
+ }
+ .imgBox {
+    position: relative;
+    width: 96%;
+    margin: 2% 2% 0 2%;
+    height: 400px; 
+    overflow: hidden;
+    background-color: $color-lightgrey;
+
+    @include media-tablet {
+        height: 300px; 
+      }
+  }
+
+  .productPrice {
+    @include centering;
+    padding-top: 10px;
+    font-size: 2rem;
+    font-weight: 600;
+    color: $color-dark;
+  }
+
+  .productName {
+    @include centering;
+    margin: 0;
+    padding: 2%;
+    color: $color-dark;
+  }
+  .productDescription {
+    margin: 0;
+    padding: 2%;
+    font-style: italic;
+    color: $color-darcgrey;
+  }
+    

@@ -6,6 +6,9 @@ const nextConfig = {
     includePaths: ['./ui/styles', './ui/components'],
     importer: globImporter(),
   },
+  images: {
+    domains: ['images.cdn.us-central1.gcp.commercetools.com'],
+  },
 
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) =>
