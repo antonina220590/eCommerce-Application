@@ -1,0 +1,88 @@
+@import '../../styles/settings/variables.module.scss';
+@import '../../styles/settings/mixins.scss';
+
+.productPageWrapper {
+  box-sizing: border-box;
+  padding: 60px 10px;
+
+  @include media-tablet {
+    padding: 20px 10px;
+  }
+}
+
+.productInsideContainer {
+  display: flex;
+}
+
+.productLeftSideContainer {
+  display: flex;
+  width: 30%;
+  padding-top: 20px;
+}
+
+.productRightSideContainer {
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+}
+
+.imgBox {
+  position: relative;
+  width: 96%;
+  margin: 2% 2% 0 2%;
+  height: 400px;
+  overflow: hidden;
+  background-color: $color-lightgrey;
+
+  @include media-tablet {
+      height: 300px;
+    }
+}
+
+.productTitle {
+  margin: 20px;
+  color: $color-dark;
+}
+
+.productDescriptionText {
+  margin: 5px;
+}
+
+.productFullDescription {
+  display: flex;
+  text-align: justify;
+  margin: 0 20px;
+  max-height: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.productFullDescription_open {
+  max-height: none;
+}
+
+.productFullDescriptionBottom {
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(240, 240, 240, 1) 100%);
+  width: 100%;
+  height: 50px;
+  opacity: 1;
+  transition: 3s;
+}
+
+.readMoreLabel {
+  cursor: pointer;
+  padding: 10px 20px;
+  font-style: italic;
+  color: $color-dark;
+}
+
+.readMoreLabel:hover {
+  color: $color-brand;
+}
+
+
+.productMain {
+  background: $color-lightgrey;
+}
