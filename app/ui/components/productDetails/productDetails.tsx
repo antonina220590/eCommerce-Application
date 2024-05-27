@@ -9,6 +9,12 @@ import clsx from 'clsx';
 
 function ProductDetails() {
   const [product, setProduct] = useState<Product | null>(null);
+  const [open, setOpen] = useState(false);
+
+  const toggleTextFullVisibility = () => {
+    console.log(!open);
+    setOpen(!open);
+  };
 
   useEffect(() => {
     const currentPath = window.location.pathname;
@@ -37,7 +43,7 @@ function ProductDetails() {
                     src={product.masterData.current.masterVariant.images[0].url}
                     alt={product.masterData.current.name['en-US']}
                     fill
-                    sizes="max-width: 800px"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     style={{ objectFit: 'scale-down' }}
                   />
                 ) : (
@@ -49,12 +55,32 @@ function ProductDetails() {
               <h3 className={clsx(style.productTitle)}>
                 {product.masterData.current.name['en-US']}
               </h3>
-              <div className={clsx(style.productFullDescription)}>
+              <div
+                className={clsx(
+                  !open
+                    ? style.productFullDescription
+                    : style.productFullDescription_open
+                )}
+              >
                 <p className={clsx(style.productDescriptionText)}>
                   {product.masterData.current.description?.['en-US'] ??
                     'No description available'}
                 </p>
+                <div
+                  className={clsx(
+                    !open
+                      ? style.productFullDescriptionBottom
+                      : style.productFullDescriptionBottom_open
+                  )}
+                />
               </div>
+              <button
+                className={clsx(style.productDescriptionButton)}
+                type="button"
+                onClick={toggleTextFullVisibility}
+              >
+                {!open ? 'Read more...' : 'Read less...'}
+              </button>
             </div>
           </div>
         </div>
