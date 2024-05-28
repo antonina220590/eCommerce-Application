@@ -1,6 +1,6 @@
-async function fetchDiscountDetails(discountId: string) {
+async function fetchDiscountDetails(id: string) {
   try {
-    const response = await fetch(`/api/catalog/discounts/${discountId}`, {
+    const response = await fetch(`/api/catalog/product-discounts?id=${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -14,6 +14,7 @@ async function fetchDiscountDetails(discountId: string) {
     }
 
     const discount = await response.json();
+    // console.log('fetched discount-> ', discount);
     return discount;
   } catch (error) {
     console.error('Failed to fetch discount details', error);
