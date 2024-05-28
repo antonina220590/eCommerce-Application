@@ -21,6 +21,7 @@
 .productCard {
   box-sizing: border-box;
   border: 1px solid $color-dark;
+  position: relative;
 }  
   
 .productLink{
@@ -46,6 +47,19 @@
     font-size: 2rem;
     font-weight: 600;
     color: $color-dark;
+  }
+  .saleMark {
+    position: absolute;
+    top: 3%;
+    left: 0;
+    background-color: $color-brand;
+    padding: 0 5px;
+  }
+  
+  .fullPrice {
+    text-decoration: line-through;
+    color: $color-disabled;
+    padding-right: 10px;
   }
 
   .productName {

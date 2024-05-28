@@ -63,7 +63,8 @@ export default function Cards() {
                     <div className={clsx(style.productPrice)}>
                       {discountedPrice ? (
                         <>
-                          <span className={clsx(style.originalPrice)}>
+                          <div className={clsx(style.saleMark)}>Sale</div>
+                          <span className={clsx(style.fullPrice)}>
                             ${originalPrice / 100}
                           </span>
                           <span className={clsx(style.discountedPrice)}>
