@@ -6,7 +6,13 @@ import {
 } from '@/app/utils/commercetools/commercetools-client';
 import fetch from 'node-fetch';
 import { serialize } from 'cookie';
-import { Customer, ResponseCustomerData, Address } from '@/app/types';
+import {
+  Customer,
+  ResponseCustomerData,
+  Address,
+  LoginTokenRequest,
+} from '@/app/types';
+import fetchTokenData from '@/app/utils/auth/fetchTokenData';
 
 async function setDefaultAddresses(
   customerId: string,
@@ -153,8 +159,27 @@ export async function POST(req: NextRequest) {
 
     const userName = data.customer.firstName;
 
+    const resTokenData = (await fetchTokenData(
+      email,
+      password
+    )) as LoginTokenRequest;
+    // console.log('resTokenData - >>', resTokenData);
+    const tokenData = resTokenData;
+    const accessToken = tokenData.access_token;
+    const expiresIn = tokenData.expires_in;
+
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
+    headers.append(
+      'Set-Cookie',
+      serialize('accessToken', accessToken, {
+        httpOnly: false,
+        secure: process.env.NODE_ENV === 'production',
+        path: '/',
+        sameSite: 'strict',
+        maxAge: expiresIn,
+      })
+    );
     headers.append(
       'Set-Cookie',
       serialize('userName', userName, {

@@ -1,45 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fetch from 'node-fetch';
-import {
-  projectKey,
-  scopes,
-  authUrl,
-  clientId,
-  clientSecret,
-} from '@/app/utils/commercetools/commercetools-client';
 import { serialize } from 'cookie';
 import { LoginTokenRequest } from '@/app/types';
 import fetchUserData from '@/app/utils/auth/fetchUserData';
+import fetchTokenData from '@/app/utils/auth/fetchTokenData';
 
 export async function POST(req: NextRequest) {
   const { email, password } = await req.json();
-  const auth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
   try {
-    const response = await fetch(
-      `${authUrl}/oauth/${projectKey}/customers/token`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Basic ${auth}`,
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `grant_type=password&username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&scope=${encodeURIComponent(scopes.join(' '))}`,
-      }
-    );
-
-    if (!response.ok) {
-      const error = (await response.json()) as { message: string };
-      return NextResponse.json(
-        {
-          message: 'Error logging in (!response.ok) -> ',
-          error: error.message,
-        },
-        { status: response.status }
-      );
-    }
-
-    const res = (await response.json()) as LoginTokenRequest;
+    const res = (await fetchTokenData(email, password)) as LoginTokenRequest;
     // console.log('res - >>', res);
     const tokenData = res;
     const accessToken = tokenData.access_token;
