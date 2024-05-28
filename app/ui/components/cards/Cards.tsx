@@ -51,6 +51,7 @@ export default function Cards() {
                           product.masterData.current.masterVariant.images[0].url
                         }
                         alt={product.masterData.current.name['en-US']}
+                        priority
                         fill
                         sizes="max-width: 800px"
                         style={{ objectFit: 'scale-down' }}
