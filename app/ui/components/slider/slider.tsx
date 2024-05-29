@@ -1,6 +1,6 @@
 'use client';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide, SwiperClass } from 'swiper/react';
 import { Navigation, Thumbs } from 'swiper/modules';
 import fetchProductById from '@/app/utils/product/fetchProductById';
 import React, { useEffect, useState } from 'react';
@@ -8,7 +8,9 @@ import { Product } from '@commercetools/platform-sdk';
 import Image from 'next/image';
 
 function Slider() {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<
+    string | SwiperClass | null | undefined
+  >(null)!;
   const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
