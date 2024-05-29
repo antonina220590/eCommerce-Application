@@ -11,6 +11,7 @@ import fetchProductById from '@/app/utils/product/fetchProductById';
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Slider from '@/app/ui/components/slider/slider';
+import Image from 'next/image';
 
 function ProductDetails() {
   const [product, setProduct] = useState<Product | null>(null);
@@ -37,14 +38,29 @@ function ProductDetails() {
           <div className={clsx(style.productInsideContainer)}>
             <div className={clsx(style.productLeftSideContainer)}>
               {product.masterData.current.masterVariant.images &&
-              product.masterData.current.masterVariant.images.length > 0 ? (
+              product.masterData.current.masterVariant.images.length > 1 ? (
                 <div className={clsx(style.sliderBox)}>
                   <div className={clsx(style.sliderInnerBox)}>
                     <Slider />
                   </div>
                 </div>
               ) : (
-                <p>No image available</p>
+                <div className={clsx(style.imgBox)}>
+                  {product.masterData.current.masterVariant.images &&
+                  product.masterData.current.masterVariant.images.length > 0 ? (
+                    <Image
+                      src={
+                        product.masterData.current.masterVariant.images[0].url
+                      }
+                      alt={product.masterData.current.name['en-US']}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      style={{ objectFit: 'scale-down' }}
+                    />
+                  ) : (
+                    <p>No image available</p>
+                  )}
+                </div>
               )}
             </div>
             <div className={clsx(style.productRightSideContainer)}>
