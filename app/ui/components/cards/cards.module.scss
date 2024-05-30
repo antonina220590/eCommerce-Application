@@ -22,24 +22,35 @@
   box-sizing: border-box;
   border: 1px solid $color-dark;
   position: relative;
-}  
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+    border-color: $color-brand;
+    .productName {
+      text-decoration: underline;
+      color: $color-brand;
+    }
+  }
+}
   
 .productLink{
-    all: unset;
+  all: unset;
 
- }
- .imgBox {
-    position: relative;
-    width: 96%;
-    margin: 2% 2% 0 2%;
-    height: 400px; 
-    overflow: hidden;
-    background-color: $color-lightgrey;
+}
 
-    @include media-tablet {
-        height: 300px; 
-      }
+.imgBox {
+  position: relative;
+  width: 100%;
+  height: 400px; 
+  overflow: hidden;
+  background-color: $color-lightgrey;
+
+  @include media-tablet {
+    height: 300px; 
   }
+}
 
   .productPrice {
     @include centering;
