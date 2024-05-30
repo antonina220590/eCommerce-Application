@@ -12,22 +12,24 @@
 
 .productInsideContainer {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .productLeftSideContainer {
   display: flex;
-  width: 30%;
+  width: 40%;
   padding-top: 20px;
+  position: relative;
+  flex-direction: column;
 
   @include media-mobile {
-    width: 40%;
+    width: 50%;
   }
 }
 
 .productRightSideContainer {
   display: flex;
-  width: 50%;
+  width: 40%;
   flex-direction: column;
 
 }
@@ -45,16 +47,17 @@
   }
 
   @include media-mobile {
-      height: 250px;
+      height: 150px;
     }
 }
 
 .productTitle {
-  margin: 20px;
+  margin: 20px 0;
   color: $color-dark;
 
   @include media-mobile {
     font-size: 15px;
+    margin: 20px 0 5px 0;
   }
 }
 
@@ -69,7 +72,7 @@
 .productFullDescription {
   display: flex;
   text-align: justify;
-  margin: 0 20px;
+  margin: 20px 0;
   max-height: 200px;
   overflow: hidden;
   position: relative;
@@ -79,7 +82,7 @@
 .productFullDescription_open {
   display: flex;
   text-align: justify;
-  margin: 0 20px;
+  margin: 20px 0;
   max-height: 200px;
   overflow: hidden;
   position: relative;
@@ -124,16 +127,40 @@
 }
 
 .productDescriptionButton {
-  width: 100%;
+  width: 90%;
   background: transparent;
   outline: none;
   border: none;
   cursor: pointer;
-  margin: 20px;
+  margin: 20px 0;
   color: $color-dark;
   font-style: italic;
+  font-size: 15px;
+
+  @include media-tablet {
+    font-size: 12px;
+  }
 }
 
 .productDescriptionButton:hover {
   color: $color-brand;
+}
+
+.sliderBox {
+  display: flex;
+  justify-content: center;
+}
+.sliderInnerBox {
+  width: 50%;
+  height: 400px;
+  background: $color-lightgrey;
+  padding: 0 20px;
+
+  @include media-tablet {
+    height: 300px;
+  }
+
+  @include media-mobile {
+    height: 150px;
+  }
 }

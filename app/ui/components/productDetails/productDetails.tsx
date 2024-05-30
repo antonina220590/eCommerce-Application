@@ -1,11 +1,17 @@
 'use client';
 
+import 'swiper/scss';
+import 'swiper/scss/free-mode';
+import 'swiper/scss/navigation';
+import 'swiper/scss/thumbs';
+
 import { Product } from '@commercetools/platform-sdk';
 import style from '@/app/ui/components/productDetails/productDetails.module.scss';
 import fetchProductById from '@/app/utils/product/fetchProductById';
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 import clsx from 'clsx';
+import Slider from '@/app/ui/components/slider/slider';
+import Image from 'next/image';
 
 function ProductDetails() {
   const [product, setProduct] = useState<Product | null>(null);
@@ -24,7 +30,6 @@ function ProductDetails() {
     };
     fetchProduct().catch(console.error);
   }, []);
-  // console.log(product?.masterData.current.name);
 
   return (
     <div>
@@ -32,20 +37,31 @@ function ProductDetails() {
         <div className={clsx(style.productPageWrapper)}>
           <div className={clsx(style.productInsideContainer)}>
             <div className={clsx(style.productLeftSideContainer)}>
-              <div className={clsx(style.imgBox)}>
-                {product.masterData.current.masterVariant.images &&
-                product.masterData.current.masterVariant.images.length > 0 ? (
-                  <Image
-                    src={product.masterData.current.masterVariant.images[0].url}
-                    alt={product.masterData.current.name['en-US']}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    style={{ objectFit: 'scale-down' }}
-                  />
-                ) : (
-                  <p>No image available</p>
-                )}
-              </div>
+              {product.masterData.current.masterVariant.images &&
+              product.masterData.current.masterVariant.images.length > 1 ? (
+                <div className={clsx(style.sliderBox)}>
+                  <div className={clsx(style.sliderInnerBox)}>
+                    <Slider />
+                  </div>
+                </div>
+              ) : (
+                <div className={clsx(style.imgBox)}>
+                  {product.masterData.current.masterVariant.images &&
+                  product.masterData.current.masterVariant.images.length > 0 ? (
+                    <Image
+                      src={
+                        product.masterData.current.masterVariant.images[0].url
+                      }
+                      alt={product.masterData.current.name['en-US']}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      style={{ objectFit: 'scale-down' }}
+                    />
+                  ) : (
+                    <p>No image available</p>
+                  )}
+                </div>
+              )}
             </div>
             <div className={clsx(style.productRightSideContainer)}>
               <h3 className={clsx(style.productTitle)}>
