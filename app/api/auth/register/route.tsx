@@ -65,6 +65,7 @@ export async function POST(req: NextRequest) {
     password,
     firstName,
     lastName,
+    dateOfBirth,
     checkboxDefaultShipping,
     streetShipping,
     cityShipping,
@@ -103,6 +104,7 @@ export async function POST(req: NextRequest) {
       password,
       firstName,
       lastName,
+      dateOfBirth,
       addresses,
     };
 

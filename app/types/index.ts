@@ -11,11 +11,14 @@ export interface LoginTokenRequest {
   token_type: string;
 }
 export interface Address {
-  id?: string;
+  id: string;
   streetName: string;
   city: string;
   postalCode: string;
   country: string;
+}
+export interface AddressListProps {
+  addresses: Address[];
 }
 export interface Customer {
   id: string;

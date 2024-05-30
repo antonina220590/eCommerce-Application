@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import getUserInfo from '@/app/utils/user/getUserInfo';
 import { Customer } from '@commercetools/platform-sdk';
 import styles from '../login/login.module.scss';
+import UserAddress from './UserAddress';
 
 export default function UserInfo() {
   const [userData, setUserData] = useState<Customer | null>(null);
@@ -12,7 +13,7 @@ export default function UserInfo() {
   useEffect(() => {
     const fetchUserData = async () => {
       const fetchedUser = await getUserInfo();
-      setUserData(fetchedUser.userData);
+      setUserData(fetchedUser.userData as Customer);
     };
     fetchUserData().catch(console.error);
   }, []);
@@ -55,6 +56,7 @@ export default function UserInfo() {
             />
           </label>
           <h2>User Addresses</h2>
+          <UserAddress user={userData} />
         </form>
       )}
 
