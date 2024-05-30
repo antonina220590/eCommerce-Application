@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const token = await getToken();
-    const addresses: Address[] = [];
+    const addresses = [];
 
     if (streetShipping && cityShipping && codeShipping && countryShipping) {
       addresses.push({
