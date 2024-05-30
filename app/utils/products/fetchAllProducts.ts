@@ -1,6 +1,9 @@
-async function fetchAllProducts() {
+async function fetchAllProducts(params = {}) {
   try {
-    const response = await fetch(`/api/catalog/products`, {
+    const queryString = new URLSearchParams(params).toString();
+    const url = `/api/catalog/products/${queryString ? `?${queryString}` : ''}`;
+
+    const response = await fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -9,7 +12,7 @@ async function fetchAllProducts() {
 
     if (!response.ok) {
       throw new Error(
-        `Failed to fetch user details: ${response.status} ${response.statusText}`
+        `Failed to fetch products: ${response.status} ${response.statusText}`
       );
     }
 
