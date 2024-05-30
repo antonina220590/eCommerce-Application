@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import UserIcon from '@/public/user.svg';
 import style from '../links.module.scss';
 import BasketIcon from '../../../../../../public/basket.svg';
 import LoginIcon from '../../../../../../public/login.svg';
@@ -23,6 +24,12 @@ const linkIcons: Links[] = [
     name: 'Login',
     href: '/login',
     image: <LoginIcon className={clsx(style.svgSignUp)} />,
+  },
+
+  {
+    name: 'User',
+    href: '/user',
+    image: <UserIcon className={clsx(style.svgSignUp)} />,
   },
 
   {

@@ -25,7 +25,7 @@ export default function NavIcons() {
     if (link.name === 'Sign Up' || link.name === 'Login') {
       return !isLoggedIn;
     }
-    if (link.name === 'Logout') {
+    if (link.name === 'Logout' || link.name === 'User') {
       return isLoggedIn;
     }
     return true;
