@@ -1,8 +1,9 @@
 async function fetchAllProducts(params = {}) {
   try {
     const queryString = new URLSearchParams(params).toString();
-    const changedString = queryString.replace(/\+/g, ' '); // Заменяем "+" на пробелы
-    const url = `/api/catalog/products${queryString ? `?${changedString}` : ''}`;
+    const decodedString = queryString.replace(/\+/g, ' ');
+    const url = `/api/catalog/products${decodedString ? `?${decodedString}` : ''}`;
+    console.log(url);
 
     const response = await fetch(url, {
       method: 'GET',

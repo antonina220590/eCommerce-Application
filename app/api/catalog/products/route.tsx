@@ -6,11 +6,14 @@ import {
 } from '@/app/utils/commercetools/commercetools-client';
 import { ProductPagedQueryResponse } from '@commercetools/platform-sdk';
 
-export async function GET() {
+export async function GET(params = {}) {
   try {
     const token = await getToken();
+    const queryString = new URLSearchParams(params).toString();
+    const changedString = queryString.replace(/\+/g, ' ');
+    const url = `${apiUrl}/${projectKey}/products${queryString ? `/search?${changedString}` : ''}`;
 
-    const response = await fetch(`${apiUrl}/${projectKey}/products`, {
+    const response = await fetch(url, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
