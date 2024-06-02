@@ -7,6 +7,7 @@ import 'swiper/scss/thumbs';
 
 import { Product } from '@commercetools/platform-sdk';
 import style from '@/app/ui/components/productDetails/productDetails.module.scss';
+import styles from '@/app/ui/components/cards/cards.module.scss';
 import fetchProductById from '@/app/utils/product/fetchProductById';
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
@@ -30,6 +31,10 @@ function ProductDetails() {
     };
     fetchProduct().catch(console.error);
   }, []);
+
+  const price = product?.masterData.current.masterVariant.prices?.[0];
+  const discountedPrice = price?.discounted?.value?.centAmount;
+  const originalPrice = price?.value?.centAmount || 0;
 
   return (
     <div>
@@ -62,6 +67,26 @@ function ProductDetails() {
                   )}
                 </div>
               )}
+              <div className={clsx(style.productDetailsPrice)}>
+                {price ? (
+                  <div className={clsx(style.productPrice)}>
+                    {discountedPrice ? (
+                      <>
+                        <span className={clsx(style.fullPrice)}>
+                          ${originalPrice / 100}
+                        </span>
+                        <span className={clsx(styles.discountedPrice)}>
+                          ${discountedPrice / 100}
+                        </span>
+                      </>
+                    ) : (
+                      <span>${originalPrice / 100}</span>
+                    )}
+                  </div>
+                ) : (
+                  <div>Price not available</div>
+                )}
+              </div>
             </div>
             <div className={clsx(style.productRightSideContainer)}>
               <h3 className={clsx(style.productTitle)}>
