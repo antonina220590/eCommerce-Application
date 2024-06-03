@@ -6,15 +6,15 @@
   flex-grow: 1;
   flex-direction: column;
   gap: 5px;
-  min-height: calc(100vh - 167px); 
+  min-height: calc(100vh - 167px);
   color: $color-dark;
   background-color: $color-background;
 
-  &Title{
+  &Title {
     position: relative;
 
-    &::after{
-      content: "";
+    &::after {
+      content: '';
       position: absolute;
       bottom: -10px;
       left: calc(50% - 25px);
@@ -23,7 +23,7 @@
       background-color: $color-brand;
     }
   }
-  &Subtitle{
+  &Subtitle {
     margin-bottom: 0;
     a {
       display: inline;
@@ -37,7 +37,7 @@
     }
   }
 
-  &Form{
+  &Form {
     @include centering;
     flex-direction: column;
     gap: 5px;
@@ -45,11 +45,11 @@
     padding: 20px;
 
     @include media-mobile {
-      width: calc(100% - 40px); 
-     }
+      width: calc(100% - 40px);
+    }
   }
 
-  &Element{
+  &Element {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -73,9 +73,9 @@
       padding-left: 15px;
 
       @include media-mobile {
-        width: calc(100% - 20px); 
+        width: calc(100% - 20px);
         height: 50px;
-       }
+      }
     }
 
     input.Error {
@@ -88,8 +88,8 @@
       border: 1px $color-brand solid;
 
       @include media-mobile {
-        width: 100%; 
-       }
+        width: 100%;
+      }
     }
 
     button {
@@ -99,21 +99,21 @@
       position: absolute;
       right: 0;
       top: 50%;
-      transform: translateY(-50%) ;
+      transform: translateY(-50%);
     }
-  
+
     button:hover {
       cursor: pointer;
     }
   }
-  
-  &Error{
-      display: block;
-      min-height: 18px;
-      color: $color-error;
-      font-size: 12px;
+
+  &Error {
+    display: block;
+    min-height: 18px;
+    color: $color-error;
+    font-size: 12px;
   }
-  &Button{
+  &Button {
     all: unset;
     @include centering;
     align-self: center;
@@ -122,11 +122,11 @@
     margin-top: 20px;
     background-color: $color-brand;
 
-    &:disabled{
+    &:disabled {
       opacity: 0.5;
     }
 
-    &:hover:not(:disabled){
+    &:hover:not(:disabled) {
       cursor: pointer;
       background-color: $color-dark;
       color: $color-brand;
@@ -135,6 +135,16 @@
     @include media-mobile {
       max-width: 280px;
       height: 50px;
-     }
+    }
+  }
+
+  &Disabled {
+    pointer-events: none;
+    background-color: rgba($color-dark, 0.1);
+
+    input,
+    select {
+      background-color: rgba($color-dark, 0.1);
+    }
   }
 }

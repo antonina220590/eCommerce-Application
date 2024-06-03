@@ -6,9 +6,11 @@ import getUserInfo from '@/app/utils/user/getUserInfo';
 import { Customer } from '@commercetools/platform-sdk';
 import styles from '../login/login.module.scss';
 import UserAddress from './UserAddress';
+import Checkbox from '../registration/checkbox/checkbox';
 
 export default function UserInfo() {
   const [userData, setUserData] = useState<Customer | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -19,6 +21,10 @@ export default function UserInfo() {
   }, []);
   // console.log('userData', userData);
 
+  const handleEditChange = () => {
+    setIsEditing(!isEditing);
+  };
+
   const handleSubmit = () => {
     // console.log('submitted');
   };
@@ -26,38 +32,57 @@ export default function UserInfo() {
   return (
     <section className={clsx(styles.form)}>
       {userData && (
-        <form className={clsx(styles.formForm)} onSubmit={handleSubmit}>
-          <h2>User Information</h2>
-          <label htmlFor="firstName" className={clsx(styles.formElement)}>
-            First name*
-            <input
-              id="firstName"
-              name="firstName"
-              type="text"
-              value={userData.firstName}
-            />
-          </label>
-          <label htmlFor="firstName" className={clsx(styles.formElement)}>
-            Last name*
-            <input
-              id="lastName"
-              name="lastName"
-              type="text"
-              value={userData.lastName}
-            />
-          </label>
-          <label htmlFor="dateOfBirth" className={clsx(styles.formElement)}>
-            Date of birth*
-            <input
-              id="dateOfBirth"
-              name="dateOfBirth"
-              type="date"
-              value={userData.dateOfBirth}
-            />
-          </label>
-          <h2>User Addresses</h2>
-          <UserAddress user={userData} />
-        </form>
+        <>
+          <Checkbox
+            id="editForm"
+            name="editForm"
+            label="Edit Mode"
+            isChecked={isEditing}
+            checkHandler={handleEditChange}
+          />
+          <form
+            className={clsx(styles.formForm, {
+              [styles.formDisabled]: !isEditing,
+            })}
+            onSubmit={handleSubmit}
+          >
+            <h2>User Information</h2>
+            <label htmlFor="firstName" className={clsx(styles.formElement)}>
+              First name*
+              <input
+                id="firstName"
+                name="firstName"
+                type="text"
+                value={userData.firstName}
+              />
+            </label>
+            <label htmlFor="firstName" className={clsx(styles.formElement)}>
+              Last name*
+              <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                value={userData.lastName}
+              />
+            </label>
+            <label htmlFor="dateOfBirth" className={clsx(styles.formElement)}>
+              Date of birth*
+              <input
+                id="dateOfBirth"
+                name="dateOfBirth"
+                type="date"
+                value={userData.dateOfBirth}
+              />
+            </label>
+            <h2>User Addresses</h2>
+            <UserAddress user={userData} />
+            {isEditing && (
+              <button type="submit" className={clsx(styles.formButton)}>
+                Save Info
+              </button>
+            )}
+          </form>
+        </>
       )}
 
       {/* {JSON.stringify(userData)} */}
