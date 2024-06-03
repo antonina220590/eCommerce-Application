@@ -6,15 +6,12 @@ import fetchProductById from '@/app/utils/product/fetchProductById';
 import React, { useEffect, useState } from 'react';
 import { Product } from '@commercetools/platform-sdk';
 import Image from 'next/image';
-import SliderBig from '@/app/ui/components/slider/sliderEnlarged';
-import Modal from '../modal/modal';
 
-function Slider() {
+export default function SliderBig() {
   const [thumbsSwiper, setThumbsSwiper] = useState<
     string | SwiperClass | null | undefined
   >(null)!;
   const [product, setProduct] = useState<Product | null>(null);
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const currentPath = window.location.pathname;
@@ -30,22 +27,16 @@ function Slider() {
 
   return (
     <>
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <SliderBig />
-      </Modal>
       <Swiper
         loop
         spaceBetween={10}
         navigation
         thumbs={{ swiper: thumbsSwiper }}
         modules={[Navigation, Thumbs]}
-        className="mySwiper2"
+        className="mySwiper3"
       >
         {images?.map((image, id) => (
-          <SwiperSlide
-            key={`${image.url}-${id + 4}`}
-            onClick={() => setModalOpen(true)}
-          >
+          <SwiperSlide key={`${image.url}-${id + 4}`}>
             <Image
               src={image.url}
               alt="image"
@@ -64,7 +55,7 @@ function Slider() {
         freeMode
         watchSlidesProgress
         modules={[Navigation, Thumbs]}
-        className="mySwiper"
+        className="mySwiper4"
       >
         {images?.map((image, id) => (
           <SwiperSlide key={`${image.url}-${id + 4}`}>
@@ -81,4 +72,3 @@ function Slider() {
     </>
   );
 }
-export default Slider;
