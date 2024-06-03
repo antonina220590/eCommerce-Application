@@ -1,0 +1,20 @@
+.categoryListWrapper {
+  display: flex;
+  background-color: white;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.linksBox {
+  position: relative;
+}
+
+.noLinks {
+  position: absolute;
+  display: none;
+  visibility: hidden;
+}
+
+.productLink {
+  background: white;
+}
