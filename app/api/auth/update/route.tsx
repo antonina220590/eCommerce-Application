@@ -98,7 +98,6 @@ export async function POST(req: NextRequest) {
       req: { headers: { cookie: cookies } },
     });
 
-    // console.log('data -> ', data);
     // console.log('regData -> ', regData);
 
     const userData = await fetchUserData(accessToken);

@@ -147,4 +147,12 @@
       background-color: rgba($color-dark, 0.1);
     }
   }
+
+  &UserAddress {
+    &:has(~ .formUserAddress) {
+      margin-bottom: 2rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid;
+    }
+  }
 }

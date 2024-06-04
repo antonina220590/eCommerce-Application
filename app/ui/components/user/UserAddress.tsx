@@ -11,24 +11,31 @@ interface UserAddressProps {
 
 function UserAddress({ user }: UserAddressProps) {
   const { addresses, defaultShippingAddressId, defaultBillingAddressId } = user;
-  // console.log(addresses);
-  // console.log(defaultShippingAddressId);
-  // console.log(defaultBillingAddressId);
 
   return (
     <>
-      {addresses.map((address: Address) => {
+      {addresses.map((address: Address, index: number) => {
         const isDefaultShipping = address.id === defaultShippingAddressId;
         const isDefaultBilling = address.id === defaultBillingAddressId;
         let addressPostfix = '';
-        if (address.id === defaultShippingAddressId) {
+
+        if (defaultShippingAddressId && defaultBillingAddressId) {
+          if (isDefaultShipping) {
+            addressPostfix = 'Shipping';
+          } else if (isDefaultBilling) {
+            addressPostfix = 'Billing';
+          }
+        } else if (index === 0) {
           addressPostfix = 'Shipping';
-        } else if (address.id === defaultBillingAddressId) {
+        } else if (index === 1) {
           addressPostfix = 'Billing';
         }
 
         return (
-          <div key={address.id} className={clsx(styles.formElement)}>
+          <div
+            key={address.id}
+            className={clsx(styles.formUserAddress, styles.formElement)}
+          >
             {isDefaultShipping && <h3>Default Shipping Address</h3>}
             {isDefaultBilling && <h3>Default Billing Address</h3>}
 
