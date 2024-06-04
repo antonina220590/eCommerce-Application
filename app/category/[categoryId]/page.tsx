@@ -1,9 +1,11 @@
 'use client';
 
+import CategoryBooks from '@/app/ui/components/categoryPage/categoryPage';
+
 export default function Category() {
   return (
     <main>
-      <h1>Category Page</h1>
+      <CategoryBooks />
     </main>
   );
 }
