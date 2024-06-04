@@ -20,58 +20,69 @@ function UserAddress({ user }: UserAddressProps) {
       {addresses.map((address: Address) => {
         const isDefaultShipping = address.id === defaultShippingAddressId;
         const isDefaultBilling = address.id === defaultBillingAddressId;
+        let addressPostfix = '';
+        if (address.id === defaultShippingAddressId) {
+          addressPostfix = 'Shipping';
+        } else if (address.id === defaultBillingAddressId) {
+          addressPostfix = 'Billing';
+        }
 
         return (
           <div key={address.id} className={clsx(styles.formElement)}>
             {isDefaultShipping && <h3>Default Shipping Address</h3>}
             {isDefaultBilling && <h3>Default Billing Address</h3>}
+
+            <input
+              type="text"
+              readOnly
+              hidden
+              name={`id${addressPostfix}`}
+              value={address.id}
+            />
             <label
-              htmlFor={`streetName-${address.id}`}
+              htmlFor={`street${addressPostfix}`}
               className={clsx(styles.formElement)}
             >
               Street*
               <input
-                id={`streetName-${address.id}`}
-                name={`streetName-${address.id}`}
+                id={`street${addressPostfix}`}
+                name={`street${addressPostfix}`}
                 type="text"
                 defaultValue={address.streetName}
               />
             </label>
-
             <label
-              htmlFor={`postalCode-${address.id}`}
+              htmlFor={`code${addressPostfix}`}
               className={clsx(styles.formElement)}
             >
               Postal code*
               <input
-                id={`postalCode-${address.id}`}
-                name={`postalCode-${address.id}`}
+                id={`code${addressPostfix}`}
+                name={`code${addressPostfix}`}
                 type="text"
                 defaultValue={address.postalCode}
               />
             </label>
-
             <label
-              htmlFor={`city-${address.id}`}
+              htmlFor={`city${addressPostfix}`}
               className={clsx(styles.formElement)}
             >
               City*
               <input
-                id={`city-${address.id}`}
-                name={`city-${address.id}`}
+                id={`city${addressPostfix}`}
+                name={`city${addressPostfix}`}
                 type="text"
                 defaultValue={address.city}
               />
             </label>
-
             <label
-              htmlFor={`country-${address.id}`}
+              htmlFor={`country${addressPostfix}`}
               className={clsx(styles.formElement)}
             >
               Country*
               <input
-                id={`country-${address.id}`}
-                name={`country-${address.id}`}
+                id={`country${addressPostfix}`}
+                name={`country${addressPostfix}`}
                 type="text"
                 defaultValue={address.country}
               />

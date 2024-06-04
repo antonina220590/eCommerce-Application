@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import clsx from 'clsx';
 import getUserInfo from '@/app/utils/user/getUserInfo';
 import { Customer } from '@commercetools/platform-sdk';
+import handleUserUpdate from '@/app/utils/auth/handleUserUpdate';
 import styles from '../login/login.module.scss';
 import UserAddress from './UserAddress';
 import Checkbox from '../registration/checkbox/checkbox';
@@ -25,8 +26,15 @@ export default function UserInfo() {
     setIsEditing(!isEditing);
   };
 
-  const handleSubmit = () => {
-    // console.log('submitted');
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const result = await handleUserUpdate(e);
+    console.log(result);
+    // if (result?.success) {
+    //   console.log('result', result?.success);
+    // }
+    // console.log(e);
   };
 
   return (
@@ -53,7 +61,7 @@ export default function UserInfo() {
                 id="firstName"
                 name="firstName"
                 type="text"
-                value={userData.firstName}
+                defaultValue={userData.firstName}
               />
             </label>
             <label htmlFor="firstName" className={clsx(styles.formElement)}>
@@ -62,7 +70,7 @@ export default function UserInfo() {
                 id="lastName"
                 name="lastName"
                 type="text"
-                value={userData.lastName}
+                defaultValue={userData.lastName}
               />
             </label>
             <label htmlFor="dateOfBirth" className={clsx(styles.formElement)}>
@@ -71,7 +79,7 @@ export default function UserInfo() {
                 id="dateOfBirth"
                 name="dateOfBirth"
                 type="date"
-                value={userData.dateOfBirth}
+                defaultValue={userData.dateOfBirth}
               />
             </label>
             <h2>User Addresses</h2>
