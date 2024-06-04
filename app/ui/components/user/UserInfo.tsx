@@ -12,6 +12,7 @@ import Checkbox from '../registration/checkbox/checkbox';
 export default function UserInfo() {
   const [userData, setUserData] = useState<Customer | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [userUpdateStatus, setUserUpdateStatus] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -20,21 +21,22 @@ export default function UserInfo() {
     };
     fetchUserData().catch(console.error);
   }, []);
-  // console.log('userData', userData);
+  // console.log('userData --> ', userData);
 
   const handleEditChange = () => {
     setIsEditing(!isEditing);
+    setUserUpdateStatus(null);
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const result = await handleUserUpdate(e);
-    console.log(result);
-    // if (result?.success) {
-    //   console.log('result', result?.success);
-    // }
-    // console.log(e);
+    const result = await handleUserUpdate(e, setUserUpdateStatus);
+    // console.log(result);
+    if (result?.success) {
+      setIsEditing(false);
+      // console.log('result', result?.success);
+    }
   };
 
   return (
@@ -84,6 +86,7 @@ export default function UserInfo() {
             </label>
             <h2>User Addresses</h2>
             <UserAddress user={userData} />
+            {userUpdateStatus}
             {isEditing && (
               <button type="submit" className={clsx(styles.formButton)}>
                 Save Info

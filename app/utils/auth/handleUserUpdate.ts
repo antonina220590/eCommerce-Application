@@ -1,11 +1,11 @@
 import { FormEvent } from 'react';
 
 const handleUserUpdate = async (
-  e: FormEvent<HTMLFormElement>
-  //   setLoginError: (_error: string | null) => void
+  e: FormEvent<HTMLFormElement>,
+  setUserUpdateStatus: (_error: string | null) => void
 ) => {
   // console.log('Login FormData -> ', formData);
-  //   setLoginError(null);
+  setUserUpdateStatus(null);
   e.preventDefault();
 
   const formData: { [key: string]: string | boolean } = {};
@@ -25,6 +25,8 @@ const handleUserUpdate = async (
     }
   });
 
+  // console.log('formData --> ', formData);
+
   try {
     const response = await fetch('/api/auth/update', {
       method: 'POST',
@@ -35,16 +37,17 @@ const handleUserUpdate = async (
     });
 
     const result = await response.json();
-    console.log('handleUserUpdate result', result);
+    // console.log('handleUserUpdate result', result);
 
     if (response.ok) {
+      setUserUpdateStatus(result.message);
       return { success: true };
     }
-    // setLoginError(result?.error);
+    setUserUpdateStatus(result?.error);
     return { success: false };
   } catch (error) {
     console.error('UserUpdate failed:', error);
-    // setLoginError('UserUpdate failed due to some error');
+    setUserUpdateStatus('UserUpdate failed due to some error');
     return { success: false };
   }
 };
