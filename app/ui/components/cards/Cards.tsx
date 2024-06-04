@@ -21,6 +21,7 @@ export default function Cards() {
 
     fetchProducts().catch(console.error);
   }, []);
+  console.log(products);
 
   return (
     <div>

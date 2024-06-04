@@ -23,12 +23,7 @@ export default function SubcategoryLinks() {
   const currentPathId = currentPath.split('/')[2];
 
   const results = categories?.results;
-  // results?.map((result) => {
-  //   const parentId = result.parent?.id;
-  //   if (parentId === currentPathId) {
-  //     console.log(result.orderHint);
-  //   }
-  // });
+
   return (
     <div className={clsx(styles.linksBox)}>
       <div className={clsx(styles.categoryListWrapper)}>
@@ -41,7 +36,7 @@ export default function SubcategoryLinks() {
                 return (
                   <Link
                     key={result.id}
-                    href={`/category/${result.id}`}
+                    href={`/subcategory/${result.id}`}
                     className={clsx(styles.productLink)}
                   >
                     <h4
