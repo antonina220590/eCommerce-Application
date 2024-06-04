@@ -1,0 +1,69 @@
+@import '@/app/ui/styles/settings/variables.module.scss';
+@import '@/app/ui/styles/settings/mixins.scss';
+
+.closeModalBtn {
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+  overflow-y: auto;
+  transition: opacity 0.3s;
+  z-index: 8;
+}
+
+.modalWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+}
+
+.modalContent {
+  position: relative;
+  margin: 20px;
+  width: 100%;
+  max-width: 800px;
+  border-radius: 20px;
+  background-color: $color-light;
+  padding: 40px 20px 20px 70px;
+  transition: opacity 0.3s, transform 0.3s;
+  display: flex;
+  gap:20px;
+
+  @include media-mid {
+    max-width: 650px;
+   }
+
+   @include media-tablet {
+    max-width: 460px;
+   }
+
+   @include media-mobile {
+    max-width: 450px;
+   }
+
+   @include media-small {
+    max-width: 250px;
+   }
+}
+
+.closeModalBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 30px;
+  height: 30px;
+  z-index: 20;
+}
+

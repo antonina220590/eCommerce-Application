@@ -21,59 +21,75 @@ export default function Cards() {
 
     fetchProducts().catch(console.error);
   }, []);
-  console.log(products);
 
   return (
     <div>
       {products?.results ? (
         <div className={clsx(style.productsList)}>
-          {products.results.map((product) => (
-            <div
-              id={product.id}
-              role="presentation"
-              className={clsx(style.productCard)}
-              key={product.id}
-            >
-              <Link
-                href={`/product/${product.id}`}
-                className={clsx(style.productLink)}
+          {products.results.map((product) => {
+            const price = product.masterData.current.masterVariant.prices?.[0];
+            const discountedPrice = price?.discounted?.value?.centAmount;
+            const originalPrice = price?.value?.centAmount || 0;
+
+            return (
+              <div
+                id={product.id}
+                role="presentation"
+                className={clsx(style.productCard)}
+                key={product.id}
               >
-                <div className={clsx(style.imgBox)}>
-                  {product.masterData.current.masterVariant.images &&
-                  product.masterData.current.masterVariant.images.length > 0 ? (
-                    <Image
-                      src={
-                        product.masterData.current.masterVariant.images[0].url
-                      }
-                      alt={product.masterData.current.name['en-US']}
-                      fill
-                      sizes="max-width: 800px"
-                      style={{ objectFit: 'scale-down' }}
-                    />
-                  ) : (
-                    <p>No image available</p>
-                  )}
-                </div>
-                {product.masterData.current.masterVariant.prices &&
-                product.masterData.current.masterVariant.prices.length > 0 ? (
-                  <div className={clsx(style.productPrice)}>
-                    $
-                    {product.masterData.current.masterVariant.prices[0].value
-                      .centAmount / 100}
+                <Link
+                  href={`/product/${product.id}`}
+                  className={clsx(style.productLink)}
+                >
+                  <div className={clsx(style.imgBox)}>
+                    {product.masterData.current.masterVariant.images &&
+                    product.masterData.current.masterVariant.images.length >
+                      0 ? (
+                      <Image
+                        src={
+                          product.masterData.current.masterVariant.images[0].url
+                        }
+                        alt={product.masterData.current.name['en-US']}
+                        priority
+                        fill
+                        sizes="max-width: 800px"
+                        style={{ objectFit: 'scale-down' }}
+                      />
+                    ) : (
+                      <p>No image available</p>
+                    )}
                   </div>
-                ) : (
-                  <div>Price not available</div>
-                )}
-                <h3 className={clsx(style.productName)}>
-                  {product.masterData.current.name['en-US']}
-                </h3>
-                <p className={clsx(style.productDescription)}>
-                  {product.masterData.current.metaDescription?.['en-US'] ??
-                    'No description available'}
-                </p>
-              </Link>
-            </div>
-          ))}
+                  {price ? (
+                    <div className={clsx(style.productPrice)}>
+                      {discountedPrice ? (
+                        <>
+                          <div className={clsx(style.saleMark)}>Sale</div>
+                          <span className={clsx(style.fullPrice)}>
+                            ${originalPrice / 100}
+                          </span>
+                          <span className={clsx(style.discountedPrice)}>
+                            ${discountedPrice / 100}
+                          </span>
+                        </>
+                      ) : (
+                        <span>${originalPrice / 100}</span>
+                      )}
+                    </div>
+                  ) : (
+                    <div>Price not available</div>
+                  )}
+                  <h3 className={clsx(style.productName)}>
+                    {product.masterData.current.name['en-US']}
+                  </h3>
+                  <p className={clsx(style.productDescription)}>
+                    {product.masterData.current.metaDescription?.['en-US'] ??
+                      'No description available'}
+                  </p>
+                </Link>
+              </div>
+            );
+          })}
         </div>
       ) : (
         <p> ...loading... </p>
