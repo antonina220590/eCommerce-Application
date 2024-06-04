@@ -14,7 +14,7 @@ async function fetchAllProducts() {
     }
 
     const products = await response.json();
-    console.log('products fetched -> ', products);
+    // console.log('products fetched -> ', products);
 
     return products;
   } catch (error) {
