@@ -19,8 +19,6 @@ export default function CategoryLinks() {
     fetchCategories().catch(console.error);
   }, []);
 
-  // console.log(categories)
-
   const results = categories?.results;
   return (
     <div className={clsx(styles.linksBox)}>

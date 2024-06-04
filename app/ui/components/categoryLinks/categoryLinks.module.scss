@@ -1,3 +1,6 @@
+@import '../../styles/settings/mixins.scss';
+@import '../../styles/settings/variables.module.scss';
+
 .categoryListWrapper {
   display: flex;
   background-color: white;
@@ -17,4 +20,10 @@
 
 .productLink {
   background: white;
+  text-decoration: none;
+  color: $color-dark;
+}
+
+.productLink:hover {
+  color: $color-brand;
 }
