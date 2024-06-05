@@ -25,6 +25,7 @@ export default function CategoryBooks() {
 
   const currentPath = window.location.pathname;
   const currentPathId = currentPath.split('/')[2];
+  console.log(currentPathId);
 
   return (
     <div>

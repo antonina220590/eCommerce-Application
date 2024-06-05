@@ -27,7 +27,7 @@ function ProductDetails() {
 
   useEffect(() => {
     const currentPath = window.location.pathname;
-    const id = currentPath.split('/')[2];
+    const id = currentPath.split('/')[3];
     const fetchProduct = async () => {
       const fetched = await fetchProductById(id);
       setProduct(fetched.products);

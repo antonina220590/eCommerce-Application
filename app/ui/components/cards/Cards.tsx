@@ -39,7 +39,7 @@ export default function Cards() {
                 key={product.id}
               >
                 <Link
-                  href={`/product/${product.id}`}
+                  href={`/catalog/product/${product.id}`}
                   className={clsx(style.productLink)}
                 >
                   <div className={clsx(style.imgBox)}>

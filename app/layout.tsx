@@ -4,6 +4,7 @@ import Header from './ui/components/headerComponent/Header';
 import Footer from './ui/components/footerComponent/Footer';
 
 import './ui/styles/main.scss';
+// import NextBreadcrumb from './ui/components/breadcrumb/breadcrumb';
 
 export const metadata: Metadata = {
   title: 'eCommerce-Application',
@@ -19,6 +20,14 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Header />
+        {/* <NextBreadcrumb
+          homeElement="Home"
+          separator={<span> &gt; </span>}
+          activeClasses=""
+          containerClasses=""
+          listClasses=""
+          capitalizeLinks
+        /> */}
         {children}
         <Footer />
       </body>

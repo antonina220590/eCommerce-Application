@@ -1,0 +1,18 @@
+@import '../../styles/settings/variables.module.scss';
+@import '../../styles/settings/mixins.scss';
+
+.breadcrumbLink {
+  background: transparent;
+  text-decoration: none;
+  color: $color-dark;
+}
+
+.breadcrumbLink:hover {
+  color: $color-brand;
+}
+
+.breadcrumbContainer {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+}
