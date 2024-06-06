@@ -5,7 +5,7 @@ import {
 } from '@/app/utils/commercetools/commercetools-client';
 import fetch from 'node-fetch';
 import { parseCookies } from 'nookies';
-// import { Customer, ResponseCustomerData, Address } from '@/app/types';
+import { Action } from '@/app/types';
 import fetchUserData from '@/app/utils/auth/fetchUserData';
 
 async function userUpdate(
@@ -26,11 +26,14 @@ async function userUpdate(
   codeBilling: string,
   countryBilling: string
 ) {
-  const actions = [
+  const actions: Action[] = [
     { action: 'setFirstName', firstName },
     { action: 'setLastName', lastName },
     { action: 'setDateOfBirth', dateOfBirth },
-    {
+  ];
+
+  if (idShipping) {
+    actions.push({
       action: 'changeAddress',
       addressId: idShipping,
       address: {
@@ -39,8 +42,10 @@ async function userUpdate(
         postalCode: codeShipping,
         country: countryShipping,
       },
-    },
-    {
+    });
+  }
+  if (idBilling) {
+    actions.push({
       action: 'changeAddress',
       addressId: idBilling,
       address: {
@@ -49,8 +54,8 @@ async function userUpdate(
         postalCode: codeBilling,
         country: countryBilling,
       },
-    },
-  ];
+    });
+  }
 
   const requestBody = {
     version,

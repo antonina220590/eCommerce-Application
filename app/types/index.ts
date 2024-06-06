@@ -31,3 +31,18 @@ export interface Customer {
 export interface ResponseCustomerData {
   customer: Customer;
 }
+
+export type Action =
+  | { action: 'setFirstName'; firstName: string }
+  | { action: 'setLastName'; lastName: string }
+  | { action: 'setDateOfBirth'; dateOfBirth: string }
+  | {
+      action: 'changeAddress';
+      addressId: string;
+      address: {
+        streetName: string;
+        city: string;
+        postalCode: string;
+        country: string;
+      };
+    };
