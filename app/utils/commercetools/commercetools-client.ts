@@ -4,8 +4,12 @@ import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
 
 const projectKey = process.env.CTP_PROJECT_KEY!;
 // const scopes = process.env.CTP_SCOPES!.split(' ');
+// const scopes =
+//   'view_categories:ecommerce-final-task manage_my_business_units:ecommerce-final-task manage_customers:ecommerce-final-task manage_my_quotes:ecommerce-final-task view_published_products:ecommerce-final-task manage_my_quote_requests:ecommerce-final-task create_anonymous_token:ecommerce-final-task manage_my_shopping_lists:ecommerce-final-task manage_my_payments:ecommerce-final-task manage_my_orders:ecommerce-final-task manage_my_profile:ecommerce-final-task'.split(
+//     ' '
+//   );
 const scopes =
-  'view_categories:ecommerce-final-task manage_my_business_units:ecommerce-final-task manage_customers:ecommerce-final-task manage_my_quotes:ecommerce-final-task view_published_products:ecommerce-final-task manage_my_quote_requests:ecommerce-final-task create_anonymous_token:ecommerce-final-task manage_my_shopping_lists:ecommerce-final-task manage_my_payments:ecommerce-final-task manage_my_orders:ecommerce-final-task manage_my_profile:ecommerce-final-task'.split(
+  'manage_extensions:ecommerce-final-task manage_tax_categories:ecommerce-final-task manage_cart_discounts:ecommerce-final-task manage_shopping_lists:ecommerce-final-task manage_project_settings:ecommerce-final-task manage_customer_groups:ecommerce-final-task manage_categories:ecommerce-final-task manage_order_edits:ecommerce-final-task manage_shipping_methods:ecommerce-final-task manage_products:ecommerce-final-task manage_types:ecommerce-final-task manage_discount_codes:ecommerce-final-task manage_orders:ecommerce-final-task manage_payments:ecommerce-final-task manage_customers:ecommerce-final-task create_anonymous_token:ecommerce-final-task manage_my_shopping_lists:ecommerce-final-task manage_my_payments:ecommerce-final-task manage_my_orders:ecommerce-final-task manage_my_profile:ecommerce-final-task'.split(
     ' '
   );
 const authUrl = process.env.CTP_AUTH_URL!;

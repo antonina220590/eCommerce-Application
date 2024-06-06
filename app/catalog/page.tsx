@@ -1,9 +1,13 @@
-'use client';
+import React from 'react';
+import Cards from '../ui/components/cards/Cards';
+import CategoryLinks from '../ui/components/categoryLinks/categoryLinks';
 
-export default function Catalog() {
+function Catalog() {
   return (
     <main>
-      <h1>In development</h1>
+      <CategoryLinks />
+      <Cards />
     </main>
   );
 }
+export default Catalog;

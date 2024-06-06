@@ -11,11 +11,14 @@ export interface LoginTokenRequest {
   token_type: string;
 }
 export interface Address {
-  id?: string;
+  id: string;
   streetName: string;
   city: string;
   postalCode: string;
   country: string;
+}
+export interface AddressListProps {
+  addresses: Address[];
 }
 export interface Customer {
   id: string;
@@ -28,3 +31,18 @@ export interface Customer {
 export interface ResponseCustomerData {
   customer: Customer;
 }
+
+export type Action =
+  | { action: 'setFirstName'; firstName: string }
+  | { action: 'setLastName'; lastName: string }
+  | { action: 'setDateOfBirth'; dateOfBirth: string }
+  | {
+      action: 'changeAddress';
+      addressId: string;
+      address: {
+        streetName: string;
+        city: string;
+        postalCode: string;
+        country: string;
+      };
+    };
