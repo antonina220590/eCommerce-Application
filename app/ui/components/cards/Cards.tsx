@@ -87,6 +87,9 @@ export default function Cards() {
                       'No description available'}
                   </p>
                 </Link>
+                <button className={clsx(style.productButton)} type="button">
+                  Add to Card
+                </button>
               </div>
             );
           })}
