@@ -18,7 +18,7 @@ export async function GET() {
       },
     });
 
-    console.log(response);
+    // console.log(response);
 
     if (!response.ok) {
       const error = (await response.json()) as { message: string };
@@ -32,7 +32,7 @@ export async function GET() {
     }
 
     const products = (await response.json()) as ProductPagedQueryResponse;
-    console.log('res - >>', products);
+    // console.log('res - >>', products);
 
     return new Response(
       JSON.stringify({
