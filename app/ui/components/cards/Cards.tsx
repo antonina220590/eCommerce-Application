@@ -15,7 +15,7 @@ export default function Cards() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const fetched = await fetchAllProducts();
+      const fetched = await fetchAllProducts(6, 0);
       setProducts(fetched.products);
     };
 
@@ -95,7 +95,7 @@ export default function Cards() {
           })}
         </div>
       ) : (
-        <p> ...loading... </p>
+        <p />
       )}
     </div>
   );
