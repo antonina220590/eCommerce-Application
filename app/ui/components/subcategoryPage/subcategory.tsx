@@ -16,7 +16,7 @@ export default function SubcategoryBooks() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const fetched = await fetchAllProducts();
+      const fetched = await fetchAllProducts(14, 0);
       setProducts(fetched.products);
     };
 

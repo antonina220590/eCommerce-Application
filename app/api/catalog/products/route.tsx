@@ -9,11 +9,12 @@ import { ProductPagedQueryResponse } from '@commercetools/platform-sdk';
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const limit = searchParams.get('limit');
+  const offset = searchParams.get('offset');
   try {
     const token = await getToken();
 
     const response = await fetch(
-      `${apiUrl}/${projectKey}/products?limit=${limit}`,
+      `${apiUrl}/${projectKey}/products?limit=${limit}&offset=${offset}`,
       {
         method: 'GET',
         headers: {
