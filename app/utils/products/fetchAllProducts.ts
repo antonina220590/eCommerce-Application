@@ -1,6 +1,6 @@
-async function fetchAllProducts() {
+async function fetchAllProducts(limit: number) {
   try {
-    const response = await fetch(`/api/catalog/products`, {
+    const response = await fetch(`/api/catalog/products?limit=${limit}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
