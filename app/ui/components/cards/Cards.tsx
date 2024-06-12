@@ -8,11 +8,13 @@ import React, { useEffect, useState } from 'react';
 import fetchAllProducts from '@/app/utils/products/fetchAllProducts';
 import { ProductPagedQueryResponse } from '@commercetools/platform-sdk';
 import handleAddToCart from '@/app/utils/cart/handleAddToCart';
+import Spinner from '../../../../public/spinner.svg';
 
 export default function Cards() {
   const [products, setProducts] = useState<ProductPagedQueryResponse | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -24,12 +26,14 @@ export default function Cards() {
   }, []);
 
   const addToCart = async (productId: string) => {
-    console.log(productId);
     try {
+      setIsLoading((prev) => ({ ...prev, [productId]: true }));
       const result = await handleAddToCart(productId);
       console.log('Product added to cart:', result);
+      setIsLoading((prev) => ({ ...prev, [productId]: false }));
     } catch (error) {
       console.error('Error adding product to cart:', error);
+      setIsLoading((prev) => ({ ...prev, [productId]: false }));
     }
   };
 
@@ -101,9 +105,14 @@ export default function Cards() {
                 <button
                   onClick={() => addToCart(product.id)}
                   className={clsx(style.productButton)}
+                  style={
+                    isLoading[product.id]
+                      ? { backgroundColor: '#1B3764', color: '#FFCA42' }
+                      : {}
+                  }
                   type="button"
                 >
-                  Add to Card
+                  Add to Card {isLoading[product.id] && <Spinner />}
                 </button>
               </div>
             );

@@ -13,14 +13,66 @@ export async function POST(req: NextRequest) {
   try {
     const accessToken =
       getCookie('accessToken', { req }) || (await fetchAnonymousToken());
-
-    // console.log('accessToken --> ', accessToken);
-
+    const cartId = getCookie('cartId', { req });
     const { currency, lineItems } = await req.json();
 
+    // console.log('accessToken --> ', accessToken);
     // console.log('req ---> ', req);
+    // console.log('lineItems ---> ', lineItems);
 
-    const response = await fetch(`${apiUrl}/${projectKey}/me/carts`, {
+    let response;
+    let cartData;
+
+    if (cartId) {
+      // checking existing cart
+      const existingCart = await fetch(
+        `${apiUrl}/${projectKey}/me/carts/${cartId}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      cartData = (await existingCart.json()) as Cart;
+      const currentVersion = cartData.version;
+
+      lineItems[0].action = 'addLineItem';
+
+      // cart updating
+      response = await fetch(`${apiUrl}/${projectKey}/me/carts/${cartId}`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          version: currentVersion,
+          actions: lineItems,
+        }),
+      });
+
+      if (!response.ok) {
+        const error = (await response.json()) as { message: string };
+        console.error('Error updating cart -> ', error);
+        return NextResponse.json(
+          { message: 'Error updating cart -> ', error: error.message },
+          { status: 500 }
+        );
+      }
+      cartData = (await response.json()) as Cart;
+
+      return NextResponse.json(
+        { message: 'Cart updated successfully', cartData },
+        {
+          status: 200,
+        }
+      );
+    }
+
+    // cart creating
+    response = await fetch(`${apiUrl}/${projectKey}/me/carts`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -40,7 +92,7 @@ export async function POST(req: NextRequest) {
         { status: 500 }
       );
     }
-    const cartData = (await response.json()) as Cart;
+    cartData = (await response.json()) as Cart;
     // console.log(' cart response ---> ', cartData);
 
     const headers = new Headers();
