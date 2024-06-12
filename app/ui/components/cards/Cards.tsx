@@ -7,6 +7,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import fetchAllProducts from '@/app/utils/products/fetchAllProducts';
 import { ProductPagedQueryResponse } from '@commercetools/platform-sdk';
+import handleAddToCart from '@/app/utils/cart/handleAddToCart';
 
 export default function Cards() {
   const [products, setProducts] = useState<ProductPagedQueryResponse | null>(
@@ -21,6 +22,16 @@ export default function Cards() {
 
     fetchProducts().catch(console.error);
   }, []);
+
+  const addToCart = async (productId: string) => {
+    console.log(productId);
+    try {
+      const result = await handleAddToCart(productId);
+      console.log('Product added to cart:', result);
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+    }
+  };
 
   return (
     <div>
@@ -87,7 +98,11 @@ export default function Cards() {
                       'No description available'}
                   </p>
                 </Link>
-                <button className={clsx(style.productButton)} type="button">
+                <button
+                  onClick={() => addToCart(product.id)}
+                  className={clsx(style.productButton)}
+                  type="button"
+                >
                   Add to Card
                 </button>
               </div>
