@@ -5,13 +5,11 @@ import {
 } from '@/app/utils/commercetools/commercetools-client';
 import { getCookie } from 'cookies-next';
 import { NextRequest, NextResponse } from 'next/server';
-import fetchAnonymousToken from '@/app/utils/auth/fetchAnonymousToken';
 import { Cart } from '@commercetools/platform-sdk';
 
 export async function GET(req: NextRequest) {
   try {
-    const accessToken =
-      getCookie('accessToken', { req }) || (await fetchAnonymousToken());
+    const accessToken = getCookie('accessToken', { req });
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
 

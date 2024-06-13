@@ -11,19 +11,17 @@ import { Cart } from '@commercetools/platform-sdk';
 
 export async function POST(req: NextRequest) {
   try {
-    const accessToken =
-      getCookie('accessToken', { req }) || (await fetchAnonymousToken());
+    const accessToken = getCookie('accessToken', { req });
     const cartId = getCookie('cartId', { req });
     const { currency, lineItems } = await req.json();
 
     // console.log('accessToken --> ', accessToken);
     // console.log('req ---> ', req);
-    // console.log('lineItems ---> ', lineItems);
 
     let response;
     let cartData;
 
-    if (cartId) {
+    if (cartId && accessToken) {
       // checking existing cart
       const existingCart = await fetch(
         `${apiUrl}/${projectKey}/me/carts/${cartId}`,
@@ -36,9 +34,11 @@ export async function POST(req: NextRequest) {
         }
       );
       cartData = (await existingCart.json()) as Cart;
-      const currentVersion = cartData.version;
+      const currentVersion = cartData.version || 1;
 
       lineItems[0].action = 'addLineItem';
+      console.log('lineItems ---> ', lineItems);
+      console.log('currentVersion ---> ', currentVersion);
 
       // cart updating
       response = await fetch(`${apiUrl}/${projectKey}/me/carts/${cartId}`, {
@@ -72,10 +72,12 @@ export async function POST(req: NextRequest) {
     }
 
     // cart creating
+
+    const anonymousToken = (await fetchAnonymousToken()) as string;
     response = await fetch(`${apiUrl}/${projectKey}/me/carts`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${anonymousToken}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -100,6 +102,16 @@ export async function POST(req: NextRequest) {
     headers.append(
       'Set-Cookie',
       serialize('cartId', cartData.id, {
+        httpOnly: false,
+        secure: process.env.NODE_ENV === 'production',
+        path: '/',
+        sameSite: 'strict',
+        maxAge: 172800,
+      })
+    );
+    headers.append(
+      'Set-Cookie',
+      serialize('accessToken', anonymousToken, {
         httpOnly: false,
         secure: process.env.NODE_ENV === 'production',
         path: '/',
