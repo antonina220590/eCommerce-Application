@@ -6,17 +6,23 @@ import {
 } from '@/app/utils/commercetools/commercetools-client';
 import { ProductPagedQueryResponse } from '@commercetools/platform-sdk';
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const limit = searchParams.get('limit');
+  const offset = searchParams.get('offset');
   try {
     const token = await getToken();
 
-    const response = await fetch(`${apiUrl}/${projectKey}/products`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await fetch(
+      `${apiUrl}/${projectKey}/products?limit=${limit}&offset=${offset}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
     // console.log(response);
 

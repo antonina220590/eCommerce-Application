@@ -1,0 +1,10 @@
+.spinnerBox {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0 15px 0;
+}
+
+.spinnerBox_invisible {
+  visibility: hidden;
+  position: absolute;
+}
