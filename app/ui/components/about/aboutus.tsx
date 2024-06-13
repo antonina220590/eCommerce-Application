@@ -61,13 +61,11 @@ export default function AboutUs() {
             <span className={clsx(style.span)}>
               <p className={clsx(style.p)}>
                 <span className={clsx(style.spanBio)}>Bio:</span> Tonya has a
-                bachelor degree in law. She also spent one year in Italy
-                studying the Internationl Tax law at the Ferrara University. The
-                she worked as consultant in the field of corporate law in one of
-                the Big4 companies for five years. Then she moved to another
-                country and decided to try herself in frontend development as it
-                was something completely new, interesting and challenging for
-                her.
+                bachelor degree in law. She worked as consultant in the field of
+                corporate law in one of the Big4 companies for five years. Then
+                she moved to another country and decided to try herself in
+                frontend development as it was something completely new,
+                interesting and challenging for her.
               </p>
             </span>
             <span className={clsx(style.span)}>
@@ -152,25 +150,19 @@ export default function AboutUs() {
             </span>
             <span className={clsx(style.span)}>
               <p className={clsx(style.p)}>
-                <span className={clsx(style.spanBio)}>Bio:</span> Lorem ipsum
-                dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
+                <span className={clsx(style.spanBio)}>Bio:</span> Zhenya is
+                working as Frontend Developer. He enrolled to RS School course
+                to refresh his knowledges and learn something new.
               </p>
             </span>
             <span className={clsx(style.span)}>
               <p className={clsx(style.p, style.para)}>
-                <span className={clsx(style.spanBio)}>Contribution:</span>Lorem
-                ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <span className={clsx(style.spanBio)}>Contribution:</span>{' '}
+                Zhenya was the most valuable and experienced member of our team.
+                During the project he developed environment configuration, made
+                settings of API Client, was responsible for all integrations
+                with Commercetools. Also Zhenya worked on the user profile page,
+                on the basket page.
               </p>
             </span>
           </div>
