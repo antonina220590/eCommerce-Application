@@ -1,14 +1,41 @@
-const handleAddToCart = async (productId: string) => {
-  const myCartDraft = {
-    currency: 'USD',
-    lineItems: [
-      {
-        productId,
-        variantId: 1,
-        quantity: 1,
-      },
-    ],
-  };
+// export enum CartUpdateAction {
+//   UpdateCart,
+//   UpdateQuantity,
+// }
+
+const handleAddToCart = async (
+  id: string,
+  amount: number = 1,
+  action: string = 'UpdateCart'
+) => {
+  let myCartDraft;
+
+  if (action === 'UpdateCart') {
+    myCartDraft = {
+      currency: 'USD',
+      lineItems: [
+        {
+          productId: id,
+          variantId: 1,
+          quantity: amount,
+        },
+      ],
+    };
+  }
+
+  if (action === 'UpdateQuantity') {
+    myCartDraft = {
+      lineItems: [
+        {
+          action: 'changeLineItemQuantity',
+          lineItemId: id,
+          quantity: amount,
+        },
+      ],
+    };
+  }
+
+  console.log('myCartDraft', myCartDraft);
 
   try {
     const response = await fetch('/api/create-cart', {
@@ -27,7 +54,7 @@ const handleAddToCart = async (productId: string) => {
     }
     return { success: false };
   } catch (error) {
-    console.error('Login failed:', error);
+    console.error('Add to cart failed:', error);
     return { success: false };
   }
 };

@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import style from '@/app/ui/components/cards/cards.module.scss';
 import React, { useEffect, useState } from 'react';
 import fetchProductsFromCart from '@/app/utils/cart/fetchProductsFromCart';
+import handleAddToCart from '@/app/utils/cart/handleAddToCart';
 import { LineItem } from '@commercetools/platform-sdk';
 
 export default function Cart() {
@@ -19,12 +20,40 @@ export default function Cart() {
     fetchProducts().catch(console.error);
   }, []);
 
+  const handleQuantityChange = async (
+    id: string,
+    quantity: number,
+    action: string
+  ) => {
+    const cartUpdate = await handleAddToCart(id, quantity, action);
+    console.log(cartUpdate);
+  };
+
   return (
     <div>
       {products ? (
         <div className={clsx(style.productsList)}>
           {products.map((product) => (
-            <p key={product.id}> {product.name['en-US']}</p>
+            <div key={product.productId}>
+              <p> {product.name['en-US']}</p>
+              <p> {product.productId}</p>
+              <div>
+                amount in cart - {product.quantity}
+                <br />
+                <input
+                  type="number"
+                  min={1}
+                  defaultValue={product.quantity}
+                  onChange={(e) =>
+                    handleQuantityChange(
+                      product.id,
+                      parseInt(e.target.value, 10),
+                      'UpdateQuantity'
+                    )
+                  }
+                />
+              </div>
+            </div>
           ))}
         </div>
       ) : (
