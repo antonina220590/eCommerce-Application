@@ -8,11 +8,14 @@ import styles from '@/app/ui/components/categoryLinks/categoryLinks.module.scss'
 import clsx from 'clsx';
 import Link from 'next/link';
 import Image from 'next/image';
+import handleAddToCart from '@/app/utils/cart/handleAddToCart';
+import Spinner from '../../../../public/spinner.svg';
 
 export default function CategoryBooks() {
   const [products, setProducts] = useState<ProductPagedQueryResponse | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -21,6 +24,18 @@ export default function CategoryBooks() {
     };
     fetchProducts().catch(console.error);
   }, []);
+
+  const addToCart = async (productId: string) => {
+    try {
+      setIsLoading((prev) => ({ ...prev, [productId]: true }));
+      const result = await handleAddToCart(productId);
+      console.log('Product added to cart:', result);
+      setIsLoading((prev) => ({ ...prev, [productId]: false }));
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+      setIsLoading((prev) => ({ ...prev, [productId]: false }));
+    }
+  };
 
   const currentPath = window.location.pathname;
   const currentPathId = currentPath.split('/')[2];
@@ -96,6 +111,18 @@ export default function CategoryBooks() {
                         'No description available'}
                     </p>
                   </Link>
+                  <button
+                    onClick={() => addToCart(product.id)}
+                    className={clsx(style.productButton)}
+                    style={
+                      isLoading[product.id]
+                        ? { backgroundColor: '#1B3764', color: '#FFCA42' }
+                        : {}
+                    }
+                    type="button"
+                  >
+                    Add to Card {isLoading[product.id] && <Spinner />}
+                  </button>
                 </div>
               );
             }
