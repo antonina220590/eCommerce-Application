@@ -1,0 +1,127 @@
+@import '../../styles/settings/variables.module.scss';
+@import '../../styles/settings/mixins.scss';
+
+.basketWrapper {
+  padding: 20px;
+}
+
+.basketTitle {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  color: $color-dark;
+}
+
+.cartList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cartContainer {
+  background-color: $color-lightgrey;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  font-size: 25px;
+  font-weight: 200;
+  align-items: center;
+  padding: 0 10px 0 0;
+}
+
+.imgCartBox {
+  position: relative;
+  width: 150px;
+  height: 100px;
+
+  @include media-tablet {
+    width: 150px;
+  }
+  @include media-mobile {
+    width: 100px;
+  }
+}
+
+.cartName {
+  font-size: calc(16px + 0.00375 * (100vw - 320px));
+  color: $color-dark;
+  margin: 0;
+}
+
+.infoWrapper {
+  display: flex;
+}
+
+.infoBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.upperBox {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 10px;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.cartProduct {
+  display: grid;
+  grid-column: span 2 / span 2;
+  justify-self: self-start;
+}
+
+.cartColums {
+  display: grid;
+  justify-self: center;
+}
+
+.cartColumsEnd {
+  display: grid;
+  justify-self: end;
+}
+
+.productBox {
+  display: grid;
+  grid-column: span 2 / span 2;
+  justify-self: self-start;
+  gap: 20px;
+  display: flex;
+}
+
+.nameBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 30px;
+}
+
+.productName {
+  font-size: 18px;
+}
+
+.infoPrice,
+.infoQuantity {
+  display: grid;
+  justify-self: center;
+}
+
+.infoTotal {
+  display: grid;
+  justify-self: end;
+}
+
+.quantityBox {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.qtyBtn {
+  border-radius: 8px;
+  background: transparent;
+  border: 3px solid $color-brand;
+  cursor: pointer;
+}
