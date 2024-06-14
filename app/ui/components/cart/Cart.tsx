@@ -23,18 +23,18 @@ export default function Cart() {
   }, []);
 
   // const handleIncrease = useCallback(() => {
-  //   // Это на всякий случай. Вдруг тебе пригодится
+  // Это на всякий случай. Вдруг тебе пригодится
 
   // }, []);
 
   // const handleDecrease = useCallback(() => {
-  //   // Это на всякий случай. Вдруг тебе пригодится
+  // Это на всякий случай. Вдруг тебе пригодится
 
   // }, []);
 
   return (
     <div className={clsx(styles.basketWrapper)}>
-      <h1 className={clsx(styles.basketTitle)}>Shopping Cart</h1>
+      <h3 className={clsx(styles.basketTitle)}>Shopping Cart</h3>
       {products ? (
         <div className={clsx(styles.cartList)}>
           <div className={clsx(styles.upperBox)}>
@@ -68,12 +68,12 @@ export default function Cart() {
                   )}
                 </div>
                 <div className={clsx(styles.nameBox)}>
-                  <span className={clsx(styles.productName)}>
+                  <span className={clsx(styles.productName, styles.cartPrices)}>
                     {product.name['en-US']}
                   </span>
                 </div>
               </div>
-              <div className={clsx(styles.infoPrice)}>
+              <div className={clsx(styles.infoPrice, styles.cartPrices)}>
                 {product.price ? (
                   <div className={clsx(styles.productPrice)}>
                     <span className={clsx(styles.fullPrice)}>
@@ -88,15 +88,15 @@ export default function Cart() {
                 <div className={clsx(styles.quantityBox)}>
                   <button
                     type="button"
-                    className={clsx(styles.qtyBtn)}
+                    className={clsx(styles.qtyBtn, styles.cartPrices)}
                     // onClick={handleDecrease}
                   >
                     -
                   </button>
-                  <div>{1}</div>
+                  <div className={clsx(styles.cartPrices)}>{1}</div>
                   <button
                     type="button"
-                    className={clsx(styles.qtyBtn)}
+                    className={clsx(styles.qtyBtn, styles.cartPrices)}
                     // onClick={handleIncrease}
                   >
                     +
@@ -104,7 +104,7 @@ export default function Cart() {
                 </div>
               </div>
               {product.price ? (
-                <div className={clsx(styles.infoTotal)}>
+                <div className={clsx(styles.infoTotal, styles.cartPrices)}>
                   ${(product?.totalPrice?.centAmount || 0) / 100}
                 </div>
               ) : (
