@@ -20,7 +20,7 @@ export async function GET(request: Request) {
       },
     });
 
-    console.log(response);
+    // console.log(response);
 
     if (!response.ok) {
       const error = (await response.json()) as { message: string };

@@ -18,7 +18,7 @@ export async function GET() {
       },
     });
 
-    console.log(response);
+    // console.log(response);
 
     if (!response.ok) {
       const error = (await response.json()) as { message: string };
@@ -32,7 +32,7 @@ export async function GET() {
     }
 
     const categories = (await response.json()) as CategoryPagedQueryResponse;
-    console.log('res - >>', categories);
+    // console.log('res - >>', categories);
 
     return new Response(
       JSON.stringify({

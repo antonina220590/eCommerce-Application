@@ -38,9 +38,8 @@
   }
 }
 
-.productLink{
+.productLink {
   all: unset;
-
 }
 
 .imgBox {
@@ -55,61 +54,66 @@
   }
 }
 
-  .productPrice {
-    @include centering;
-    padding-top: 10px;
-    font-size: 2rem;
-    font-weight: 600;
-    color: $color-dark;
-  }
-  .saleMark {
-    position: absolute;
-    top: 3%;
-    left: 0;
-    background-color: $color-brand;
-    padding: 0 5px;
-  }
-
-  .fullPrice {
-    text-decoration: line-through;
-    color: $color-disabled;
-    padding-right: 10px;
-  }
-
-  .productName {
-    @include centering;
-    margin: 0;
-    padding: 2%;
-    color: $color-dark;
-  }
-  .productDescription {
-    margin: 0;
-    padding: 2%;
-    font-style: italic;
-    color: $color-darcgrey;
-  }
-
- .productButton {
+.productPrice {
   @include centering;
-    margin-top: auto;
-    margin-bottom: 10px;
-    align-self: center;
-    width: 200px;
-    height: 60px;
-    margin-top: 20px;
-    background-color: $color-brand;
-    border: none;
-    border-radius: 7px;
+  padding-top: 10px;
+  font-size: 2rem;
+  font-weight: 600;
+  color: $color-dark;
+}
+.saleMark {
+  position: absolute;
+  top: 3%;
+  left: 0;
+  background-color: $color-brand;
+  padding: 0 5px;
+}
+
+.fullPrice {
+  text-decoration: line-through;
+  color: $color-disabled;
+  padding-right: 10px;
+}
+
+.productName {
+  @include centering;
+  margin: 0;
+  padding: 2%;
+  color: $color-dark;
+}
+.productDescription {
+  margin: 0;
+  padding: 2%;
+  font-style: italic;
+  color: $color-darcgrey;
+}
+
+.productButton {
+  @include centering;
+  margin-top: auto;
+  margin-bottom: 10px;
+  align-self: center;
+  width: 200px;
+  height: 60px;
+  margin-top: 20px;
+  background-color: $color-brand;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 20px;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &:hover:not(:disabled) {
     cursor: pointer;
-    font-size: 20px;
-
-    &:disabled {
-      opacity: 0.5;
-    }
-
-    &:hover:not(:disabled) {
-      cursor: pointer;
-      background-color: $color-dark;
-      color: $color-brand;
-    }
- }
+    background-color: $color-dark;
+    color: $color-brand;
+  }
+}

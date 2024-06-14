@@ -35,7 +35,7 @@ export async function GET(request: Request) {
     }
 
     const products = (await response.json()) as ProductPagedQueryResponse;
-    console.log('res - >>', products);
+    // console.log('res - >>', products);
 
     return new Response(
       JSON.stringify({
