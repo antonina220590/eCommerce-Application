@@ -8,7 +8,9 @@ import fetchAllProducts from '@/app/utils/products/fetchAllProducts';
 import { ProductPagedQueryResponse } from '@commercetools/platform-sdk';
 import Link from 'next/link';
 import style from '@/app/ui/components/cards/cards.module.scss';
+import handleAddToCart from '@/app/utils/cart/handleAddToCart';
 import styles from './loadmore.module.scss';
+import Spinner from '../../../../public/spinner.svg';
 
 let limit = 3;
 const offset = 6;
@@ -18,6 +20,7 @@ export default function LoadMore() {
     null
   );
   const [isSpinner, setSpinner] = useState(true);
+  const [isLoading, setIsLoading] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     if (inView) {
@@ -39,6 +42,18 @@ export default function LoadMore() {
       fetchProducts().catch(console.error);
     }
   }, [inView, products]);
+
+  const addToCart = async (productId: string) => {
+    try {
+      setIsLoading((prev) => ({ ...prev, [productId]: true }));
+      const result = await handleAddToCart(productId);
+      console.log('Product added to cart:', result);
+      setIsLoading((prev) => ({ ...prev, [productId]: false }));
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+      setIsLoading((prev) => ({ ...prev, [productId]: false }));
+    }
+  };
 
   return (
     <>
@@ -107,8 +122,17 @@ export default function LoadMore() {
                         'No description available'}
                     </p>
                   </Link>
-                  <button className={clsx(style.productButton)} type="button">
-                    Add to Card
+                  <button
+                    onClick={() => addToCart(product.id)}
+                    className={clsx(style.productButton)}
+                    style={
+                      isLoading[product.id]
+                        ? { backgroundColor: '#1B3764', color: '#FFCA42' }
+                        : {}
+                    }
+                    type="button"
+                  >
+                    Add to Card {isLoading[product.id] && <Spinner />}
                   </button>
                 </div>
               );
