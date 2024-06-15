@@ -2,39 +2,48 @@
 
 import clsx from 'clsx';
 import React, { useEffect, useState } from 'react';
-// import  useCallback from 'react';
 import fetchProductsFromCart from '@/app/utils/cart/fetchProductsFromCart';
+import handleAddToCart from '@/app/utils/cart/handleAddToCart';
 import { LineItem } from '@commercetools/platform-sdk';
 import styles from '@/app/ui/components/cart/cart.module.scss';
 import Image from 'next/image';
 
 export default function Cart() {
   const [products, setProducts] = useState<LineItem[] | null>(null);
-  // const [quantity, setQuantity] = useState(1);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
 
   useEffect(() => {
     const fetchProducts = async () => {
       const fetched = await fetchProductsFromCart();
-      console.log('fetched cart --> ', fetched.cartData.lineItems);
+      // console.log('fetched cart --> ', fetched.cartData.lineItems);
       setProducts(fetched.cartData.lineItems);
+      setTotalPrice(fetched.cartData.totalPrice.centAmount);
     };
 
     fetchProducts().catch(console.error);
   }, []);
 
-  // const handleIncrease = useCallback(() => {
-  // Это на всякий случай. Вдруг тебе пригодится
-
-  // }, []);
-
-  // const handleDecrease = useCallback(() => {
-  // Это на всякий случай. Вдруг тебе пригодится
-
-  // }, []);
+  const handleQuantityChange = async (
+    id: string,
+    quantity: number,
+    action: string
+  ) => {
+    const cartUpdate = await handleAddToCart(id, quantity, action);
+    console.log('cartUpdate', cartUpdate);
+    if (cartUpdate.success) {
+      const fetched = await fetchProductsFromCart();
+      // console.log('fetched cart UPD --> ', fetched);
+      setProducts(fetched.cartData.lineItems);
+      setTotalPrice(fetched.cartData.totalPrice.centAmount);
+    }
+  };
 
   return (
     <div className={clsx(styles.basketWrapper)}>
       <h3 className={clsx(styles.basketTitle)}>Shopping Cart</h3>
+      <h3 className={clsx(styles.basketTitle)}>
+        Total Price - ${totalPrice / 100}
+      </h3>
       {products ? (
         <div className={clsx(styles.cartList)}>
           <div className={clsx(styles.upperBox)}>
@@ -113,6 +122,21 @@ export default function Cart() {
               ) : (
                 <div>Price not available</div>
               )}
+              <div>
+                amount in cart
+                <input
+                  type="number"
+                  min={1}
+                  defaultValue={product.quantity}
+                  onChange={(e) =>
+                    handleQuantityChange(
+                      product.id,
+                      parseInt(e.target.value, 10),
+                      'UpdateQuantity'
+                    )
+                  }
+                />
+              </div>
             </div>
           ))}
         </div>

@@ -17,6 +17,7 @@ export async function POST(req: NextRequest) {
 
     // console.log('accessToken --> ', accessToken);
     // console.log('req ---> ', req);
+    // console.log('lineItems ---> ', lineItems);
 
     let response;
     let cartData;
@@ -36,9 +37,11 @@ export async function POST(req: NextRequest) {
       cartData = (await existingCart.json()) as Cart;
       const currentVersion = cartData.version || 1;
 
-      lineItems[0].action = 'addLineItem';
-      console.log('lineItems ---> ', lineItems);
-      console.log('currentVersion ---> ', currentVersion);
+      if (!lineItems[0].action) {
+        lineItems[0].action = 'addLineItem';
+      }
+      // console.log('lineItems ---> ', lineItems);
+      // console.log('currentVersion ---> ', currentVersion);
 
       // cart updating
       response = await fetch(`${apiUrl}/${projectKey}/me/carts/${cartId}`, {
@@ -72,7 +75,6 @@ export async function POST(req: NextRequest) {
     }
 
     // cart creating
-
     const anonymousToken = (await fetchAnonymousToken()) as string;
     response = await fetch(`${apiUrl}/${projectKey}/me/carts`, {
       method: 'POST',
