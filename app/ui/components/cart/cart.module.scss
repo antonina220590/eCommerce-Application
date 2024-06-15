@@ -1,0 +1,184 @@
+@import '../../styles/settings/variables.module.scss';
+@import '../../styles/settings/mixins.scss';
+
+.basketWrapper {
+  padding: 20px;
+}
+
+.basketTitle {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  color: $color-dark;
+
+  @include media-tablet {
+    font-size: 2rem;
+  }
+  @include media-mobile {
+    font-size: 1.5rem;
+  }
+}
+
+.cartList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cartContainer {
+  background-color: $color-lightgrey;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  font-size: 25px;
+  font-weight: 200;
+  align-items: center;
+  padding: 0 10px 0 0;
+}
+
+.imgCartBox {
+  position: relative;
+  width: 150px;
+  height: 100px;
+
+  @include media-tablet {
+    width: 150px;
+  }
+  @include media-mobile {
+    width: 80px;
+  }
+}
+
+.cartName {
+  font-size: calc(16px + 0.00375 * (100vw - 320px));
+  color: $color-dark;
+  margin: 0;
+}
+
+.infoWrapper {
+  display: flex;
+}
+
+.infoBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.upperBox {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 10px;
+  font-size: 25px;
+  font-weight: 500;
+
+  @include media-tablet {
+    font-size: 15px;
+  }
+
+  @include media-mobile {
+    font-size: 10px;
+  }
+}
+
+.cartProduct {
+  display: grid;
+  grid-column: span 2 / span 2;
+  justify-self: self-start;
+}
+
+.cartColums {
+  display: grid;
+  justify-self: center;
+}
+
+.cartColumsEnd {
+  display: grid;
+  justify-self: end;
+}
+
+.productBox {
+  display: grid;
+  grid-column: span 2 / span 2;
+  justify-self: self-start;
+  gap: 20px;
+  display: flex;
+
+  @include media-tablet {
+    gap: 10px;
+  }
+
+  @include media-mobile {
+    gap: 5px;
+  }
+}
+
+.nameBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.productName {
+  font-size: 18px;
+}
+
+.infoPrice,
+.infoQuantity {
+  display: grid;
+  justify-self: center;
+}
+
+.infoTotal {
+  display: grid;
+  justify-self: end;
+}
+
+.quantityBox {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  @include media-tablet {
+    gap: 7px;
+  }
+
+  @include media-mobile {
+    gap: 5px;
+  }
+}
+
+.qtyBtn {
+  border-radius: 5px;
+  background: transparent;
+  border: 2px solid $color-brand;
+  cursor: pointer;
+}
+
+.cartPrices {
+  font-size: 25px;
+  @include media-tablet {
+    font-size: 20px;
+  }
+
+  @include media-mobile {
+    font-size: 10px;
+  }
+}
+
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  color: $color-dark;
+
+  @include media-mobile {
+    font-size: 10px;
+  }
+}
+
+.deleteBtn:hover {
+  color: $color-brand;
+}
