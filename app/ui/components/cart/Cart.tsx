@@ -71,6 +71,9 @@ export default function Cart() {
                   <span className={clsx(styles.productName, styles.cartPrices)}>
                     {product.name['en-US']}
                   </span>
+                  <button className={clsx(styles.deleteBtn)} type="button">
+                    Delete
+                  </button>
                 </div>
               </div>
               <div className={clsx(styles.infoPrice, styles.cartPrices)}>
