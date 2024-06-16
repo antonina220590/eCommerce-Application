@@ -43,6 +43,7 @@ export default function Cart() {
       // console.log('fetched cart UPD --> ', fetched);
       setProducts(fetched?.cartData?.lineItems);
       setTotalPrice(fetched?.cartData?.totalPrice?.centAmount);
+      setCartVersion(fetched?.cartData?.version);
     }
   };
 
