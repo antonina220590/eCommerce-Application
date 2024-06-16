@@ -9,6 +9,7 @@ import handleRemoveAllFromCart from '@/app/utils/cart/handleRemoveAllFromCart';
 import { LineItem } from '@commercetools/platform-sdk';
 import styles from '@/app/ui/components/cart/cart.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Cart() {
   const [products, setProducts] = useState<LineItem[] | null>(null);
@@ -69,15 +70,20 @@ export default function Cart() {
       // console.log('fetched cart UPD --> ', fetched);
       setProducts(fetched?.cartData?.lineItems);
       setTotalPrice(fetched?.cartData?.totalPrice?.centAmount);
-      setCartClearSuccessMessage('Everything was deleted');
+
+      setCartClearSuccessMessage('Shopping Cart has been cleared');
+
+      setTimeout(() => {
+        setCartClearSuccessMessage('');
+      }, 4000);
     }
   };
 
   return (
     <div className={clsx(styles.basketWrapper)}>
-      <h3 className={clsx(styles.basketTitle)}>Shopping Cart</h3>
       {products?.length ? (
         <>
+          <h3 className={clsx(styles.basketTitle)}>Shopping Cart</h3>
           <div className={clsx(styles.cartList)}>
             <div className={clsx(styles.upperBox)}>
               <div className={clsx(styles.cartProduct)}>Product</div>
@@ -176,11 +182,23 @@ export default function Cart() {
           </div>
         </>
       ) : (
-        <>
-          <p>Cart is empty</p>
+        <div className={clsx(styles.emptyBox)}>
+          {cartClearSuccessMessage ? (
+            <div className={clsx(styles.modal)}>{cartClearSuccessMessage}</div>
+          ) : (
+            <div />
+          )}
 
-          {cartClearSuccessMessage}
-        </>
+          <h3 className={clsx(styles.basketTitle)}>
+            Your Shopping Cart lives to serve. Give it purpose — fill it with
+            our amazing books.
+          </h3>
+          <span className={clsx(styles.linkBox)}>
+            <Link href="/catalog" className={clsx(styles.catalogLink)}>
+              Continue shopping
+            </Link>
+          </span>
+        </div>
       )}
     </div>
   );
