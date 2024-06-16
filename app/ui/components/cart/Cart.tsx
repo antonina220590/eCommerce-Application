@@ -77,15 +77,6 @@ export default function Cart() {
       <h3 className={clsx(styles.basketTitle)}>Shopping Cart</h3>
       {products?.length ? (
         <>
-          <h3 className={clsx(styles.basketTitle)}>
-            Total Price - ${totalPrice / 100}
-          </h3>
-          <button
-            type="button"
-            onClick={() => handleCartClear(cartId, cartVersion)}
-          >
-            Clear Shopping Cart
-          </button>
           <div className={clsx(styles.cartList)}>
             <div className={clsx(styles.upperBox)}>
               <div className={clsx(styles.cartProduct)}>Product</div>
@@ -146,34 +137,8 @@ export default function Cart() {
                   )}
                 </div>
                 <div className={clsx(styles.infoQuantity)}>
-                  <div className={clsx(styles.quantityBox)}>
-                    <button
-                      type="button"
-                      className={clsx(styles.qtyBtn, styles.cartPrices)}
-                      // onClick={handleDecrease}
-                    >
-                      -
-                    </button>
-                    <div className={clsx(styles.cartPrices)}>{1}</div>
-                    <button
-                      type="button"
-                      className={clsx(styles.qtyBtn, styles.cartPrices)}
-                      // onClick={handleIncrease}
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-                {product.price ? (
-                  <div className={clsx(styles.infoTotal, styles.cartPrices)}>
-                    ${(product?.totalPrice?.centAmount || 0) / 100}
-                  </div>
-                ) : (
-                  <div>Price not available</div>
-                )}
-                <div>
-                  amount in cart
                   <input
+                    className={clsx(styles.qtyInput)}
                     type="number"
                     min={1}
                     defaultValue={product.quantity}
@@ -186,8 +151,27 @@ export default function Cart() {
                     }
                   />
                 </div>
+                {product.price ? (
+                  <div className={clsx(styles.infoTotal, styles.cartPrices)}>
+                    ${(product?.totalPrice?.centAmount || 0) / 100}
+                  </div>
+                ) : (
+                  <div>Price not available</div>
+                )}
               </div>
             ))}
+          </div>
+          <div className={clsx(styles.bottomBox)}>
+            <button
+              className={clsx(styles.deleteAllBtn)}
+              type="button"
+              onClick={() => handleCartClear(cartId, cartVersion)}
+            >
+              Clear Shopping Cart
+            </button>
+            <h4 className={clsx(styles.totalPrice)}>
+              Total Price - ${totalPrice / 100}
+            </h4>
           </div>
         </>
       ) : (
