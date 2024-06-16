@@ -4,9 +4,13 @@ import clsx from 'clsx';
 import style from '@/app/ui/components/cards/cards.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import fetchAllProducts from '@/app/utils/products/fetchAllProducts';
-import { ProductPagedQueryResponse } from '@commercetools/platform-sdk';
+import fetchProductsFromCart from '@/app/utils/cart/fetchProductsFromCart';
+import {
+  ProductPagedQueryResponse,
+  LineItem,
+} from '@commercetools/platform-sdk';
 import handleAddToCart from '@/app/utils/cart/handleAddToCart';
 import Spinner from '../../../../public/spinner.svg';
 
@@ -15,26 +19,49 @@ export default function Cards() {
     null
   );
   const [isLoading, setIsLoading] = useState<Record<string, boolean>>({});
+  const [cartProducts, setCartProducts] = useState<LineItem[] | null>(null);
+
+  const fetchCartProducts = async () => {
+    try {
+      const fetched = await fetchProductsFromCart();
+      console.log('fetched?.cartData --> ', fetched?.cartData);
+      setCartProducts(fetched?.cartData?.lineItems);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const fetched = await fetchAllProducts(6, 0);
-      setProducts(fetched.products);
+      try {
+        const fetched = await fetchAllProducts(6, 0);
+        setProducts(fetched.products);
+        fetchCartProducts();
+      } catch (error) {
+        console.error(error);
+      }
     };
 
-    fetchProducts().catch(console.error);
+    fetchProducts();
   }, []);
 
   const addToCart = async (productId: string) => {
+    setIsLoading((prev) => ({ ...prev, [productId]: true }));
     try {
-      setIsLoading((prev) => ({ ...prev, [productId]: true }));
-      const result = await handleAddToCart(productId);
-      console.log('Product added to cart:', result);
-      setIsLoading((prev) => ({ ...prev, [productId]: false }));
+      await handleAddToCart(productId);
+      // console.log('Product added to cart:', result);
+      await fetchCartProducts();
     } catch (error) {
       console.error('Error adding product to cart:', error);
+    } finally {
       setIsLoading((prev) => ({ ...prev, [productId]: false }));
     }
+  };
+
+  const isProductInCart = (id: string) => {
+    return cartProducts?.some(
+      (productInCart) => productInCart.productId === id
+    );
   };
 
   return (
@@ -111,8 +138,15 @@ export default function Cards() {
                       : {}
                   }
                   type="button"
+                  disabled={isProductInCart(product.id)}
                 >
-                  Add to Cart {isLoading[product.id] && <Spinner />}
+                  {isProductInCart(product.id) ? (
+                    <span>Already in cart</span>
+                  ) : (
+                    <span>
+                      Add to Cart {isLoading[product.id] && <Spinner />}
+                    </span>
+                  )}
                 </button>
               </div>
             );
