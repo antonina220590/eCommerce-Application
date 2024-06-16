@@ -121,7 +121,7 @@ export default function CategoryBooks() {
                     }
                     type="button"
                   >
-                    Add to Card {isLoading[product.id] && <Spinner />}
+                    Add to Cart {isLoading[product.id] && <Spinner />}
                   </button>
                 </div>
               );
