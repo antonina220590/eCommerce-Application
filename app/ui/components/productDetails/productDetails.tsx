@@ -186,6 +186,7 @@ function ProductDetails() {
                 </div>
                 {inCart ? (
                   <button
+                    className={clsx(styles.productButton)}
                     type="button"
                     onClick={() => handleRemoveProduct(product.id)}
                     style={
@@ -198,6 +199,7 @@ function ProductDetails() {
                   </button>
                 ) : (
                   <button
+                    className={clsx(styles.productButton)}
                     onClick={() => addToCart(product.id)}
                     style={
                       isLoading[product.id]
