@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import fetchProductsFromCart from '@/app/utils/cart/fetchProductsFromCart';
 import handleAddToCart from '@/app/utils/cart/handleAddToCart';
 import handleRemoveFromCart from '@/app/utils/cart/handleRemoveFromCart';
+import handleRemoveAllFromCart from '@/app/utils/cart/handleRemoveAllFromCart';
 import { LineItem } from '@commercetools/platform-sdk';
 import styles from '@/app/ui/components/cart/cart.module.scss';
 import Image from 'next/image';
@@ -12,12 +13,19 @@ import Image from 'next/image';
 export default function Cart() {
   const [products, setProducts] = useState<LineItem[] | null>(null);
   const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [cartId, setCartId] = useState<string>('');
+  const [cartVersion, setCartVersion] = useState<number>(0);
+  const [cartClearSuccessMessage, setCartClearSuccessMessage] =
+    useState<string>('');
 
   useEffect(() => {
     const fetchProducts = async () => {
       const fetched = await fetchProductsFromCart();
       setProducts(fetched?.cartData?.lineItems);
+      // console.log('fetched?.cartData --> ', fetched?.cartData);
       setTotalPrice(fetched?.cartData?.totalPrice?.centAmount);
+      setCartId(fetched?.cartData?.id);
+      setCartVersion(fetched?.cartData?.version);
     };
 
     fetchProducts().catch(console.error);
@@ -29,7 +37,19 @@ export default function Cart() {
     action: string
   ) => {
     const cartUpdate = await handleAddToCart(id, quantity, action);
-    console.log('cartUpdate', cartUpdate);
+    // console.log('cartUpdate', cartUpdate);
+    if (cartUpdate.success) {
+      const fetched = await fetchProductsFromCart();
+      // console.log('fetched cart UPD --> ', fetched);
+      setProducts(fetched?.cartData?.lineItems);
+      setTotalPrice(fetched?.cartData?.totalPrice?.centAmount);
+    }
+  };
+
+  const handleRemoveProduct = async (id: string) => {
+    console.log(id);
+    const cartUpdate = await handleRemoveFromCart(id);
+    // console.log('cartUpdate', cartUpdate);
     if (cartUpdate.success) {
       const fetched = await fetchProductsFromCart();
       // console.log('fetched cart UPD --> ', fetched);
@@ -38,15 +58,16 @@ export default function Cart() {
     }
   };
 
-  const handleRemoveProduct = async (id: string) => {
-    console.log(id);
-    const cartUpdate = await handleRemoveFromCart(id);
-    console.log('cartUpdate', cartUpdate);
-    if (cartUpdate.success) {
+  const handleCartClear = async (id: string, version: number) => {
+    // console.log(id);
+    const clearCart = await handleRemoveAllFromCart(id, version);
+    // console.log('clearCart', clearCart);
+    if (clearCart.success) {
       const fetched = await fetchProductsFromCart();
       // console.log('fetched cart UPD --> ', fetched);
-      setProducts(fetched.cartData.lineItems);
-      setTotalPrice(fetched.cartData.totalPrice.centAmount);
+      setProducts(fetched?.cartData?.lineItems);
+      setTotalPrice(fetched?.cartData?.totalPrice?.centAmount);
+      setCartClearSuccessMessage('Everything was deleted');
     }
   };
 
@@ -58,6 +79,12 @@ export default function Cart() {
           <h3 className={clsx(styles.basketTitle)}>
             Total Price - ${totalPrice / 100}
           </h3>
+          <button
+            type="button"
+            onClick={() => handleCartClear(cartId, cartVersion)}
+          >
+            Clear Shopping Cart
+          </button>
           <div className={clsx(styles.cartList)}>
             <div className={clsx(styles.upperBox)}>
               <div className={clsx(styles.cartProduct)}>Product</div>
@@ -163,7 +190,11 @@ export default function Cart() {
           </div>
         </>
       ) : (
-        <p>Cart is empty</p>
+        <>
+          <p>Cart is empty</p>
+
+          {cartClearSuccessMessage}
+        </>
       )}
     </div>
   );
