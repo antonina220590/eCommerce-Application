@@ -4,9 +4,11 @@ async function fetchProductsFromCart() {
   const cookies = parseCookies();
   const { cartId } = cookies;
 
-  console.log(cartId);
-
   try {
+    if (!cartId) {
+      return [];
+    }
+
     const response = await fetch(`/api/my-cart?id=${cartId}`, {
       method: 'GET',
       headers: {
