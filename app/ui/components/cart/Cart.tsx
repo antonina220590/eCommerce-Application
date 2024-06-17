@@ -10,6 +10,7 @@ import { LineItem } from '@commercetools/platform-sdk';
 import styles from '@/app/ui/components/cart/cart.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
+import style from '@/app/ui/components/cards/cards.module.scss';
 
 export default function Cart() {
   const [products, setProducts] = useState<LineItem[] | null>(null);
@@ -23,7 +24,7 @@ export default function Cart() {
     const fetchProducts = async () => {
       const fetched = await fetchProductsFromCart();
       setProducts(fetched?.cartData?.lineItems);
-      // console.log('fetched?.cartData --> ', fetched?.cartData);
+      console.log('fetched?.cartData --> ', fetched?.cartData);
       setTotalPrice(fetched?.cartData?.totalPrice?.centAmount);
       setCartId(fetched?.cartData?.id);
       setCartVersion(fetched?.cartData?.version);
@@ -134,10 +135,23 @@ export default function Cart() {
                 </div>
                 <div className={clsx(styles.infoPrice, styles.cartPrices)}>
                   {product.price ? (
-                    <div className={clsx(styles.productPrice)}>
-                      <span className={clsx(styles.fullPrice)}>
-                        ${(product?.price?.value?.centAmount || 0) / 100}
-                      </span>
+                    <div className={clsx(styles.infoTotal, styles.cartPrices)}>
+                      {product.price.discounted ? (
+                        <>
+                          <span className={clsx(styles.fullPriceLineThrough)}>
+                            ${(product?.price?.value?.centAmount || 0) / 100}
+                          </span>
+                          <span className={clsx(style.discountedPrice)}>
+                            $
+                            {(product?.price?.discounted?.value?.centAmount ||
+                              0) / 100}
+                          </span>
+                        </>
+                      ) : (
+                        <span>
+                          ${(product?.price?.value?.centAmount || 0) / 100}
+                        </span>
+                      )}
                     </div>
                   ) : (
                     <div>Price not available</div>
