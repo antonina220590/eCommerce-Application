@@ -27,6 +27,8 @@ function ProductDetails() {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [inCart, setInCart] = useState<boolean | undefined>(undefined);
   const [isLoading, setIsLoading] = useState<Record<string, boolean>>({});
+  const [cartClearSuccessMessage, setCartClearSuccessMessage] =
+    useState<string>('');
 
   const toggleTextFullVisibility = () => {
     setOpen(!open);
@@ -91,6 +93,12 @@ function ProductDetails() {
     const cartUpdate = await handleRemoveFromCart(lineItemId);
     if (cartUpdate.success) {
       setInCart(false);
+      setCartClearSuccessMessage('Product removed from your shopping cart');
+      console.log(setCartClearSuccessMessage);
+
+      setTimeout(() => {
+        setCartClearSuccessMessage('');
+      }, 3000);
     }
     setIsLoading((prev) => ({ ...prev, [id]: false }));
   };
@@ -103,6 +111,13 @@ function ProductDetails() {
 
   return (
     <div>
+      <div className={clsx(style.wrapper)}>
+        {cartClearSuccessMessage ? (
+          <div className={clsx(style.modal)}>{cartClearSuccessMessage}</div>
+        ) : (
+          <div />
+        )}
+      </div>
       {product ? (
         <>
           <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
@@ -186,7 +201,7 @@ function ProductDetails() {
                 </div>
                 {inCart ? (
                   <button
-                    className={clsx(styles.productButton)}
+                    className={clsx(style.productPageButton)}
                     type="button"
                     onClick={() => handleRemoveProduct(product.id)}
                     style={
@@ -199,7 +214,7 @@ function ProductDetails() {
                   </button>
                 ) : (
                   <button
-                    className={clsx(styles.productButton)}
+                    className={clsx(style.productPageButton)}
                     onClick={() => addToCart(product.id)}
                     style={
                       isLoading[product.id]

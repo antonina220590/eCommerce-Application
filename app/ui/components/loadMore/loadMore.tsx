@@ -5,10 +5,14 @@ import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
 import { useEffect, useState } from 'react';
 import fetchAllProducts from '@/app/utils/products/fetchAllProducts';
-import { ProductPagedQueryResponse } from '@commercetools/platform-sdk';
+import {
+  LineItem,
+  ProductPagedQueryResponse,
+} from '@commercetools/platform-sdk';
 import Link from 'next/link';
 import style from '@/app/ui/components/cards/cards.module.scss';
 import handleAddToCart from '@/app/utils/cart/handleAddToCart';
+import fetchProductsFromCart from '@/app/utils/cart/fetchProductsFromCart';
 import styles from './loadmore.module.scss';
 import Spinner from '../../../../public/spinner.svg';
 
@@ -21,12 +25,24 @@ export default function LoadMore() {
   );
   const [isSpinner, setSpinner] = useState(true);
   const [isLoading, setIsLoading] = useState<Record<string, boolean>>({});
+  const [cartProducts, setCartProducts] = useState<LineItem[] | null>(null);
+
+  const fetchCartProducts = async () => {
+    try {
+      const fetched = await fetchProductsFromCart();
+      console.log('fetched?.cartData --> ', fetched?.cartData);
+      setCartProducts(fetched?.cartData?.lineItems);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     if (inView) {
       const fetchProducts = async () => {
         const fetched = await fetchAllProducts(limit, offset);
         setProducts(fetched.products);
+        fetchCartProducts();
         if (products) {
           if (products.total) {
             if (products.limit < products.total) {
@@ -44,15 +60,22 @@ export default function LoadMore() {
   }, [inView, products]);
 
   const addToCart = async (productId: string) => {
+    setIsLoading((prev) => ({ ...prev, [productId]: true }));
     try {
-      setIsLoading((prev) => ({ ...prev, [productId]: true }));
-      const result = await handleAddToCart(productId);
-      console.log('Product added to cart:', result);
-      setIsLoading((prev) => ({ ...prev, [productId]: false }));
+      await handleAddToCart(productId);
+      // console.log('Product added to cart:', result);
+      await fetchCartProducts();
     } catch (error) {
       console.error('Error adding product to cart:', error);
+    } finally {
       setIsLoading((prev) => ({ ...prev, [productId]: false }));
     }
+  };
+
+  const isProductInCart = (id: string) => {
+    return cartProducts?.some(
+      (productInCart) => productInCart.productId === id
+    );
   };
 
   return (
@@ -131,8 +154,15 @@ export default function LoadMore() {
                         : {}
                     }
                     type="button"
+                    disabled={isProductInCart(product.id)}
                   >
-                    Add to Card {isLoading[product.id] && <Spinner />}
+                    {isProductInCart(product.id) ? (
+                      <span>Already in cart</span>
+                    ) : (
+                      <span>
+                        Add to Cart {isLoading[product.id] && <Spinner />}
+                      </span>
+                    )}
                   </button>
                 </div>
               );
