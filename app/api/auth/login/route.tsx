@@ -40,6 +40,16 @@ export async function POST(req: NextRequest) {
         maxAge: expiresIn,
       })
     );
+    headers.append(
+      'Set-Cookie',
+      serialize('cartId', '', {
+        httpOnly: false,
+        secure: process.env.NODE_ENV === 'production',
+        path: '/',
+        sameSite: 'strict',
+        maxAge: 0,
+      })
+    );
 
     return NextResponse.json(
       {
