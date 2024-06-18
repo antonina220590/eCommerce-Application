@@ -14,7 +14,7 @@ async function fetchCategory(id: string) {
     }
 
     const categories = await response.json();
-    console.log('categories fetched -> ', categories);
+    // console.log('categories fetched -> ', categories);
 
     return categories;
   } catch (error) {

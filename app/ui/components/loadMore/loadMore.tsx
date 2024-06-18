@@ -1,31 +1,36 @@
 'use client';
 
+import clsx from 'clsx';
+import Image from 'next/image';
+import { useInView } from 'react-intersection-observer';
+import { useEffect, useState } from 'react';
 import fetchAllProducts from '@/app/utils/products/fetchAllProducts';
 import {
   LineItem,
   ProductPagedQueryResponse,
 } from '@commercetools/platform-sdk';
-import React, { useEffect, useState } from 'react';
-import style from '@/app/ui/components/cards/cards.module.scss';
-import styles from '@/app/ui/components/categoryLinks/categoryLinks.module.scss';
-import clsx from 'clsx';
 import Link from 'next/link';
-import Image from 'next/image';
+import style from '@/app/ui/components/cards/cards.module.scss';
 import handleAddToCart from '@/app/utils/cart/handleAddToCart';
 import fetchProductsFromCart from '@/app/utils/cart/fetchProductsFromCart';
+import styles from './loadmore.module.scss';
 import Spinner from '../../../../public/spinner.svg';
 
-export default function SubcategoryBooks() {
+let limit = 3;
+const offset = 6;
+export default function LoadMore() {
+  const { ref, inView } = useInView();
   const [products, setProducts] = useState<ProductPagedQueryResponse | null>(
     null
   );
+  const [isSpinner, setSpinner] = useState(true);
   const [isLoading, setIsLoading] = useState<Record<string, boolean>>({});
   const [cartProducts, setCartProducts] = useState<LineItem[] | null>(null);
 
   const fetchCartProducts = async () => {
     try {
       const fetched = await fetchProductsFromCart();
-      console.log('fetched?.cartData --> ', fetched?.cartData);
+      // console.log('fetched?.cartData --> ', fetched?.cartData);
       setCartProducts(fetched?.cartData?.lineItems);
     } catch (error) {
       console.error(error);
@@ -33,14 +38,26 @@ export default function SubcategoryBooks() {
   };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const fetched = await fetchAllProducts(14, 0);
-      setProducts(fetched.products);
-      fetchCartProducts();
-    };
+    if (inView) {
+      const fetchProducts = async () => {
+        const fetched = await fetchAllProducts(limit, offset);
+        setProducts(fetched.products);
+        fetchCartProducts();
+        if (products) {
+          if (products.total) {
+            if (products.limit < products.total) {
+              limit += 1;
+            } else {
+              setSpinner(false);
+              limit = products.total;
+            }
+          }
+        }
+      };
 
-    fetchProducts().catch(console.error);
-  }, []);
+      fetchProducts().catch(console.error);
+    }
+  }, [inView, products]);
 
   const addToCart = async (productId: string) => {
     setIsLoading((prev) => ({ ...prev, [productId]: true }));
@@ -61,18 +78,12 @@ export default function SubcategoryBooks() {
     );
   };
 
-  const currentPath = window.location.pathname;
-  const currentPathId = currentPath.split('/')[2];
-
   return (
-    <div>
-      {products ? (
-        <div className={clsx(style.productsList)}>
-          {products.results.map((product) => {
-            const { categories } = product.masterData.current;
-            const id = categories?.[1]?.id;
-
-            if (id === currentPathId) {
+    <>
+      <div>
+        {products?.results ? (
+          <div className={clsx(style.productsList)}>
+            {products.results.map((product) => {
               const price =
                 product.masterData.current.masterVariant.prices?.[0];
               const discountedPrice = price?.discounted?.value?.centAmount;
@@ -155,14 +166,20 @@ export default function SubcategoryBooks() {
                   </button>
                 </div>
               );
-            }
-            <div />;
-            return <div className={clsx(styles.noLinks)} key={product.id} />;
-          })}
-        </div>
-      ) : (
-        <p>...loading...</p>
-      )}
-    </div>
+            })}
+          </div>
+        ) : (
+          <p />
+        )}
+      </div>
+      <div
+        className={clsx(styles.spinnerBox, {
+          [styles.spinnerBox_invisible]: !isSpinner,
+        })}
+        ref={ref}
+      >
+        <Image src="./spinner.svg" alt="spinner" width={56} height={56} />
+      </div>
+    </>
   );
 }

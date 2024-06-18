@@ -18,7 +18,7 @@ export async function GET(request: Request) {
       },
     });
 
-    console.log('response', response);
+    // console.log('response', response);
 
     if (!response.ok) {
       const error = (await response.json()) as { message: string };

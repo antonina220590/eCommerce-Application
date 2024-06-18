@@ -1,27 +1,64 @@
 'use client';
 
 import fetchAllProducts from '@/app/utils/products/fetchAllProducts';
-import { ProductPagedQueryResponse } from '@commercetools/platform-sdk';
+import {
+  LineItem,
+  ProductPagedQueryResponse,
+} from '@commercetools/platform-sdk';
 import React, { useEffect, useState } from 'react';
 import style from '@/app/ui/components/cards/cards.module.scss';
 import styles from '@/app/ui/components/categoryLinks/categoryLinks.module.scss';
 import clsx from 'clsx';
 import Link from 'next/link';
 import Image from 'next/image';
+import handleAddToCart from '@/app/utils/cart/handleAddToCart';
+import fetchProductsFromCart from '@/app/utils/cart/fetchProductsFromCart';
+import Spinner from '../../../../public/spinner.svg';
 
 export default function CategoryBooks() {
   const [products, setProducts] = useState<ProductPagedQueryResponse | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState<Record<string, boolean>>({});
+  const [cartProducts, setCartProducts] = useState<LineItem[] | null>(null);
+
+  const fetchCartProducts = async () => {
+    try {
+      const fetched = await fetchProductsFromCart();
+      console.log('fetched?.cartData --> ', fetched?.cartData);
+      setCartProducts(fetched?.cartData?.lineItems);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const fetched = await fetchAllProducts();
+      const fetched = await fetchAllProducts(14, 0);
       setProducts(fetched.products);
+      fetchCartProducts();
     };
-
     fetchProducts().catch(console.error);
   }, []);
+
+  const addToCart = async (productId: string) => {
+    setIsLoading((prev) => ({ ...prev, [productId]: true }));
+    try {
+      await handleAddToCart(productId);
+      // console.log('Product added to cart:', result);
+      await fetchCartProducts();
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+    } finally {
+      setIsLoading((prev) => ({ ...prev, [productId]: false }));
+    }
+  };
+
+  const isProductInCart = (id: string) => {
+    return cartProducts?.some(
+      (productInCart) => productInCart.productId === id
+    );
+  };
 
   const currentPath = window.location.pathname;
   const currentPathId = currentPath.split('/')[2];
@@ -97,6 +134,25 @@ export default function CategoryBooks() {
                         'No description available'}
                     </p>
                   </Link>
+                  <button
+                    onClick={() => addToCart(product.id)}
+                    className={clsx(style.productButton)}
+                    style={
+                      isLoading[product.id]
+                        ? { backgroundColor: '#1B3764', color: '#FFCA42' }
+                        : {}
+                    }
+                    type="button"
+                    disabled={isProductInCart(product.id)}
+                  >
+                    {isProductInCart(product.id) ? (
+                      <span>Already in cart</span>
+                    ) : (
+                      <span>
+                        Add to Cart {isLoading[product.id] && <Spinner />}
+                      </span>
+                    )}
+                  </button>
                 </div>
               );
             }

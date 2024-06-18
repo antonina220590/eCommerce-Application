@@ -1,0 +1,148 @@
+@import '../../styles/settings/variables.module.scss';
+@import '../../styles/settings/mixins.scss';
+
+.h4,
+.p  {
+  margin: 0;
+  padding: 10px 0 0 0;
+}
+
+.para {
+  padding-bottom: 20px;
+}
+
+.aboutWrapper {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+  padding: 0 20px;
+}
+
+.aboutDescriptionWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.aboutTitle {
+  border-bottom: 3px solid $color-brand;
+  color: $color-dark;
+}
+
+.aboutTextContainer {
+  display: flex;
+}
+
+.aboutText {
+  font-size: calc(16px + 0.00375 * (100vw - 320px));
+}
+
+.pictureTonya {
+  width: 80%;
+  height: 80%;
+  margin-bottom: 10px;
+  background: url('/tonya.png') no-repeat center;
+  background-size: cover;
+}
+
+.pictureGalya {
+  width: 80%;
+  height: 80%;
+  margin-bottom: 10px;
+  background: url('/galya.png') no-repeat center;
+  background-size: cover;
+}
+
+.pictureZhenya {
+  width: 80%;
+  height: 80%;
+  margin-bottom: 10px;
+  background: url('/zhenya.png') no-repeat center;
+  background-size: cover;
+}
+
+.cardsContainer {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px 0 40px;
+  gap: 10px;
+
+  @include media-mobile {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.pictureBox {
+  height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $color-background;
+
+  @include media-laptop {
+    height: 500px;
+  }
+
+  @include media-mid {
+    height: 350px;
+  }
+
+  @include media-tablet {
+    height: 300px;
+  }
+
+  @include media-mobile {
+    height: 500px;
+  }
+
+  @include media-small {
+    height: 300px;
+  }
+}
+
+.cardsWrapper {
+  width: 33.3%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $color-brand;
+
+  @include media-mobile {
+    width:70%;
+  }
+
+  @include media-small {
+    width:80%;
+  }
+}
+
+.cardsInfo {
+  padding: 0 40px;
+}
+
+.span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gitHubLink {
+  text-decoration: none;
+  background-color: transparent;
+  padding-top: 10px;
+}
+
+.gitHubLink:hover {
+  color: $color-brand;
+}
+
+.spanBio {
+  font-weight: 800;
+}
+
+.rssLink {
+  background: transparent;
+  display: flex;
+  justify-content: center;
+}

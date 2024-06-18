@@ -1,11 +1,14 @@
-async function fetchAllProducts() {
+async function fetchAllProducts(limit: number, offset: number) {
   try {
-    const response = await fetch(`/api/catalog/products`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await fetch(
+      `/api/catalog/products?limit=${limit}&offset=${offset}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
     if (!response.ok) {
       throw new Error(

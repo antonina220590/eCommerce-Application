@@ -1,0 +1,321 @@
+@import '../../styles/settings/variables.module.scss';
+@import '../../styles/settings/mixins.scss';
+
+.basketMain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.basketWrapper {
+  padding: 20px;
+}
+
+.basketTitle {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  color: $color-dark;
+  text-align: center;
+
+  @include media-tablet {
+    font-size: 2rem;
+  }
+  @include media-mobile {
+    font-size: 1.5rem;
+  }
+}
+
+.cartList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cartContainer {
+  background-color: $color-lightgrey;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  font-size: 25px;
+  font-weight: 200;
+  align-items: center;
+  padding: 0 10px 0 0;
+}
+
+.imgCartBox {
+  position: relative;
+  width: 150px;
+  height: 100px;
+
+  @include media-tablet {
+    width: 150px;
+  }
+  @include media-mobile {
+    width: 80px;
+  }
+}
+
+.cartName {
+  font-size: calc(16px + 0.00375 * (100vw - 320px));
+  color: $color-dark;
+  margin: 0;
+}
+
+.infoWrapper {
+  display: flex;
+}
+
+.infoBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.upperBox {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 10px;
+  font-size: 25px;
+  font-weight: 500;
+
+  @include media-tablet {
+    font-size: 15px;
+  }
+
+  @include media-mobile {
+    font-size: 10px;
+  }
+}
+
+.cartProduct {
+  display: grid;
+  grid-column: span 2 / span 2;
+  justify-self: self-start;
+}
+
+.cartColums {
+  display: grid;
+  justify-self: center;
+}
+
+.cartColumsEnd {
+  display: grid;
+  justify-self: end;
+}
+
+.productBox {
+  display: grid;
+  grid-column: span 2 / span 2;
+  justify-self: self-start;
+  gap: 20px;
+  display: flex;
+
+  @include media-tablet {
+    gap: 10px;
+  }
+
+  @include media-mobile {
+    gap: 5px;
+  }
+}
+
+.nameBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.productName {
+  font-size: 18px;
+}
+
+.infoPrice,
+.infoQuantity {
+  display: grid;
+  justify-self: center;
+  justify-items: center;
+}
+
+.infoTotal {
+  display: grid;
+  justify-self: end;
+}
+
+.quantityBox {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  @include media-tablet {
+    gap: 7px;
+  }
+
+  @include media-mobile {
+    gap: 5px;
+  }
+}
+
+.qtyBtn {
+  border-radius: 5px;
+  background: transparent;
+  border: 2px solid $color-brand;
+  cursor: pointer;
+}
+
+.cartPrices {
+  font-size: 25px;
+  @include media-tablet {
+    font-size: 20px;
+  }
+
+  @include media-mobile {
+    font-size: 10px;
+  }
+}
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  color: $color-dark;
+
+  @include media-mobile {
+    font-size: 10px;
+  }
+}
+
+.deleteBtn:hover {
+  color: $color-brand;
+}
+
+.qtyInput {
+  width: 25%;
+  border-color: $color-brand;
+
+  @include media-tablet {
+    font-size: 2rem;
+    width: 28%;
+  }
+  @include media-mobile {
+    font-size: 1rem;
+    width: 45%;
+  }
+}
+
+.totalPrice {
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  color: $color-dark;
+  align-items: center;
+
+  @include media-tablet {
+    font-size: 2rem;
+  }
+  @include media-mobile {
+    font-size: 1.5rem;
+  }
+}
+
+.bottomBox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.deleteAllBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: 10px;
+  align-self: center;
+  width: 200px;
+  height: 60px;
+  margin-top: 20px;
+  background-color: $color-brand;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 3 rem;
+
+  @include media-tablet {
+    font-size: 2rem;
+  }
+  @include media-mobile {
+    font-size: 1rem;
+    width: 120px;
+    height: 40px;
+    font-weight: 300;
+  }
+}
+
+.deleteAllBtn:hover {
+  background-color: $color-dark;
+  color: $color-lightgrey;
+}
+
+.basketMessage {
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+  padding: 0px;
+}
+
+.emptyBox {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.catalogLink {
+  background: transparent;
+  color: $color-brand;
+  font-size: 2.5rem;
+  font-weight: 500;
+  text-decoration: none;
+
+  @include media-tablet {
+    font-size: 2rem;
+  }
+  @include media-mobile {
+    font-size: 1.5rem;
+  }
+}
+
+.catalogLink:hover {
+  color: $color-dark;
+}
+
+.linkBox {
+  display: flex;
+  justify-content: center;
+}
+
+.modal {
+  width: 25%;
+  padding: 40px 0;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: $color-darcgrey;
+  opacity: 0.8;
+  margin-bottom: 20px;
+  color: $color-dark;
+
+  @include media-mobile {
+    width: 60%;
+    padding: 20px 0;
+  }
+}
+
+.fullPriceLineThrough {
+  text-decoration: line-through;
+  color: $color-error;
+  padding-right: 10px;
+}
