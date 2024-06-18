@@ -24,7 +24,7 @@ export default function Cart() {
     const fetchProducts = async () => {
       const fetched = await fetchProductsFromCart();
       setProducts(fetched?.cartData?.lineItems);
-      console.log('fetched?.cartData --> ', fetched?.cartData);
+      // console.log('fetched?.cartData --> ', fetched?.cartData);
       setTotalPrice(fetched?.cartData?.totalPrice?.centAmount);
       setCartId(fetched?.cartData?.id);
       setCartVersion(fetched?.cartData?.version);
@@ -50,7 +50,7 @@ export default function Cart() {
   };
 
   const handleRemoveProduct = async (id: string) => {
-    console.log(id);
+    // console.log(id);
     const cartUpdate = await handleRemoveFromCart(id);
     // console.log('cartUpdate', cartUpdate);
     if (cartUpdate.success) {

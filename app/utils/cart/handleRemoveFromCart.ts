@@ -19,8 +19,8 @@ const handleRemoveFromCart = async (id: string) => {
       body: JSON.stringify(myCartDraft),
     });
 
-    const result = await response.json();
-    console.log('cart updating result:', result);
+    // const result = await response.json();
+    // console.log('cart updating result:', result);
 
     if (response.ok) {
       return { success: true };

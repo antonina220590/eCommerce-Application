@@ -47,7 +47,7 @@ function ProductDetails() {
   useEffect(() => {
     const fetchProducts = async () => {
       const fetched = await fetchProductsFromCart();
-      console.log('fetched?.cartData --> ', fetched?.cartData);
+      // console.log('fetched?.cartData --> ', fetched?.cartData);
       setCartProducts(fetched?.cartData?.lineItems);
     };
     const currentProductId = product?.id;
@@ -56,7 +56,7 @@ function ProductDetails() {
     );
     setInCart(isCurrentProductInCart);
 
-    console.log('currentProductId --> ', currentProductId);
+    // console.log('currentProductId --> ', currentProductId);
 
     fetchProducts().catch(console.error);
   }, [product]);
@@ -65,12 +65,11 @@ function ProductDetails() {
     try {
       setIsLoading((prev) => ({ ...prev, [productId]: true }));
       const result = await handleAddToCart(productId);
-      console.log('Product added to cart:', result);
+      // console.log('Product added to cart:', result);
       setIsLoading((prev) => ({ ...prev, [productId]: false }));
       if (result.success) {
         const updCartProducts = async () => {
           const fetched = await fetchProductsFromCart();
-          console.log('fetched?.cartData --> ', fetched?.cartData);
           setCartProducts(fetched?.cartData?.lineItems);
         };
         updCartProducts().catch(console.error);
@@ -84,7 +83,7 @@ function ProductDetails() {
 
   const handleRemoveProduct = async (id: string) => {
     setIsLoading((prev) => ({ ...prev, [id]: true }));
-    console.log(id);
+    // console.log(id);
     const currentLineItem = cartProducts?.find(
       (productInCart) => productInCart.productId === id
     );
@@ -94,7 +93,7 @@ function ProductDetails() {
     if (cartUpdate.success) {
       setInCart(false);
       setCartClearSuccessMessage('Product removed from your shopping cart');
-      console.log(setCartClearSuccessMessage);
+      // console.log(setCartClearSuccessMessage);
 
       setTimeout(() => {
         setCartClearSuccessMessage('');
@@ -106,8 +105,6 @@ function ProductDetails() {
   const price = product?.masterData.current.masterVariant.prices?.[0];
   const discountedPrice = price?.discounted?.value?.centAmount;
   const originalPrice = price?.value?.centAmount || 0;
-
-  console.log('product', product);
 
   return (
     <div>
@@ -223,7 +220,7 @@ function ProductDetails() {
                     }
                     type="button"
                   >
-                    Add to Card {isLoading[product.id] && <Spinner />}
+                    Add to Cart {isLoading[product.id] && <Spinner />}
                   </button>
                 )}
               </div>
