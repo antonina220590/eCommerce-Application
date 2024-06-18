@@ -35,7 +35,7 @@ const handleAddToCart = async (
     };
   }
 
-  console.log('myCartDraft', myCartDraft);
+  // console.log('myCartDraft', myCartDraft);
 
   try {
     const response = await fetch('/api/create-cart', {
@@ -46,8 +46,8 @@ const handleAddToCart = async (
       body: JSON.stringify(myCartDraft),
     });
 
-    const result = await response.json();
-    console.log('cart creating result', result);
+    // const result = await response.json();
+    // console.log('cart creating result', result);
 
     if (response.ok) {
       return { success: true };

@@ -24,7 +24,7 @@ export default function Cards() {
   const fetchCartProducts = async () => {
     try {
       const fetched = await fetchProductsFromCart();
-      console.log('fetched?.cartData --> ', fetched?.cartData);
+      // console.log('fetched?.cartData --> ', fetched?.cartData);
       setCartProducts(fetched?.cartData?.lineItems);
     } catch (error) {
       console.error(error);

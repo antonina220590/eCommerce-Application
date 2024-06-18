@@ -10,8 +10,8 @@ const handleRemoveAllFromCart = async (id: string, version: number) => {
       }
     );
 
-    const result = await response.json();
-    console.log('cart clear result:', result);
+    // const result = await response.json();
+    // console.log('cart clear result:', result);
 
     if (response.ok) {
       return { success: true };
